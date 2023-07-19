@@ -24,7 +24,7 @@ public class AllWorkouts {
     }
 
     // MODIFIES: this
-    // EFFECTS: adds workout to list of workouts
+    // EFFECTS: removes workout from list of workouts
     public void removeWorkout(Workout workout) {
         this.workouts.remove(workout);
     }

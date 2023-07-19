@@ -28,8 +28,8 @@ public class Workout {
         return this.exercises;
     }
 
-    public Date getDate() {
-        return this.date;
+    public String getDate() {
+        return this.date.getDate();
     }
 
     // EFFECTS: removes given exercise from exercises

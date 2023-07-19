@@ -24,13 +24,13 @@ public class WorkoutTest {
     @Test
     void testConstructor1() {
         assertEquals(0, testWorkout1.getExercises().size());
-        assertEquals("2023-05-21", testWorkout1.getDate().getDate());
+        assertEquals("2023-05-21", testWorkout1.getDate());
     }
 
     @Test
     void testConstructor2() {
         assertEquals(0, testWorkout2.getExercises().size());
-        assertEquals("2022-08-01", testWorkout2.getDate().getDate());
+        assertEquals("2022-08-01", testWorkout2.getDate());
     }
 
     @Test
