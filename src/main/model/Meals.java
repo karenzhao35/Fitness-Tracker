@@ -21,7 +21,7 @@ public class Meals {
         this.date = new Date(date);
     }
 
-    // getters
+    // getters and setters
     public List<Food> getMeal() {
         return meal;
     }
@@ -29,6 +29,7 @@ public class Meals {
     public String getDate() {
         return date.getDate();
     }
+
 
     // MODIFIES: this
     // EFFECTS: add given food item to meal

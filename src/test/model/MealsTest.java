@@ -17,9 +17,9 @@ public class MealsTest {
     void runBefore() {
         testMeals1 = new Meals("2019-09-08");
         testMeals2 = new Meals();
-        food1 = new Food("Apple", MealType.SNACK, 30, 0);
-        food2 = new Food("Steak", MealType.DINNER, 600, 20);
-        food3 = new Food("Avacado", MealType.LUNCH, 240, 2);
+        food1 = new Food("Apple", MealType.SNACK, 30, 0.0);
+        food2 = new Food("Steak", MealType.DINNER, 600, 20.0);
+        food3 = new Food("Avacado", MealType.LUNCH, 240, 2.0);
         current = System.currentTimeMillis();
     }
 
@@ -34,6 +34,7 @@ public class MealsTest {
         assertEquals(0, testMeals2.getMeal().size());
         assertEquals(new java.sql.Date(current).toString(), testMeals2.getDate());
     }
+
 
     @Test
     void testAddOneWorkouts() {
@@ -84,13 +85,13 @@ public class MealsTest {
 
     @Test
     void testSumNoProtein() {
-        assertEquals(0, testMeals2.sumProtein());
+        assertEquals(0.0, testMeals2.sumProtein());
     }
 
     @Test
     void testSumThreeProteins() {
         addFoods(testMeals1);
-        assertEquals(22, testMeals1.sumProtein());
+        assertEquals(22.0, testMeals1.sumProtein());
     }
 
 

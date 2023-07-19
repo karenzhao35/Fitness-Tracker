@@ -28,4 +28,37 @@ public class AllMeals {
     public void removeMeals(Meals meals) {
         allMeals.remove(meals);
     }
+
+    // EFFECTS: produces true if there is a meal from today
+    public boolean mealToday() {
+        Date date = new Date();
+        for (Meals m : allMeals) {
+            if (m.getDate().equals(date.getDate())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    // EFFECTS: returns true if meal with given date exists
+    public boolean mealExists(String date) {
+        for (Meals m : allMeals) {
+            if (m.getDate().equals(date)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    // REQUIRES: meal with given date must exist in all meals list
+    // EFFECTS: return the meals from the given date in list
+    public Meals retreiveMeals(String date) {
+        for (Meals m : allMeals) {
+            if (m.getDate().equals(date)) {
+                return m;
+            }
+        }
+        return null;
+    }
 }
+

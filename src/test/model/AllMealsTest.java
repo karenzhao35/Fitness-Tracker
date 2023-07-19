@@ -3,7 +3,7 @@ package model;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class AllMealsTest {
     private AllMeals testAllMeals;
@@ -44,9 +44,7 @@ public class AllMealsTest {
 
     @Test
     void testRemoveOneWorkout() {
-        testAllMeals.addMeals(meals1);
-        testAllMeals.addMeals(meals2);
-        testAllMeals.addMeals(meals3);
+        addAllMeals();
         testAllMeals.removeMeals(meals2);
         assertEquals(2, testAllMeals.getAllMeals().size());
         assertEquals(meals1, testAllMeals.getAllMeals().get(0));
@@ -55,12 +53,78 @@ public class AllMealsTest {
 
     @Test
     void testRemoveThreeWorkout() {
-        testAllMeals.addMeals(meals1);
-        testAllMeals.addMeals(meals2);
-        testAllMeals.addMeals(meals3);
+        addAllMeals();
         testAllMeals.removeMeals(meals1);
         testAllMeals.removeMeals(meals2);
         testAllMeals.removeMeals(meals3);
         assertEquals(0, testAllMeals.getAllMeals().size());
+    }
+
+    @Test
+    void testTrueMealTodayOne() {
+        testAllMeals.addMeals(meals3);
+        assertTrue(testAllMeals.mealToday());
+    }
+
+    @Test
+    void testTrueMealToday() {
+        addAllMeals();
+        assertTrue(testAllMeals.mealToday());
+    }
+
+    @Test
+    void testEmptyMealToday() {
+        assertFalse(testAllMeals.mealToday());
+    }
+
+    @Test
+    void testFalseMealToday() {
+        testAllMeals.addMeals(meals1);
+        testAllMeals.addMeals(meals2);
+        assertFalse(testAllMeals.mealToday());
+    }
+
+    @Test
+    void testEmptyMealExists() {
+        assertFalse(testAllMeals.mealExists("2017-07-14"));
+    }
+
+    @Test
+    void testTrueMealExistsOne() {
+        testAllMeals.addMeals(meals1);
+        assertTrue(testAllMeals.mealExists(meals1.getDate()));
+    }
+
+    @Test
+    void testMealExists() {
+        addAllMeals();
+        assertTrue(testAllMeals.mealExists(meals2.getDate()));
+        assertFalse(testAllMeals.mealExists("2015-08-06"));
+    }
+
+    @Test
+    void testRetrieveMealsEmpty() {
+        assertNull(testAllMeals.retreiveMeals("2018-08-25"));
+    }
+
+    @Test
+    void testRetrieveMeals() {
+        addAllMeals();
+        assertEquals(meals1, testAllMeals.retreiveMeals(meals1.getDate()));
+        assertEquals(meals3, testAllMeals.retreiveMeals(meals3.getDate()));
+    }
+
+    @Test
+    void testRetrieveMealsNotThere() {
+        addAllMeals();
+        assertNull(testAllMeals.retreiveMeals("1978-07-31"));
+    }
+
+    // MODIFIES: this
+    // EFFECTS: adds meals to allMeals
+    private void addAllMeals() {
+        testAllMeals.addMeals(meals1);
+        testAllMeals.addMeals(meals2);
+        testAllMeals.addMeals(meals3);
     }
 }

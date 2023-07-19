@@ -13,7 +13,7 @@ public class Exercise {
     // REQUIRES: reps are greater than 0
     //           weight is greater than or equal to 0
     // EFFECTS: constructs an exercise with given name
-    //          and add the first set of reps and weight
+    //          and add the first set of reps and weight (lbs)
     public Exercise(String name, int reps, int weight) {
         this.name = name;
         this.reps = new ArrayList<>();
