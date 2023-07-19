@@ -94,7 +94,7 @@ public class FitnessApp {
 
     // EFFECTS: prints the options for starting a new workout
     private void initWorkout() {
-        System.out.println("Amazing! Enter the date you would like to record the workout for,");
+        System.out.println("Enter the date you would like to record the workout for,");
         System.out.println("or 'today' if it's for today's workout,");
         System.out.println("or 'back' to return back to the menu");
         System.out.println("NOTE: Please format the date as YYYY-MM-DD");
@@ -125,23 +125,32 @@ public class FitnessApp {
     private void anyWorkout(String command) {
         Workout workout = new Workout(command);
         allWorkouts.addWorkout(workout);
-        workout.addExercise(newExercise());
-        addNewExercise();
+        Exercise exercise = newExercise();
+        workout.addExercise(exercise);
+        if (addNewExercise()) {
+            System.out.println("Great!");
+            System.out.print("Enter reps: ");
+            int reps = input.nextInt();
+            System.out.print("Enter weight: ");
+            int weight = input.nextInt();
+            exercise.addSet(reps, weight);
+        }
     }
 
+
     private Exercise newExercise() {
-        System.out.print("Enter exercise name");
+        System.out.print("Enter exercise name: ");
         String name = input.next();
-        System.out.print("Enter reps:");
+        System.out.print("Enter reps: ");
         int reps = input.nextInt();
-        System.out.print("Enter weight:");
+        System.out.print("Enter weight: ");
         int weight = input.nextInt();
 
         Exercise exercise = new Exercise(name, reps, weight);
         return exercise;
     }
 
-    private void addNewExercise() {
+    private boolean addNewExercise() {
         boolean cont = true;
         String command = null;
 
@@ -152,10 +161,14 @@ public class FitnessApp {
 
             if (command.equals("new")) {
                 cont = false;
+                return false;
+            } else if (command.equals("continue")) {
+                return true;
             } else {
-                processWorkoutCommand(command);
+                System.out.println("Selection not valid...");
             }
         }
+        return false;
     }
 
 
