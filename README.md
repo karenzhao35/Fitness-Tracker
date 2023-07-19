@@ -24,4 +24,4 @@ create one!
 - As a user, I want to view a list of my previous workouts by date
 - As a user, I want to view a list of my calorie intake by date
 - As a user, I want to be able to select a previous workout and view it in detail
-- As a user, I want to be able to delete and edit previous workouts and meals
+- As a user, I want to be able to edit or delete previous workouts
