@@ -16,7 +16,7 @@ public class AllMealsTest {
         testAllMeals = new AllMeals();
         meals1 = new Meals("2019-02-10");
         meals2 = new Meals("2021-09-18");
-        meals3 = new Meals("2022-11-15");
+        meals3 = new Meals();
     }
 
     @Test

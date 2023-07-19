@@ -20,8 +20,7 @@ create one!
 ### User Stories
 
 - As a user, I want to be able to add a new workout day to my collection 
-- As a user, I want to be able to record my meal into my daily calorie intake
-- As a user, I want to view a list of my previous workouts by date
-- As a user, I want to view a list of my calorie intake by date
-- As a user, I want to be able to select a previous workout and view it in detail
-- As a user, I want to be able to edit or delete previous workouts
+- As a user, I want to be able to add a new exercise to my workout
+- As a user, I want to be able to add a new meal day to my collection
+- As a user, I want to be able to add a new food to my meal 
+

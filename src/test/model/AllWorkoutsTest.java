@@ -11,12 +11,13 @@ public class AllWorkoutsTest {
     private Workout workout2;
     private Workout workout3;
 
+
     @BeforeEach
     void runBefore() {
         testWorkouts = new AllWorkouts();
         workout1 = new Workout("2019-02-10");
         workout2 = new Workout("2021-09-18");
-        workout3 = new Workout("2022-11-15");
+        workout3 = new Workout();
     }
 
     @Test

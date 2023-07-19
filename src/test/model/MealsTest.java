@@ -6,63 +6,97 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class MealsTest {
-    private Meals testMeals;
+    private Meals testMeals1;
+    private Meals testMeals2;
     private Food food1;
     private Food food2;
     private Food food3;
+    private long current;
 
     @BeforeEach
     void runBefore() {
-        testMeals = new Meals("2019-09-08");
+        testMeals1 = new Meals("2019-09-08");
+        testMeals2 = new Meals();
         food1 = new Food("Apple", MealType.SNACK, 30, 0);
         food2 = new Food("Steak", MealType.DINNER, 600, 20);
         food3 = new Food("Avacado", MealType.LUNCH, 240, 2);
+        current = System.currentTimeMillis();
     }
 
     @Test
-    void testConstructor() {
-        assertEquals(0, testMeals.getMeal().size());
+    void testConstructor1() {
+        assertEquals(0, testMeals1.getMeal().size());
+        assertEquals("2019-09-08", testMeals1.getDate());
+    }
+
+    @Test
+    void testConstructor2() {
+        assertEquals(0, testMeals2.getMeal().size());
+        assertEquals(new java.sql.Date(current).toString(), testMeals2.getDate());
     }
 
     @Test
     void testAddOneWorkouts() {
-        testMeals.addFood(food1);
-        assertEquals(1, testMeals.getMeal().size());
-        assertEquals(food1, testMeals.getMeal().get(0));
+        testMeals1.addFood(food1);
+        assertEquals(1, testMeals1.getMeal().size());
+        assertEquals(food1, testMeals1.getMeal().get(0));
     }
 
     @Test
     void testAddThreeWorkouts() {
-        testMeals.addFood(food1);
-        testMeals.addFood(food2);
-        assertEquals(2, testMeals.getMeal().size());
-        assertEquals(food2, testMeals.getMeal().get(1));
-        testMeals.addFood(food3);
-        assertEquals(3, testMeals.getMeal().size());
-        assertEquals(food3, testMeals.getMeal().get(2));
+        testMeals1.addFood(food1);
+        testMeals1.addFood(food2);
+        assertEquals(2, testMeals1.getMeal().size());
+        assertEquals(food2, testMeals1.getMeal().get(1));
+        testMeals1.addFood(food3);
+        assertEquals(3, testMeals1.getMeal().size());
+        assertEquals(food3, testMeals1.getMeal().get(2));
     }
 
     @Test
     void testRemoveOneWorkout() {
-        testMeals.addFood(food1);
-        testMeals.addFood(food2);
-        testMeals.addFood(food3);
-        testMeals.removeFood(food2);
-        assertEquals(2, testMeals.getMeal().size());
-        assertEquals(food1, testMeals.getMeal().get(0));
-        assertEquals(food3, testMeals.getMeal().get(1));
+        addFoods(testMeals1);
+        testMeals1.removeFood(food2);
+        assertEquals(2, testMeals1.getMeal().size());
+        assertEquals(food1, testMeals1.getMeal().get(0));
+        assertEquals(food3, testMeals1.getMeal().get(1));
     }
 
     @Test
     void testRemoveThreeWorkout() {
-        testMeals.addFood(food1);
-        testMeals.addFood(food2);
-        testMeals.addFood(food3);
-        testMeals.removeFood(food1);
-        testMeals.removeFood(food2);
-        testMeals.removeFood(food3);
-        assertEquals(0, testMeals.getMeal().size());
+        addFoods(testMeals1);
+        testMeals1.removeFood(food1);
+        testMeals1.removeFood(food2);
+        testMeals1.removeFood(food3);
+        assertEquals(0, testMeals1.getMeal().size());
     }
 
-    // TODO: add new tests with calorie and protein
+    @Test
+    void testSumNoCalories() {
+        assertEquals(0, testMeals2.sumCalories());
+    }
+
+    @Test
+    void testSumThreeCalories() {
+        addFoods(testMeals1);
+        assertEquals(870, testMeals1.sumCalories());
+    }
+
+    @Test
+    void testSumNoProtein() {
+        assertEquals(0, testMeals2.sumProtein());
+    }
+
+    @Test
+    void testSumThreeProteins() {
+        addFoods(testMeals1);
+        assertEquals(22, testMeals1.sumProtein());
+    }
+
+
+    private void addFoods(Meals meal) {
+        meal.addFood(food1);
+        meal.addFood(food2);
+        meal.addFood(food3);
+    }
 }

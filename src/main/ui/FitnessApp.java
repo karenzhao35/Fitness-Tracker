@@ -3,6 +3,7 @@ package ui;
 import model.AllMeals;
 import model.AllWorkouts;
 import model.Workout;
+import model.Exercise;
 
 import java.util.Scanner;
 
@@ -52,6 +53,7 @@ public class FitnessApp {
         }
     }
 
+    // EFFECTS: displays menu of options to user
     private void displayMenu() {
         System.out.println("\nYo! I'm your virtual gym bro!");
         System.out.println("\nHere, you can log your sets and count your calories!");
@@ -71,30 +73,96 @@ public class FitnessApp {
         input.useDelimiter("\n");
     }
 
-
+    // MODIFIES: this
+    // EFFECTS: processes user input for a new workout
     private void startWorkout() {
-        System.out.println("Amazing! What date would you like to record the workout for?");
-        System.out.println("Please format the date as YYYY-MM-DD");
-        String date = input.next();
-        Workout workout = new Workout(date);
-        allWorkouts.addWorkout(workout);
-        newExercise();
+        boolean cont = true;
+        String command = null;
+
+        while (cont) {
+            initWorkout();
+            command = input.next();
+            command = command.toLowerCase();
+
+            if (command.equals("back")) {
+                cont = false;
+            } else {
+                processWorkoutCommand(command);
+            }
+        }
     }
+
+    // EFFECTS: prints the options for starting a new workout
+    private void initWorkout() {
+        System.out.println("Amazing! Enter the date you would like to record the workout for,");
+        System.out.println("or 'today' if it's for today's workout,");
+        System.out.println("or 'back' to return back to the menu");
+        System.out.println("NOTE: Please format the date as YYYY-MM-DD");
+    }
+
+    // MODIFIES: this
+    // EFFECTS: processes user command for a new workout
+    private void processWorkoutCommand(String command) {
+        if (command.equals("today")) {
+            todaysWorkout();
+        } else {
+            anyWorkout(command);
+        }
+    }
+
+    // TODO: check if there is any way around this duplication
+    // MODIFIES: this
+    // EFFECTS: begins a new workout for today
+    private void todaysWorkout() {
+        Workout workout = new Workout();
+        allWorkouts.addWorkout(workout);
+        workout.addExercise(newExercise());
+        addNewExercise();
+    }
+
+    // MODIFIES: this
+    // EFFECTS: begins a new workout for given date
+    private void anyWorkout(String command) {
+        Workout workout = new Workout(command);
+        allWorkouts.addWorkout(workout);
+        workout.addExercise(newExercise());
+        addNewExercise();
+    }
+
+    private Exercise newExercise() {
+        System.out.print("Enter exercise name");
+        String name = input.next();
+        System.out.print("Enter reps:");
+        int reps = input.nextInt();
+        System.out.print("Enter weight:");
+        int weight = input.nextInt();
+
+        Exercise exercise = new Exercise(name, reps, weight);
+        return exercise;
+    }
+
+    private void addNewExercise() {
+        boolean cont = true;
+        String command = null;
+
+        while (cont) {
+            System.out.println("Great! Enter 'continue' to add a new set, 'new' to go back to the workout menu");
+            command = input.next();
+            command = command.toLowerCase();
+
+            if (command.equals("new")) {
+                cont = false;
+            } else {
+                processWorkoutCommand(command);
+            }
+        }
+    }
+
 
     private void beginMeal() {
     }
 
     private void searchData() {
-    }
-    
-    private void newExercise() {
-        System.out.print("Enter exercise name");
-        String exercise = input.next();
-        System.out.print("Enter reps:");
-        int reps = input.nextInt();
-        System.out.print("Enter weight:");
-        int weight = input.nextInt();
-        
     }
 
 

@@ -10,11 +10,11 @@ public class Workout {
     private List<Exercise> exercises;
     private Date date;
 
-//    // EFFECTS: constructs a workout with no exercises and the current date
-//    public Workout() {
-//        exercises = new ArrayList<>();
-//        date = new Date();
-//    }
+    // EFFECTS: constructs a workout with no exercises and the current date
+    public Workout() {
+        exercises = new ArrayList<>();
+        date = new Date();
+    }
 
     // EFFECTS: constructs a workout with no exercises and the given date
     public Workout(String date) {

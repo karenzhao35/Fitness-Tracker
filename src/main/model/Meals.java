@@ -9,7 +9,13 @@ public class Meals {
     private List<Food> meal;
     private Date date;
 
-    // EFFECTS: constructs a new AllMeals with no foods and a new date
+    // EFFECTS: constructs a new Meals with today's date
+    public Meals() {
+        meal = new ArrayList<>();
+        date = new Date();
+    }
+
+    // EFFECTS: constructs a new Meals with no foods and a new date
     public Meals(String date) {
         meal = new ArrayList<>();
         this.date = new Date(date);
