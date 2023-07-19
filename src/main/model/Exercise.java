@@ -10,6 +10,8 @@ public class Exercise {
     private List<Integer> reps;
     private List<Integer> weight;
 
+    // REQUIRES: reps are greater than 0
+    //           weight is greater than or equal to 0
     // EFFECTS: constructs an exercise with given name
     //          and add the first set of reps and weight
     public Exercise(String name, int reps, int weight) {
@@ -24,6 +26,14 @@ public class Exercise {
     // getters:
     public String getName() {
         return this.name;
+    }
+
+    public List<Integer> getReps() {
+        return this.reps;
+    }
+
+    public List<Integer> getWeight() {
+        return this.weight;
     }
 
     // MODIFIES: this

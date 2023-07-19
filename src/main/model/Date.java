@@ -6,12 +6,13 @@ import java.time.format.DateTimeFormatter;
 public class Date {
     private String date;
 
-    // Constructs a date with the current date
-    public Date() {
-        this.date = today.toString();
-    }
+//    // EFFECTS: Constructs a date with the current date in format YYYY-MM-DD
+//    public Date() {
+//        this.date = today.toString();
+//    }
 
-    // Constructs a date with the given date
+    // REQUIRES: given date must be in format YYYY-MM-DD
+    // EFFECTS: Constructs a date with the given date
     public Date(String date) {
         this.date = date;
     }
@@ -27,8 +28,8 @@ public class Date {
     // LocalDateTime&text=of%20LocalDateTime%20class.-,If%20we%20print%20the%20instance%20of%20LocalDateTime%
     // 20class%2C%20it,the%20current%20date%20and%20time.
 
-    long millis = System.currentTimeMillis();
-    java.sql.Date today = new java.sql.Date(millis);
+//    long millis = System.currentTimeMillis();
+//    java.sql.Date today = new java.sql.Date(millis);
 
 
 }
