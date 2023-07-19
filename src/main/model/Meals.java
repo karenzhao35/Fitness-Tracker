@@ -1,6 +1,6 @@
 package model;
 
-// All of the meals of the day
+// All the meals of the day
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,5 +34,23 @@ public class Meals {
     // EFFECTS: removes given food item from meal
     public void removeFood(Food food) {
         meal.remove(food);
+    }
+
+    // EFFECTS: returns the total calories consumed
+    public int sumCalories() {
+        int soFar = 0;
+        for (Food f : meal) {
+            soFar += f.getCalories();
+        }
+        return soFar;
+    }
+
+    // EFFECTS: returns the total protein consumed
+    public int sumProtein() {
+        int soFar = 0;
+        for (Food f : meal) {
+            soFar += f.getProtein();
+        }
+        return soFar;
     }
 }

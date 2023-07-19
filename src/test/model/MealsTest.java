@@ -14,9 +14,9 @@ public class MealsTest {
     @BeforeEach
     void runBefore() {
         testMeals = new Meals("2019-09-08");
-        food1 = new Food("Apple", MealType.SNACK, 30);
-        food2 = new Food("Steak", MealType.DINNER, 600);
-        food3 = new Food("Avacado", MealType.LUNCH, 240);
+        food1 = new Food("Apple", MealType.SNACK, 30, 0);
+        food2 = new Food("Steak", MealType.DINNER, 600, 20);
+        food3 = new Food("Avacado", MealType.LUNCH, 240, 2);
     }
 
     @Test
@@ -63,4 +63,6 @@ public class MealsTest {
         testMeals.removeFood(food3);
         assertEquals(0, testMeals.getMeal().size());
     }
+
+    // TODO: add new tests with calorie and protein
 }

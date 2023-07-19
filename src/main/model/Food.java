@@ -6,11 +6,14 @@ public class Food {
     private String name;
     private MealType type;
     private int calories;
+    private int protein;
 
-    public Food(String name, MealType type, int calories) {
+    // EFFECTS: constructs food with given name, meal type, calories (kcal), and protein (g)
+    public Food(String name, MealType type, int calories, int protein) {
         this.name = name;
         this.type = type;
         this.calories = calories;
+        this.protein = protein;
     }
 
     // getters
@@ -25,5 +28,9 @@ public class Food {
 
     public int getCalories() {
         return calories;
+    }
+
+    public int getProtein() {
+        return protein;
     }
 }

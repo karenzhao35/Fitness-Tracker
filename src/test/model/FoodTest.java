@@ -11,8 +11,8 @@ public class FoodTest {
 
     @BeforeEach
     void runBefore() {
-        food1 = new Food("Apple", MealType.BREAKFAST, 30);
-        food2 = new Food("Steak", MealType.DINNER, 600);
+        food1 = new Food("Apple", MealType.BREAKFAST, 30, 8);
+        food2 = new Food("Steak", MealType.DINNER, 600, 25);
     }
 
     @Test
@@ -20,6 +20,7 @@ public class FoodTest {
         assertEquals("Apple", food1.getName());
         assertEquals(MealType.BREAKFAST, food1.getType());
         assertEquals(30, food1.getCalories());
+        assertEquals(8, food1.getProtein());
     }
 
     @Test
@@ -27,5 +28,7 @@ public class FoodTest {
         assertEquals("Steak", food2.getName());
         assertEquals(MealType.DINNER, food2.getType());
         assertEquals(600, food2.getCalories());
+        assertEquals(25, food2.getProtein());
+
     }
 }
