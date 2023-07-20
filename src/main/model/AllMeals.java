@@ -5,9 +5,10 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AllMeals {
+public class AllMeals implements AllData {
     private List<Meals> allMeals;
 
+    // EFFECTS: constructs a new AllMeals with no meals in it
     public AllMeals() {
         allMeals = new ArrayList<>();
     }
@@ -30,7 +31,7 @@ public class AllMeals {
     }
 
     // EFFECTS: produces true if there is a meal from today
-    public boolean mealToday() {
+    public boolean today() {
         Date date = new Date();
         for (Meals m : allMeals) {
             if (m.getDate().equals(date.getDate())) {
@@ -41,7 +42,7 @@ public class AllMeals {
     }
 
     // EFFECTS: returns true if meal with given date exists
-    public boolean mealExists(String date) {
+    public boolean exists(String date) {
         for (Meals m : allMeals) {
             if (m.getDate().equals(date)) {
                 return true;
@@ -51,7 +52,7 @@ public class AllMeals {
     }
 
     // REQUIRES: meal with given date must exist in all meals list
-    // EFFECTS: return the meals from the given date in list
+    // EFFECTS: return the meals with the given date from list
     public Meals retreiveMeals(String date) {
         for (Meals m : allMeals) {
             if (m.getDate().equals(date)) {

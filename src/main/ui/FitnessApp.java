@@ -2,6 +2,7 @@ package ui;
 
 import model.*;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class FitnessApp {
@@ -24,7 +25,7 @@ public class FitnessApp {
         String command = null;
 
         init();
-        greetUser();
+        String name = greetUser();
 
         while (cont) {
             displayMenu();
@@ -32,7 +33,7 @@ public class FitnessApp {
             command = command.toLowerCase();
 
             if (command.equals("q")) {
-                System.out.println("See you tomorrow!");
+                System.out.println("See you tomorrow " + name + "!");
                 cont = false;
             } else {
                 processCommand(command);
@@ -50,20 +51,21 @@ public class FitnessApp {
     }
 
     // EFFECTS: greets the user
-    public void greetUser() {
+    public String greetUser() {
         System.out.println("Yo! I'm your virtual gym bro!");
         System.out.println("Here, you can log your sets and count your calories!");
         System.out.print("\nTo start, what's your name? ");
         String name = input.next();
         System.out.println("Welcome " + name + "!");
         System.out.println("Now let's get working!");
+        return name;
     }
 
     // EFFECTS: displays menu of options to user
     private void displayMenu() {
         System.out.println("Select from the following options:");
         System.out.println("\tw -> to start a workout");
-        System.out.println("\tm -> to begin a recording your food intake");
+        System.out.println("\tf -> to begin a recording your food intake");
         System.out.println("\td -> to view previous data");
         System.out.println("\tq -> to quit");
     }
@@ -73,8 +75,8 @@ public class FitnessApp {
     private void processCommand(String command) {
         if (command.equals("w")) {
             chooseWorkout();
-        } else if (command.equals("m")) {
-            chooseMeal();
+        } else if (command.equals("f")) {
+            chooseMeals();
         } else if (command.equals("d")) {
             searchData();
         } else {
@@ -95,6 +97,8 @@ public class FitnessApp {
 
             if (command.equals("back")) {
                 cont = false;
+            } else if (command.equals("view")) {
+                printTodaysWorkout();
             } else {
                 processWorkoutCommand(command);
             }
@@ -103,8 +107,11 @@ public class FitnessApp {
 
     // EFFECTS: prints the options for starting a new workout
     private void initWorkout() {
-        System.out.println("Enter the date you would like to record the workout for,");
+        System.out.println("\nEnter the date you would like to record the workout for,");
         System.out.println("or 'today' if it's for today's workout,");
+        if (allWorkouts.today()) {
+            System.out.println("or 'view' to view today's calorie and protein intake,");
+        }
         System.out.println("or 'back' to return back to the menu");
         System.out.println("NOTE: Please format the date as YYYY-MM-DD");
     }
@@ -132,6 +139,14 @@ public class FitnessApp {
     private void workoutAnyDay(String command) {
         Workout workout = new Workout(command);
         startWorkout(workout);
+    }
+
+    // EFFECTS: prints all the exercises and sets from today's workout
+    private void printTodaysWorkout() {
+        Date date = new Date();
+        Workout todaysWorkout = allWorkouts.retrieveWorkout(date.getDate());
+        printExercises(todaysWorkout.getExercises());
+        System.out.println("Taking you back to the workout menu now...");
     }
 
 
@@ -195,7 +210,7 @@ public class FitnessApp {
 
     // MODIFIES: this
     // EFFECTS: processes user input for a new meal
-    private void chooseMeal() {
+    private void chooseMeals() {
         boolean cont = true;
         String command = null;
 
@@ -216,7 +231,7 @@ public class FitnessApp {
     private void initMeal() {
         System.out.println("\nEnter the date you would like to record your food intake for,");
         System.out.println("or 'today' if it's for today's food intake,");
-        if (allMeals.mealToday()) {
+        if (allMeals.today()) {
             System.out.println("or 'view' to view today's calorie and protein intake,");
         }
         System.out.println("or 'back' to return back to the menu");
@@ -251,6 +266,7 @@ public class FitnessApp {
         startMeals(meal);
     }
 
+    // EFFECTS: calculates and produces today's calorie and protein intake
     private void calculateTodaysFoodIntake() {
         Date date = new Date();
         Meals todaysMeals = allMeals.retreiveMeals(date.getDate());
@@ -272,7 +288,7 @@ public class FitnessApp {
     private Food newFood() {
         System.out.print("Whatcha eating?: ");
         String name = input.next();
-        System.out.print("Yum! Is it for breakfast, lunch, dinner, or snack? (enter one): ");
+        System.out.print("Yum! Is it for breakfast, lunch, dinner, or a snack? (enter one): ");
         String command = input.next();
         command.toLowerCase();
         MealType type = getType(command);
@@ -285,6 +301,7 @@ public class FitnessApp {
         return food;
     }
 
+    // EFFECTS: returns proper MealType based on user input
     private MealType getType(String command) {
         if (command.equals("breakfast")) {
             return MealType.BREAKFAST;
@@ -322,9 +339,200 @@ public class FitnessApp {
         }
     }
 
-// TODO: finish implementation of search data
+    // MODIFIES: this
+    // EFFECTS: processes user input for searching their data
     private void searchData() {
+        boolean cont = true;
+        String command = null;
+
+        while (cont) {
+            initData();
+            command = input.next();
+            command = command.toLowerCase();
+
+            if (command.equals("back")) {
+                cont = false;
+            } else {
+                processDataCommand(command);
+            }
+        }
     }
 
+    // EFFECTS: message to guide user input for data archive
+    private void initData() {
+        System.out.println("Welcome to your archive.");
+        System.out.println("Would you like to view your previous workouts, food intake, or go back?");
+        System.out.println("\tw    -> workouts");
+        System.out.println("\tf    -> food intake");
+        System.out.println("\tback -> back");
+    }
+
+    // MODIFIES: this
+    // EFFECTS: processes user command for viewing data
+    private void processDataCommand(String command) {
+        if (command.equals("w")) {
+            System.out.println("\nLet's look at your past together...");
+            viewWorkouts();
+        } else if (command.equals("f")) {
+            viewMeals();
+        } else {
+            System.out.println("Selection not valid...");
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: processes user input for viewing workout data
+    private void viewWorkouts() {
+        boolean cont = true;
+        String command = null;
+
+        while (cont) {
+            initView();
+            command = input.next();
+            command = command.toLowerCase();
+
+            if (command.equals("back")) {
+                cont = false;
+            } else {
+                processViewWorkoutCommand(command);
+            }
+        }
+    }
+
+    // EFFECTS: guides user input for viewing workout data
+    private void initView() {
+        System.out.println("\nEnter in the date you would like to view, or enter 'back' to go back: ");
+        System.out.println("NOTE: Please format the date as YYYY-MM-DD");
+    }
+
+    // MODIFIES: this
+    // EFFECTS: processes user input date to view workout data
+    private void processViewWorkoutCommand(String date) {
+        if (allWorkouts.exists(date)) {
+            Workout workout = allWorkouts.retrieveWorkout(date);
+            accessWorkout(workout);
+        } else {
+            System.out.println("Unfortunately, workout with given date doesn't exist :(");
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: accesses the workout on the given date to view exercises and choose to remove workout
+    private void accessWorkout(Workout workout) {
+        System.out.println("Here is your workout on " + workout.getDate() + "!");
+        printExercises(workout.getExercises());
+        editWorkout(workout);
+    }
+
+    // EFFECTS: prints a list of exercises and the sets for each exercise
+    private void printExercises(List<Exercise> exercises) {
+        for (Exercise e : exercises) {
+            System.out.println("For " + e.getName() + " you did:");
+            for (int i = 0; i < e.getReps().size(); i++) {
+                System.out.println("\t" + e.getReps().get(i) + " reps at " + e.getWeight().get(i) + " lbs");
+            }
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: processes the user command and removes workout if prompted
+    private void editWorkout(Workout workout) {
+        boolean keepGoing = true;
+        String command = null;
+
+        while (keepGoing) {
+            System.out.println("Enter 'remove' to remove this workout, ");
+            System.out.println("enter 'back' to go back to the workout database menu.");
+            command = input.next();
+            command = command.toLowerCase();
+
+            if (command.equals("back")) {
+                keepGoing = false;
+            } else if (command.equals("remove")) {
+                allWorkouts.removeWorkout(workout);
+                System.out.println("Your workout has been removed.");
+                System.out.println("Taking you back to the workout database menu...");
+                keepGoing = false;
+            } else {
+                System.out.println("Selection not valid...");
+            }
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: processes user input for viewing food data
+    private void viewMeals() {
+        boolean cont = true;
+        String command = null;
+
+        while (cont) {
+            initView();
+            command = input.next();
+            command = command.toLowerCase();
+
+            if (command.equals("back")) {
+                cont = false;
+            } else {
+                processViewMealsCommand(command);
+            }
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: processes user input date to view workout data
+    private void processViewMealsCommand(String date) {
+        if (allMeals.exists(date)) {
+            accessMeals(date);
+        } else {
+            System.out.println("Unfortunately, food intake record with given date doesn't exist :(");
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: accesses the meal on the given date to view foods and choose to remove meal
+    private void accessMeals(String date) {
+        System.out.println("On " + date + " you ate:");
+        Meals meals = allMeals.retreiveMeals(date);
+        printFoods(meals);
+        editMeal(meals);
+    }
+
+    // EFFECTS: prints the list of foods with calories and protein for given meal
+    private void printFoods(Meals meals) {
+        for (Food f : meals.getMeal()) {
+            String n = f.getName();
+            int c = f.getCalories();
+            double p = f.getProtein();
+            System.out.println("\t-" + n + " which had " + c + " calories and " + p + " grams of protein");
+        }
+        int kcal = meals.sumCalories();
+        double protein = meals.sumProtein();
+        System.out.println("In total, you ate " + kcal + " calories and " + protein + " grams of protein.");
+    }
+
+    // MODIFIES: this
+    // EFFECTS: processes the user command and removes meal if prompted
+    private void editMeal(Meals meals) {
+        boolean keepGoing = true;
+        String command = null;
+
+        while (keepGoing) {
+            System.out.println("Enter 'remove' to remove this day's food intake, ");
+            System.out.println("enter 'back' to go back to the workout database menu.");
+            command = input.next();
+            command = command.toLowerCase();
+
+            if (command.equals("back")) {
+                keepGoing = false;
+            } else if (command.equals("remove")) {
+                allMeals.removeMeals(meals);
+                System.out.println("This day's food intake has been removed.");
+                System.out.println("Taking you back to the food intake database menu...");
+                keepGoing = false;
+            } else {
+                System.out.println("Selection not valid...");
+            }
+        }
+    }
 
 }

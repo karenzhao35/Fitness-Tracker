@@ -63,43 +63,43 @@ public class AllMealsTest {
     @Test
     void testTrueMealTodayOne() {
         testAllMeals.addMeals(meals3);
-        assertTrue(testAllMeals.mealToday());
+        assertTrue(testAllMeals.today());
     }
 
     @Test
     void testTrueMealToday() {
         addAllMeals();
-        assertTrue(testAllMeals.mealToday());
+        assertTrue(testAllMeals.today());
     }
 
     @Test
     void testEmptyMealToday() {
-        assertFalse(testAllMeals.mealToday());
+        assertFalse(testAllMeals.today());
     }
 
     @Test
     void testFalseMealToday() {
         testAllMeals.addMeals(meals1);
         testAllMeals.addMeals(meals2);
-        assertFalse(testAllMeals.mealToday());
+        assertFalse(testAllMeals.today());
     }
 
     @Test
     void testEmptyMealExists() {
-        assertFalse(testAllMeals.mealExists("2017-07-14"));
+        assertFalse(testAllMeals.exists("2017-07-14"));
     }
 
     @Test
     void testTrueMealExistsOne() {
         testAllMeals.addMeals(meals1);
-        assertTrue(testAllMeals.mealExists(meals1.getDate()));
+        assertTrue(testAllMeals.exists(meals1.getDate()));
     }
 
     @Test
     void testMealExists() {
         addAllMeals();
-        assertTrue(testAllMeals.mealExists(meals2.getDate()));
-        assertFalse(testAllMeals.mealExists("2015-08-06"));
+        assertTrue(testAllMeals.exists(meals2.getDate()));
+        assertFalse(testAllMeals.exists("2015-08-06"));
     }
 
     @Test

@@ -3,7 +3,7 @@ package model;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class AllWorkoutsTest {
     private AllWorkouts testWorkouts;
@@ -64,4 +64,71 @@ public class AllWorkoutsTest {
         testWorkouts.removeWorkout(workout3);
         assertEquals(0, testWorkouts.getWorkouts().size());
     }
+
+    @Test
+    void testTrueWorkoutTodayOne() {
+        testWorkouts.addWorkout(workout3);
+        assertTrue(testWorkouts.today());
+    }
+
+    @Test
+    void testTrueWorkoutToday() {
+        addAllWorkouts();
+        assertTrue(testWorkouts.today());
+    }
+
+    @Test
+    void testEmptyWorkoutToday() {
+        assertFalse(testWorkouts.today());
+    }
+
+    @Test
+    void testFalseWorkoutToday() {
+        testWorkouts.addWorkout(workout1);
+        testWorkouts.addWorkout(workout2);
+        assertFalse(testWorkouts.today());
+    }
+
+    @Test
+    void testEmptyWorkoutExists() {
+        assertFalse(testWorkouts.exists("2017-07-14"));
+    }
+
+    @Test
+    void testTrueWorkoutExistsOne() {
+        testWorkouts.addWorkout(workout1);
+        assertTrue(testWorkouts.exists(workout1.getDate()));
+    }
+
+    @Test
+    void testWorkoutExists() {
+        addAllWorkouts();
+        assertTrue(testWorkouts.exists(workout2.getDate()));
+        assertFalse(testWorkouts.exists("2015-08-06"));
+    }
+
+    @Test
+    void testRetrieveWorkoutsEmpty() {
+        assertNull(testWorkouts.retrieveWorkout("2018-08-25"));
+    }
+
+    @Test
+    void testRetrieveWorkouts() {
+        addAllWorkouts();
+        assertEquals(workout1, testWorkouts.retrieveWorkout(workout1.getDate()));
+        assertEquals(workout3, testWorkouts.retrieveWorkout(workout3.getDate()));
+    }
+
+    @Test
+    void testRetrieveWorkoutsNotThere() {
+        addAllWorkouts();
+        assertNull(testWorkouts.retrieveWorkout("1978-07-31"));
+    }
+
+    private void addAllWorkouts() {
+        testWorkouts.addWorkout(workout1);
+        testWorkouts.addWorkout(workout2);
+        testWorkouts.addWorkout(workout3);
+    }
+
 }
