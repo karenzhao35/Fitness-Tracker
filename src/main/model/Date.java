@@ -2,9 +2,6 @@ package model;
 
 // Date structured as YYYY-MM-DD
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-
 public class Date {
     private String date;
 

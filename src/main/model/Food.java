@@ -2,6 +2,8 @@ package model;
 
 // A singular food item with meal type and calories
 
+import model.MealType;
+
 public class Food {
     private String name;
     private MealType type;
