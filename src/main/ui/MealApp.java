@@ -85,6 +85,7 @@ public class MealApp extends Application {
 
         System.out.print("How many calories is in a(n) " + name + " (in kcal)? ");
         int calories = ensureInteger();
+
         System.out.print("How many grams of protein is in a(n) " + name + "? ");
         double protein = ensureDouble();
 
