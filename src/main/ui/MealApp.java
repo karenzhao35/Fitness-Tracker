@@ -5,6 +5,7 @@ import model.food.AllMeals;
 import model.food.Food;
 import model.food.MealType;
 import model.food.Meals;
+
 import java.util.regex.Pattern;
 
 // Meals Application for users to enter in new food entries

@@ -1,0 +1,51 @@
+{
+    "Food Log": {"meals": [{
+        "date": "2023-07-22",
+        "foods": [
+            {
+                "protein": 0,
+                "name": "Apples",
+                "calories": 30,
+                "meal type": "SNACK"
+            },
+            {
+                "protein": 25,
+                "name": "Steak",
+                "calories": 900,
+                "meal type": "DINNER"
+            },
+            {
+                "protein": 10,
+                "name": "Pasta",
+                "calories": 800,
+                "meal type": "LUNCH"
+            }
+        ]
+    }]},
+    "name": "My data",
+    "Fitness Log": {"workouts": [{
+        "date": "2023-07-22",
+        "exercises": [
+            {
+                "reps": [
+                    10,
+                    10,
+                    9,
+                    9
+                ],
+                "name": "Leg Press",
+                "weight": [
+                    115,
+                    155,
+                    180,
+                    250
+                ]
+            },
+            {
+                "reps": [10],
+                "name": "Leg Press",
+                "weight": [200]
+            }
+        ]
+    }]}
+}

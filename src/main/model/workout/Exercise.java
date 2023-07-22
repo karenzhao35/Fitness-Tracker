@@ -1,10 +1,14 @@
 package model.workout;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
+
 import java.util.ArrayList;
 import java.util.List;
 
 // An exercise with multiple sets of reps with different weights
-public class Exercise {
+public class Exercise implements Writable {
     private String name;
     private List<Integer> reps;
     private List<Integer> weight;
@@ -20,6 +24,12 @@ public class Exercise {
 
         this.reps.add(reps);
         this.weight.add(weight);
+    }
+
+    public Exercise(String name, List<Integer> reps, List<Integer> weight) {
+        this.name = name;
+        this.reps = reps;
+        this.weight = weight;
     }
 
     // getters:
@@ -40,6 +50,32 @@ public class Exercise {
     public void addSet(int reps, int weight) {
         this.reps.add(reps);
         this.weight.add(weight);
+    }
+
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("name", name);
+        json.put("reps", repsToJson());
+        json.put("weight", weightsToJson());
+        return json;
+    }
+
+    private JSONArray repsToJson() {
+        JSONArray jsonArray = new JSONArray();
+        for (int i : reps) {
+            jsonArray.put(i);
+        }
+        return jsonArray;
+    }
+
+    private JSONArray weightsToJson() {
+        JSONArray jsonArray = new JSONArray();
+        for (int i : weight) {
+            jsonArray.put(i);
+        }
+        return jsonArray;
     }
 
 }

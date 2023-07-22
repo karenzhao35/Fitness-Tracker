@@ -36,13 +36,13 @@ public class MealsTest {
 
     @Test
     void testConstructor1() {
-        assertEquals(0, testMeals1.getMeal().size());
+        assertEquals(0, testMeals1.getFoods().size());
         assertEquals("2019-09-08", testMeals1.getDate());
     }
 
     @Test
     void testConstructor2() {
-        assertEquals(0, testMeals2.getMeal().size());
+        assertEquals(0, testMeals2.getFoods().size());
         assertEquals(new java.sql.Date(current).toString(), testMeals2.getDate());
     }
 
@@ -50,28 +50,28 @@ public class MealsTest {
     @Test
     void testAddOneWorkouts() {
         testMeals1.addFood(food1);
-        assertEquals(1, testMeals1.getMeal().size());
-        assertEquals(food1, testMeals1.getMeal().get(0));
+        assertEquals(1, testMeals1.getFoods().size());
+        assertEquals(food1, testMeals1.getFoods().get(0));
     }
 
     @Test
     void testAddThreeWorkouts() {
         testMeals1.addFood(food1);
         testMeals1.addFood(food2);
-        assertEquals(2, testMeals1.getMeal().size());
-        assertEquals(food2, testMeals1.getMeal().get(1));
+        assertEquals(2, testMeals1.getFoods().size());
+        assertEquals(food2, testMeals1.getFoods().get(1));
         testMeals1.addFood(food3);
-        assertEquals(3, testMeals1.getMeal().size());
-        assertEquals(food3, testMeals1.getMeal().get(2));
+        assertEquals(3, testMeals1.getFoods().size());
+        assertEquals(food3, testMeals1.getFoods().get(2));
     }
 
     @Test
     void testRemoveOneWorkout() {
         addFoods(testMeals1);
         testMeals1.removeFood(food2);
-        assertEquals(6, testMeals1.getMeal().size());
-        assertEquals(food1, testMeals1.getMeal().get(0));
-        assertEquals(food3, testMeals1.getMeal().get(1));
+        assertEquals(6, testMeals1.getFoods().size());
+        assertEquals(food1, testMeals1.getFoods().get(0));
+        assertEquals(food3, testMeals1.getFoods().get(1));
     }
 
     @Test
@@ -80,7 +80,7 @@ public class MealsTest {
         testMeals1.removeFood(food1);
         testMeals1.removeFood(food2);
         testMeals1.removeFood(food3);
-        assertEquals(4, testMeals1.getMeal().size());
+        assertEquals(4, testMeals1.getFoods().size());
     }
 
     @Test

@@ -1,17 +1,20 @@
 package model.food;
 
-import model.AllData;
+import model.Data;
 import model.Date;
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
 // A database for all meals eaten
-public class AllMeals implements AllData {
+public class AllMeals implements Data {
     private List<Meals> allMeals;
 
     // EFFECTS: constructs a new AllMeals with no meals in it
     public AllMeals() {
-        allMeals = new ArrayList<>();
+        this.allMeals = new ArrayList<>();
     }
 
     // getters:
@@ -32,6 +35,7 @@ public class AllMeals implements AllData {
     }
 
     // EFFECTS: produces true if there is a meal from today
+    @Override
     public boolean today() {
         Date date = new Date();
         for (Meals m : allMeals) {
@@ -43,6 +47,7 @@ public class AllMeals implements AllData {
     }
 
     // EFFECTS: returns true if meal with given date exists
+    @Override
     public boolean exists(String date) {
         for (Meals m : allMeals) {
             if (m.getDate().equals(date)) {
@@ -61,6 +66,22 @@ public class AllMeals implements AllData {
             }
         }
         return null;
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("meals", mealsToJson());
+        return json;
+    }
+
+    private JSONArray mealsToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Meals m : allMeals) {
+            jsonArray.put(m.toJson());
+        }
+        return jsonArray;
     }
 }
 

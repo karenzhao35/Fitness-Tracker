@@ -1,7 +1,10 @@
 package model.food;
 
+import org.json.JSONObject;
+import persistence.Writable;
+
 // A singular food item with meal type and calories
-public class Food {
+public class Food implements Writable {
     private String name;
     private MealType type;
     private int calories;
@@ -31,5 +34,15 @@ public class Food {
 
     public double getProtein() {
         return protein;
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("name", name);
+        json.put("meal type", type);
+        json.put("calories", calories);
+        json.put("protein", protein);
+        return json;
     }
 }
