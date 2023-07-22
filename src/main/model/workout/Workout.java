@@ -1,11 +1,11 @@
-package model;
+package model.workout;
 
-// a workout, which comprises a list of exercises performed that day
-// and the date in which they were performed
-
+import model.Date;
 import java.util.ArrayList;
 import java.util.List;
 
+// a workout, which comprises a list of exercises performed that day
+// and the date in which they were performed
 public class Workout {
     private List<Exercise> exercises;
     private Date date;

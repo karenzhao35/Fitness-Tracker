@@ -1,10 +1,11 @@
-package model;
+package model.food;
 
-// A database for all meals eaten
-
+import model.AllData;
+import model.Date;
 import java.util.ArrayList;
 import java.util.List;
 
+// A database for all meals eaten
 public class AllMeals implements AllData {
     private List<Meals> allMeals;
 

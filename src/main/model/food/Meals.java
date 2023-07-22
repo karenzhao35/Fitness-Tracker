@@ -1,10 +1,11 @@
-package model;
+package model.food;
 
-// All the meals of the day
+import model.Date;
 
 import java.util.ArrayList;
 import java.util.List;
 
+// All the meals of the day
 public class Meals {
     private List<Food> meal;
     private Date date;
@@ -60,4 +61,30 @@ public class Meals {
         }
         return soFar;
     }
+
+
+    public ArrayList<ArrayList<Food>> separateFoodTypes() {
+        ArrayList<ArrayList<Food>> soFar = new ArrayList<>();
+        ArrayList<Food> breakfast = new ArrayList<>();
+        ArrayList<Food> lunch = new ArrayList<>();
+        ArrayList<Food> dinner = new ArrayList<>();
+        ArrayList<Food> snack = new ArrayList<>();
+        for (Food f : meal) {
+            if (f.getType().equals(MealType.BREAKFAST)) {
+                breakfast.add(f);
+            } else if (f.getType().equals(MealType.LUNCH)) {
+                lunch.add(f);
+            } else if (f.getType().equals(MealType.DINNER)) {
+                dinner.add(f);
+            } else {
+                snack.add(f);
+            }
+        }
+        soFar.add(breakfast);
+        soFar.add(lunch);
+        soFar.add(dinner);
+        soFar.add(snack);
+        return soFar;
+    }
+
 }

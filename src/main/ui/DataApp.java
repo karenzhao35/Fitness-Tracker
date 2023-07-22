@@ -1,9 +1,9 @@
 package ui;
 
+import model.food.AllMeals;
+import model.workout.AllWorkouts;
+
 // Data application for users to view previous entries
-
-import model.*;
-
 public class DataApp extends Application {
 
     public DataApp(AllWorkouts allWorkouts, AllMeals allMeals) {

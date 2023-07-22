@@ -1,10 +1,9 @@
-package model;
-
-// An exercise with multiple sets of reps with different weights
+package model.workout;
 
 import java.util.ArrayList;
 import java.util.List;
 
+// An exercise with multiple sets of reps with different weights
 public class Exercise {
     private String name;
     private List<Integer> reps;

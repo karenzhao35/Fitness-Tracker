@@ -1,5 +1,8 @@
 package model;
 
+import model.food.Food;
+import model.food.MealType;
+import model.food.Meals;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -11,6 +14,10 @@ public class MealsTest {
     private Food food1;
     private Food food2;
     private Food food3;
+    private Food food4;
+    private Food food5;
+    private Food food6;
+    private Food food7;
     private long current;
 
     @BeforeEach
@@ -20,6 +27,10 @@ public class MealsTest {
         food1 = new Food("Apple", MealType.SNACK, 30, 0.0);
         food2 = new Food("Steak", MealType.DINNER, 600, 20.0);
         food3 = new Food("Avacado", MealType.LUNCH, 240, 2.0);
+        food4 = new Food("Cheese", MealType.BREAKFAST, 30, 14.0);
+        food5 = new Food("Lollipop", MealType.SNACK, 90, 0.0);
+        food6 = new Food("Sandwich", MealType.LUNCH, 300, 5.0);
+        food7 = new Food("Pasta", MealType.DINNER, 305, 7.0);
         current = System.currentTimeMillis();
     }
 
@@ -58,7 +69,7 @@ public class MealsTest {
     void testRemoveOneWorkout() {
         addFoods(testMeals1);
         testMeals1.removeFood(food2);
-        assertEquals(2, testMeals1.getMeal().size());
+        assertEquals(6, testMeals1.getMeal().size());
         assertEquals(food1, testMeals1.getMeal().get(0));
         assertEquals(food3, testMeals1.getMeal().get(1));
     }
@@ -69,7 +80,7 @@ public class MealsTest {
         testMeals1.removeFood(food1);
         testMeals1.removeFood(food2);
         testMeals1.removeFood(food3);
-        assertEquals(0, testMeals1.getMeal().size());
+        assertEquals(4, testMeals1.getMeal().size());
     }
 
     @Test
@@ -80,7 +91,7 @@ public class MealsTest {
     @Test
     void testSumThreeCalories() {
         addFoods(testMeals1);
-        assertEquals(870, testMeals1.sumCalories());
+        assertEquals(1595, testMeals1.sumCalories());
     }
 
     @Test
@@ -91,13 +102,39 @@ public class MealsTest {
     @Test
     void testSumThreeProteins() {
         addFoods(testMeals1);
-        assertEquals(22.0, testMeals1.sumProtein());
+        assertEquals(48.0, testMeals1.sumProtein());
     }
 
+    @Test
+    void testSortFoodTypesEmpty() {
+        assertEquals(4, testMeals1.separateFoodTypes().size());
+        assertEquals(0, testMeals1.separateFoodTypes().get(0).size());
+        assertEquals(0, testMeals1.separateFoodTypes().get(1).size());
+        assertEquals(0, testMeals1.separateFoodTypes().get(2).size());
+        assertEquals(0, testMeals1.separateFoodTypes().get(3).size());
+    }
 
-    private void addFoods(Meals meal) {
-        meal.addFood(food1);
-        meal.addFood(food2);
-        meal.addFood(food3);
+    @Test
+    void testSortFoodTypesAllTypes() {
+        addFoods(testMeals1);
+        testMeals1.addFood(food7);
+        testMeals1.addFood(food5);
+        testMeals1.addFood(food5);
+        assertEquals(4, testMeals1.separateFoodTypes().size());
+        assertEquals(1, testMeals1.separateFoodTypes().get(0).size());
+        assertEquals(2, testMeals1.separateFoodTypes().get(1).size());
+        assertEquals(3, testMeals1.separateFoodTypes().get(2).size());
+        assertEquals(4, testMeals1.separateFoodTypes().get(3).size());
+    }
+
+    private void addFoods(Meals meals) {
+        meals.addFood(food1);
+        meals.addFood(food2);
+        meals.addFood(food3);
+        meals.addFood(food4);
+        meals.addFood(food5);
+        meals.addFood(food6);
+        meals.addFood(food7);
+
     }
 }

@@ -1,10 +1,11 @@
-package model;
+package model.workout;
 
-// A database for all workouts performed
-
+import model.AllData;
+import model.Date;
 import java.util.ArrayList;
 import java.util.List;
 
+// A database for all workouts performed
 public class AllWorkouts implements AllData {
     private List<Workout> workouts;
 

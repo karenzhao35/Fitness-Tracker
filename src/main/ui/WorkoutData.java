@@ -1,10 +1,9 @@
 package ui;
 
+import model.workout.AllWorkouts;
+import model.workout.Workout;
+
 // Workout data for users to view previous workout entries
-
-import model.AllWorkouts;
-import model.Workout;
-
 public class WorkoutData extends Application {
 
     public WorkoutData(AllWorkouts allWorkouts) {
@@ -22,20 +21,25 @@ public class WorkoutData extends Application {
     @Override
     protected void processCommand(String date) {
         if (date.equals("today")) {
-            workoutDateToday(date);
+            workoutDateToday();
         } else if (!dateFormat(date)) {
             System.out.println("You didn't follow the format :(");
+            System.out.println("Please try again!");
         } else if (allWorkouts.exists(date)) {
             Workout workout = allWorkouts.retrieveWorkout(date);
             accessWorkout(workout);
         } else {
             System.out.println("Unfortunately, workout with given date doesn't exist :(");
+            System.out.println("Please try again!");
         }
     }
 
-    private void workoutDateToday(String date) {
+
+    // MODIFIES: this
+    // EFFECTS: accesses the workout today to view exercises and choose to remove workout
+    private void workoutDateToday() {
         if (allWorkouts.today()) {
-            Workout workout = allWorkouts.retrieveWorkout(date);
+            Workout workout = allWorkouts.retrieveWorkout(new java.sql.Date(current).toString());
             accessWorkout(workout);
         } else {
             System.out.println("Oh no! There are no workouts today.");

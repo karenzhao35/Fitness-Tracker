@@ -1,10 +1,10 @@
 package ui;
 
-// Fitness application
-
-import model.*;
+import model.food.AllMeals;
+import model.workout.AllWorkouts;
 import java.util.Scanner;
 
+// Fitness application
 public class FitnessApp {
     private AllMeals allMeals;
     private AllWorkouts allWorkouts;

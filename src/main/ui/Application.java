@@ -1,18 +1,18 @@
 package ui;
 
-// A generic application that includes the shared behaviour
-
-import model.AllMeals;
-import model.AllWorkouts;
-import model.Exercise;
+import model.food.AllMeals;
+import model.workout.AllWorkouts;
+import model.workout.Exercise;
 import java.util.regex.Pattern;
 import java.util.List;
 import java.util.Scanner;
 
+// A generic application that includes the shared behaviour
 public abstract class Application {
     protected AllMeals allMeals;
     protected AllWorkouts allWorkouts;
     protected Scanner input;
+    protected long current;
 
     // EFFECTS: constructs a new Application with the given allWorkouts, allMeals, and initialized input
     public Application(AllWorkouts allWorkouts, AllMeals allMeals) {
@@ -20,6 +20,7 @@ public abstract class Application {
         input.useDelimiter("\n");
         this.allMeals = allMeals;
         this.allWorkouts = allWorkouts;
+        current = System.currentTimeMillis();
         newWindow();
     }
 

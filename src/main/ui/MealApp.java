@@ -1,10 +1,13 @@
 package ui;
 
-// Meals Application for users to enter in new food entries
-
 import model.*;
-import model.Food;
+import model.food.AllMeals;
+import model.food.Food;
+import model.food.MealType;
+import model.food.Meals;
+import java.util.regex.Pattern;
 
+// Meals Application for users to enter in new food entries
 public class MealApp extends Application {
 
     public MealApp(AllMeals allMeals) {
@@ -36,6 +39,7 @@ public class MealApp extends Application {
             mealsAnyDay(command);
         } else {
             System.out.println("You did not follow the date format :(");
+            System.out.println("Please try again!");
         }
     }
 
@@ -67,7 +71,6 @@ public class MealApp extends Application {
     // MODIFIES: this
     // EFFECTS: adds the user's food to the meal
     private void startMeals(Meals meal) {
-        allMeals.addMeals(meal);
         Food food = newFood();
         meal.addFood(food);
         continueMeals(meal);
@@ -77,10 +80,9 @@ public class MealApp extends Application {
     private Food newFood() {
         System.out.print("Whatcha eating?: ");
         String name = input.next();
-        System.out.print("Yum! Is it for breakfast, lunch, dinner, or a snack? (enter one): ");
-        String command = input.next();
-        command.toLowerCase();
-        MealType type = getType(command);
+
+        MealType type = typeWindow();
+
         System.out.print("How many calories is in a(n) " + name + " (in kcal)? ");
         int calories = input.nextInt();
         System.out.print("How many grams of protein is in a(n) " + name + "? ");
@@ -90,6 +92,35 @@ public class MealApp extends Application {
         return food;
     }
 
+    // REQUIRES: this
+    // EFFECTS: processes a new set of user input
+    protected MealType typeWindow() {
+        boolean cont = true;
+        String command = null;
+        System.out.print("Yum! Is it for breakfast, lunch, dinner, or a snack? (enter one): ");
+
+        while (cont) {
+            command = input.next();
+            command = command.toLowerCase();
+
+            if (!typeFormat(command)) {
+                System.out.println("That is not an option! Please try again:");
+            } else {
+                cont = false;
+                return getType(command);
+            }
+        }
+        return null;
+    }
+
+    // EFFECTS: produces true if given command follows the YYYY-MM-DD date format
+    protected boolean typeFormat(String command) {
+        String pattern = "\\b^((snack)|(breakfast)|(lunch)|(dinner))$\\b";
+        boolean matches = Pattern.matches(pattern, command);
+        return matches;
+    }
+
+
     // EFFECTS: returns proper MealType based on user input
     private MealType getType(String command) {
         if (command.equals("breakfast")) {
@@ -98,10 +129,8 @@ public class MealApp extends Application {
             return MealType.LUNCH;
         } else if (command.equals("dinner")) {
             return MealType.DINNER;
-        } else if (command.equals("snack")) {
-            return MealType.SNACK;
         } else {
-            return MealType.OTHER;
+            return MealType.SNACK;
         }
     }
 

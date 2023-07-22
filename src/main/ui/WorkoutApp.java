@@ -1,9 +1,11 @@
 package ui;
 
-// Workout Application for users to enter new workout entries
-
 import model.*;
+import model.workout.AllWorkouts;
+import model.workout.Exercise;
+import model.workout.Workout;
 
+// Workout Application for users to enter new workout entries
 public class WorkoutApp extends Application {
 
     public WorkoutApp(AllWorkouts allWorkouts) {
@@ -35,6 +37,7 @@ public class WorkoutApp extends Application {
             workoutAnyDay(command);
         } else {
             System.out.println("You did not follow the date format :(");
+            System.out.println("Please try again!");
         }
     }
 
@@ -42,7 +45,6 @@ public class WorkoutApp extends Application {
     // EFFECTS: creates a new workout with today's date
     private void workoutToday() {
         Workout workout = new Workout();
-        allWorkouts.addWorkout(workout);
         startWorkout(workout);
     }
 
