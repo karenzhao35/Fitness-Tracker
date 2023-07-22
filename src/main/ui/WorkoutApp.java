@@ -78,9 +78,9 @@ public class WorkoutApp extends Application {
         System.out.print("Enter exercise name: ");
         String name = input.next();
         System.out.print("Enter reps: ");
-        int reps = input.nextInt();
+        int reps = ensureInteger();
         System.out.print("Enter weight (in lbs): ");
-        int weight = input.nextInt();
+        int weight = ensureInteger();
 
         Exercise exercise = new Exercise(name, reps, weight);
         return exercise;
@@ -116,9 +116,9 @@ public class WorkoutApp extends Application {
     private void addSet(Exercise exercise) {
         System.out.println("You got this!");
         System.out.print("Enter reps: ");
-        int reps = input.nextInt();
+        int reps = ensureInteger();
         System.out.print("Enter weight (in lbs): ");
-        int weight = input.nextInt();
+        int weight = ensureInteger();
         exercise.addSet(reps, weight);
     }
 }

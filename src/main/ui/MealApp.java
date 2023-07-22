@@ -84,9 +84,9 @@ public class MealApp extends Application {
         MealType type = typeWindow();
 
         System.out.print("How many calories is in a(n) " + name + " (in kcal)? ");
-        int calories = input.nextInt();
+        int calories = ensureInteger();
         System.out.print("How many grams of protein is in a(n) " + name + "? ");
-        double protein = input.nextDouble();
+        double protein = ensureDouble();
 
         Food food = new Food(name, type, calories, protein);
         return food;
@@ -104,7 +104,7 @@ public class MealApp extends Application {
             command = command.toLowerCase();
 
             if (!typeFormat(command)) {
-                System.out.println("That is not an option! Please try again:");
+                System.out.print("That is not an option! Please try again: ");
             } else {
                 cont = false;
                 return getType(command);

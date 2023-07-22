@@ -3,6 +3,7 @@ package ui;
 import model.food.AllMeals;
 import model.workout.AllWorkouts;
 import model.workout.Exercise;
+
 import java.util.regex.Pattern;
 import java.util.List;
 import java.util.Scanner;
@@ -74,6 +75,60 @@ public abstract class Application {
         String pattern = "\\b\\d{4}-((0[1-9])|(1[0-2]))-((0[1-9])|([1,2]\\d)|(3[0,1]))\\b";
         boolean matches = Pattern.matches(pattern, command);
         return matches;
+    }
+
+    protected boolean isInteger(String command) {
+        try {
+            Integer.parseInt(command);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+
+    protected boolean isDouble(String command) {
+        try {
+            Double.parseDouble(command);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+
+    protected int ensureInteger() {
+        boolean cont = true;
+        String command = null;
+
+        while (cont) {
+            command = input.next();
+            command = command.toLowerCase();
+
+            if (isInteger(command)) {
+                cont = false;
+                return Integer.parseInt(command);
+            } else {
+                System.out.print("That is not an integer! Please try again: ");
+            }
+        }
+        return 0;
+    }
+
+    protected double ensureDouble() {
+        boolean cont = true;
+        String command = null;
+
+        while (cont) {
+            command = input.next();
+            command = command.toLowerCase();
+
+            if (isDouble(command)) {
+                cont = false;
+                return Double.parseDouble(command);
+            } else {
+                System.out.print("That is not an integer! Please try again: ");
+            }
+        }
+        return 0.0;
     }
 
 }
