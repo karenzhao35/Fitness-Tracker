@@ -116,6 +116,7 @@ public class WorkoutApp extends Application {
         }
     }
 
+    // EFFECTS: prints options to continue or start a new workout
     private void promptContinue() {
         System.out.println("Great!");
         System.out.println("\nSelect from the following options");

@@ -7,9 +7,10 @@ import model.food.Meals;
 
 import java.util.ArrayList;
 
-// EFFECTS: Meals data for users to view previous food entries
+// Meals data for users to view previous food entries
 public class MealsData extends Application {
 
+    // EFFECTS: constructs a new MealData with given AllMeals data
     public MealsData(AllMeals allMeals) {
         super(null, allMeals);
     }

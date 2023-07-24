@@ -124,6 +124,7 @@ public abstract class Application {
         return matches;
     }
 
+    // EFFECTS: produces true if given string is an integer
     protected boolean isInteger(String command) {
         try {
             Integer.parseInt(command);
@@ -133,6 +134,7 @@ public abstract class Application {
         }
     }
 
+    // EFFECTS: produces true if given string is a double
     protected boolean isDouble(String command) {
         try {
             Double.parseDouble(command);
@@ -142,6 +144,7 @@ public abstract class Application {
         }
     }
 
+    // EFFECTS: processes user command turning it into an integer if it is one
     protected int ensureInteger() {
         boolean cont = true;
         String command = null;
@@ -160,6 +163,7 @@ public abstract class Application {
         return 0;
     }
 
+    // EFFECTS: processes user command turning it into a double if it is one
     protected double ensureDouble() {
         boolean cont = true;
         String command = null;

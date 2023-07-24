@@ -60,6 +60,7 @@ public class AllMeals implements Data, Writable {
         throw new DoesNotExist();
     }
 
+    // EFFECTS: returns the all meals data as a JSON object
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
@@ -67,6 +68,7 @@ public class AllMeals implements Data, Writable {
         return json;
     }
 
+    // EFFECTS: returns the meal data as JSON array
     private JSONArray mealsToJson() {
         JSONArray jsonArray = new JSONArray();
 

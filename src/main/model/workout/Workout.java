@@ -48,6 +48,7 @@ public class Workout implements Writable {
         this.exercises.remove(exercise);
     }
 
+    // EFFECTS: puts the workout data into a JSON object
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
@@ -56,6 +57,7 @@ public class Workout implements Writable {
         return json;
     }
 
+    // EFFECTS: returns the exercises as a JSON array
     private JSONArray exercisesToJson() {
         JSONArray jsonArray = new JSONArray();
 

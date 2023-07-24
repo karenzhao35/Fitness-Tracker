@@ -19,7 +19,7 @@ import java.util.Scanner;
 
 // Fitness application
 public class FitnessApp {
-    private static final String JSON_STORE = "./data/testReaderGeneralLog.json";
+    private static final String JSON_STORE = "./data/log.json";
     private AllMeals allMeals;
     private AllWorkouts allWorkouts;
     private AllData allData;
@@ -72,6 +72,8 @@ public class FitnessApp {
         allWorkouts = allData.getAllWorkouts();
     }
 
+    // MODIFIES: this
+    // EFFECTS: initializes JsonReader, JsonWriter and scanner
     private void init() {
         jsonWriter = new JsonWriter(JSON_STORE);
         jsonReader = new JsonReader(JSON_STORE);
@@ -79,11 +81,14 @@ public class FitnessApp {
         input.useDelimiter("\n");
     }
 
+    // EFFECTS: prompts user to choose to load their data
     private void promptLoad() {
         System.out.println("Would you like to load previous data?");
         System.out.print("Enter \"yes\" or \"no\": ");
     }
 
+    // MODIFIES: this
+    // EFFECTS: processes user input for loading data
     public boolean runLoad() {
         boolean cont = true;
         String command = null;
@@ -107,6 +112,7 @@ public class FitnessApp {
         return false;
     }
 
+    // EFFECTS: processes user input to choose to save data
     private void runSave() {
         boolean cont = true;
         String command = null;
@@ -127,6 +133,7 @@ public class FitnessApp {
         }
     }
 
+    // EFFECTS: prompts user to save their data
     private void promptSave() {
         System.out.println("Wait! Before you go, would you like to save your data?");
         System.out.print("Enter \"yes\" or \"no\": ");
@@ -166,6 +173,7 @@ public class FitnessApp {
         }
     }
 
+    // EFFECTS: saves workout and meal data to file
     private void saveWorkRoom() {
         try {
             jsonWriter.open();
@@ -177,6 +185,8 @@ public class FitnessApp {
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: loads workout and meal data from file
     private void loadWorkRoom() {
         try {
             allData = jsonReader.read();

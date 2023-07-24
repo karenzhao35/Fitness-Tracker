@@ -6,6 +6,7 @@ import model.workout.AllWorkouts;
 // Data application for users to view previous entries
 public class DataApp extends Application {
 
+    // EFFECTS: constructs a DataApp from given AllWorkout and AllMeals data
     public DataApp(AllWorkouts allWorkouts, AllMeals allMeals) {
         super(allWorkouts, allMeals);
     }

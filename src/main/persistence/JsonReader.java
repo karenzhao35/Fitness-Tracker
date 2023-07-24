@@ -17,13 +17,12 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
-//TODO: CHANGE ALL THE COMMENTS !!!
 
 // The following code was inspired by the JsonSerializationDemo
 // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo/blob/d79763d7ed5bb61196c51570598336948efe1202/src
 // /main/persistence/JsonReader.java#L17
 
-// Represents a reader that reads workroom from JSON data stored in file
+// Represents a reader that reads fitness and meal data from JSON data stored in file
 public class JsonReader {
     private String source;
 
@@ -33,8 +32,8 @@ public class JsonReader {
         this.source = source;
     }
 
-    // EFFECTS: reads workroom from file and returns it;
-    // throws IOException if an error occurs reading data from file
+    // EFFECTS: reads fitness and meal data from file and returns it;
+    //          throws IOException if an error occurs reading data from file
     public AllData read() throws IOException {
         String jsonData = readFile(source);
         JSONObject jsonObject = new JSONObject(jsonData);
@@ -52,24 +51,20 @@ public class JsonReader {
         return contentBuilder.toString();
     }
 
-    // EFFECTS: parses workroom from JSON object and returns it
+    // EFFECTS: parses fitness and meal data from JSON object and returns it
     private AllData parseAllData(JSONObject jsonObject) {
         String name = jsonObject.getString("name");
         String user = jsonObject.getString("user");
+        JSONObject jsonObjectMeals = jsonObject.getJSONObject("Food Log");
+        JSONObject jsonObjectWorkouts = jsonObject.getJSONObject("Fitness Log");
+
         AllData data = new AllData(name, user);
-        addAllData(data, jsonObject);
+        addAllMeals(data, jsonObjectMeals);
+        addAllWorkouts(data, jsonObjectWorkouts);
         return data;
     }
 
-    private void addAllData(AllData data, JSONObject jsonObject) {
-        JSONObject jsonObjectMeals = jsonObject.getJSONObject("Food Log");
-        JSONObject jsonObjectWorkouts = jsonObject.getJSONObject("Fitness Log");
-        addAllMeals(data, jsonObjectMeals);
-        addAllWorkouts(data, jsonObjectWorkouts);
-    }
-
-    // MODIFIES: wr
-    // EFFECTS: parses thingies from JSON object and adds them to workroom
+    // EFFECTS: parses all meal data from JSON object
     private void addAllMeals(AllData data, JSONObject jsonObject) {
         JSONArray jsonArray = jsonObject.getJSONArray("meals");
         for (Object json : jsonArray) {
@@ -78,8 +73,8 @@ public class JsonReader {
         }
     }
 
-    // MODIFIES: wr
-    // EFFECTS: parses thingy from JSON object and adds it to workroom
+    // MODIFIES: data
+    // EFFECTS: parses meal data from JSON object and adds it to AllData
     private void addMeals(AllData data, JSONObject jsonObject) {
         JSONArray jsonArray = jsonObject.getJSONArray("foods");
         String date = jsonObject.getString("date");
@@ -91,6 +86,8 @@ public class JsonReader {
         }
     }
 
+    // MODIFIES: meals
+    // EFFECTS: parses food data from JSON object and adds it to the given meal
     private void addFoods(Meals meals, JSONObject jsonObject) {
         String name = jsonObject.getString("name");
         MealType type = MealType.valueOf(jsonObject.getString("meal type"));
@@ -100,6 +97,7 @@ public class JsonReader {
         meals.addFood(food);
     }
 
+    // EFFECTS: parses all workout data from JSON object
     private void addAllWorkouts(AllData data, JSONObject jsonObject) {
         JSONArray jsonArray = jsonObject.getJSONArray("workouts");
         for (Object json : jsonArray) {
@@ -108,6 +106,8 @@ public class JsonReader {
         }
     }
 
+    // MODIFIES: data
+    // EFFECTS: parses workouts from JSON object and adds it to AllData
     private void addWorkouts(AllData data, JSONObject jsonObject) {
         JSONArray jsonArray = jsonObject.getJSONArray("exercises");
         String date = jsonObject.getString("date");
@@ -119,6 +119,8 @@ public class JsonReader {
         }
     }
 
+    // MODIFIES: workouts
+    // EFFECTS: parses through the exercise data and adds it to the workout
     private void addExercises(Workout workout, JSONObject jsonObject) {
         String name = jsonObject.getString("name");
         JSONArray jsonArrayReps = jsonObject.getJSONArray("reps");

@@ -16,6 +16,10 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+// The following code was inspired by the JsonWriterTest class in the JsonSerializationDemo
+// https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo/blob/d79763d7ed5bb61196c51570598336948efe1202/src
+// /test/persistence/JsonWriterTest.java#L52
+
 
 class JsonWriterTest extends JsonTest {
     private AllData allData;
@@ -78,10 +82,7 @@ class JsonWriterTest extends JsonTest {
             List<Meals> allMeals = allData.getAllMeals().getAllMeals();
             assertEquals(1, allMeals.size());
             assertEquals("2023-07-24", allMeals.get(0).getDate());
-            assertEquals("Pasta", allMeals.get(0).getFoods().get(0).getName());
-            assertEquals(300, allMeals.get(0).getFoods().get(0).getCalories());
-            assertEquals(20, allMeals.get(0).getFoods().get(0).getProtein());
-            assertEquals(MealType.DINNER, allMeals.get(0).getFoods().get(0).getType());
+            checkFoods("Pasta", MealType.DINNER, 300, 20, allMeals.get(0).getFoods().get(0));
         } catch (IOException e) {
             fail("Exception should not have been thrown");
         }

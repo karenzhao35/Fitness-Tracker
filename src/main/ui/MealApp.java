@@ -12,6 +12,7 @@ import java.util.regex.Pattern;
 // Meals Application for users to enter in new food entries
 public class MealApp extends Application {
 
+    // EFFECTS: constructs a new MealApp with given AllMeals data
     public MealApp(AllMeals allMeals) {
         super(null, allMeals);
     }
@@ -73,6 +74,8 @@ public class MealApp extends Application {
         continueMeals(meal);
     }
 
+    // TODO: confirm this
+    // MODIFIES: food
     // EFFECTS: processes the user's input for food and produces the food
     private Food newFood() {
         System.out.print("Whatcha eating?: ");
@@ -91,7 +94,7 @@ public class MealApp extends Application {
     }
 
     // REQUIRES: this
-    // EFFECTS: processes a new set of user input
+    // EFFECTS: processes a new set of user input for meal type
     protected MealType typeWindow() {
         boolean cont = true;
         String command = null;
@@ -111,7 +114,7 @@ public class MealApp extends Application {
         return null;
     }
 
-    // EFFECTS: produces true if given command follows the YYYY-MM-DD date format
+    // EFFECTS: produces true if given command is a meal type
     protected boolean typeFormat(String command) {
         String pattern = "\\b^((snack)|(breakfast)|(lunch)|(dinner))$\\b";
         boolean matches = Pattern.matches(pattern, command);
@@ -154,6 +157,7 @@ public class MealApp extends Application {
         }
     }
 
+    // EFFECTS: prompts user to either continue a meal or start a new one
     private void continuePrompt() {
         System.out.println("That sounds delicious!");
         System.out.println("\nSelect from the following options:");

@@ -1,12 +1,9 @@
 package model.workout;
 
-import model.workout.Exercise;
-import model.workout.Workout;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.assertNull;
+
 
 public class WorkoutTest {
     private Workout testWorkout1;

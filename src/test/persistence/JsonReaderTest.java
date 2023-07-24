@@ -1,18 +1,23 @@
 package persistence;
 
 import model.AllData;
+import model.food.Food;
 import model.food.MealType;
 import model.food.Meals;
 import model.workout.Workout;
 import org.junit.jupiter.api.Test;
-
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
-public class JsonReaderTest {
+
+// The following code was inspired by the JsonReaderTest in the JsonSerializationDemo
+// https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo/blob/d79763d7ed5bb61196c51570598336948efe1202/src
+// /test/persistence/JsonReaderTest.java#L49
+
+public class JsonReaderTest extends JsonTest{
 
     @Test
     void testReaderNonExistentFile() {
@@ -68,22 +73,20 @@ public class JsonReaderTest {
     }
 
 
-
-
     @Test
     void testReaderGeneralLogMeals() {
         JsonReader reader = new JsonReader("./data/testReaderGeneralLog.json");
         try {
             AllData d = reader.read();
             List<Meals> allMeals = d.getAllMeals().getAllMeals();
+            Meals meals = allMeals.get(0);
+            Food food = meals.getFoods().get(0);
             assertEquals(1, allMeals.size());
-            assertEquals("2023-07-24", allMeals.get(0).getDate());
-            assertEquals("Apples", allMeals.get(0).getFoods().get(0).getName());
-            assertEquals(30, allMeals.get(0).getFoods().get(0).getCalories());
-            assertEquals(0, allMeals.get(0).getFoods().get(0).getProtein());
-            assertEquals(MealType.LUNCH, allMeals.get(0).getFoods().get(0).getType());
+            assertEquals("2023-07-24", meals.getDate());
+            checkFoods("Apples", MealType.LUNCH, 30, 0, food);
         } catch (IOException e) {
             fail("Couldn't read from file");
         }
     }
+
 }

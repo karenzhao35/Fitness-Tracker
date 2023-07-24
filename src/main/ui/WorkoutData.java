@@ -7,6 +7,7 @@ import model.workout.Workout;
 // Workout data for users to view previous workout entries
 public class WorkoutData extends Application {
 
+    // EFFECTS: constructs WorkoutData with given AllWorkouts data
     public WorkoutData(AllWorkouts allWorkouts) {
         super(allWorkouts, null);
     }

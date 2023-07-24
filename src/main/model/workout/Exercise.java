@@ -26,6 +26,7 @@ public class Exercise implements Writable {
         this.weight.add(weight);
     }
 
+    // EFFECTS: constructs an Exercise with given sets
     public Exercise(String name, List<Integer> reps, List<Integer> weight) {
         this.name = name;
         this.reps = reps;
@@ -53,6 +54,7 @@ public class Exercise implements Writable {
     }
 
 
+    // EFFECTS: returns the exercise data as a JSON object
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
@@ -62,6 +64,7 @@ public class Exercise implements Writable {
         return json;
     }
 
+    // EFFECTS: returns the reps as a JSON array
     private JSONArray repsToJson() {
         JSONArray jsonArray = new JSONArray();
         for (int i : reps) {
@@ -70,6 +73,7 @@ public class Exercise implements Writable {
         return jsonArray;
     }
 
+    // EFFECTS: returns the weights as a JSON array
     private JSONArray weightsToJson() {
         JSONArray jsonArray = new JSONArray();
         for (int i : weight) {

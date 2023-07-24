@@ -10,7 +10,7 @@ import java.io.PrintWriter;
 // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo/blob/d79763d7ed5bb61196c51570598336948efe1202/src
 // /main/persistence/JsonWriter.java#L29
 
-// Represents a writer that writes JSON representation of workroom to file
+// Represents a writer that writes JSON representation of workout and meal logs to file
 public class JsonWriter {
     private static final int TAB = 4;
     private PrintWriter writer;
@@ -23,13 +23,13 @@ public class JsonWriter {
 
     // MODIFIES: this
     // EFFECTS: opens writer; throws FileNotFoundException if destination file cannot
-    // be opened for writing
+    //          be opened for writing
     public void open() throws FileNotFoundException {
         writer = new PrintWriter(new File(destination));
     }
 
     // MODIFIES: this
-    // EFFECTS: writes JSON representation of workroom to file
+    // EFFECTS: writes JSON representation of workout and meal logs to file
     public void write(AllData d) {
         JSONObject json = d.toJson();
         saveToFile(json.toString(TAB));

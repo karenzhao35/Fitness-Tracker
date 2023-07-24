@@ -1,6 +1,5 @@
 package model.workout;
 
-import model.workout.Exercise;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

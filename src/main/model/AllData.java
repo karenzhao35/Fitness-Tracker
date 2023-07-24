@@ -1,18 +1,18 @@
 package model;
 
 import model.food.AllMeals;
-import model.food.Meals;
 import model.workout.AllWorkouts;
-import model.workout.Workout;
 import org.json.JSONObject;
 import persistence.Writable;
 
+// Stores all the fitness data into one class
 public class AllData implements Writable {
     private AllWorkouts allWorkouts;
     private AllMeals allMeals;
     private String name;
     private String user;
 
+    // EFFECTS: constructs a new AllData with data file name and user name
     public AllData(String name, String user) {
         allWorkouts = new AllWorkouts();
         allMeals = new AllMeals();
@@ -20,6 +20,7 @@ public class AllData implements Writable {
         this.user = user;
     }
 
+    // getters & setters
     public AllWorkouts getAllWorkouts() {
         return allWorkouts;
     }
@@ -45,6 +46,7 @@ public class AllData implements Writable {
     }
 
 
+    // EFFECTS: put the data into a JSON object
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();

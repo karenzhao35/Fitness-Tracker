@@ -60,6 +60,7 @@ public class AllWorkouts implements Data, Writable {
         throw new DoesNotExist();
     }
 
+    // EFFECTS: returns the all workout data as a JSON object
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
@@ -67,6 +68,7 @@ public class AllWorkouts implements Data, Writable {
         return json;
     }
 
+    // EFFECTS: returns the workout data as a JSON array
     private JSONArray workoutsToJson() {
         JSONArray jsonArray = new JSONArray();
 

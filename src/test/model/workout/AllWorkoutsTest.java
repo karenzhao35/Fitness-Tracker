@@ -1,8 +1,6 @@
 package model.workout;
 
 import model.exceptions.DoesNotExist;
-import model.workout.AllWorkouts;
-import model.workout.Workout;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

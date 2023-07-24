@@ -25,7 +25,7 @@ public class Meals implements Writable {
         this.date = new Date(date);
     }
 
-    // getters and setters
+    // getters
     public List<Food> getFoods() {
         return foods;
     }
@@ -65,7 +65,10 @@ public class Meals implements Writable {
         return soFar;
     }
 
-
+    // TODO: is this the best way to do this
+    // EFFECTS: sorts foods into a list of list
+    //          the list will contain all the food in each meal type in order
+    //          breakfast, lunch, dinner, snack
     public ArrayList<ArrayList<Food>> separateFoodTypes() {
         ArrayList<ArrayList<Food>> soFar = new ArrayList<>();
         ArrayList<Food> breakfast = new ArrayList<>();
@@ -90,6 +93,7 @@ public class Meals implements Writable {
         return soFar;
     }
 
+    // EFFECTS: returns the meal data as a JSON object
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
@@ -98,6 +102,7 @@ public class Meals implements Writable {
         return json;
     }
 
+    // EFFECTS: return the food data as a JSON array
     private JSONArray foodsToJson() {
         JSONArray jsonArray = new JSONArray();
 
