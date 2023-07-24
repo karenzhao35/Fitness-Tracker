@@ -11,11 +11,13 @@ public class AllData implements Writable {
     private AllWorkouts allWorkouts;
     private AllMeals allMeals;
     private String name;
+    private String user;
 
-    public AllData(String name) {
+    public AllData(String name, String user) {
         allWorkouts = new AllWorkouts();
         allMeals = new AllMeals();
         this.name = name;
+        this.user = user;
     }
 
     public AllWorkouts getAllWorkouts() {
@@ -30,6 +32,10 @@ public class AllData implements Writable {
         return name;
     }
 
+    public String getUser() {
+        return user;
+    }
+
     public void setAllWorkouts(AllWorkouts allWorkouts) {
         this.allWorkouts = allWorkouts;
     }
@@ -38,18 +44,12 @@ public class AllData implements Writable {
         this.allMeals = allMeals;
     }
 
-    public void addDataWorkout(Workout workout) {
-        this.allWorkouts.addWorkout(workout);
-    }
-
-    public void addDataMeal(Meals meals) {
-        this.allMeals.addMeals(meals);
-    }
 
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
         json.put("name", name);
+        json.put("user", user);
         json.put("Fitness Log", allWorkouts.toJson());
         json.put("Food Log", allMeals.toJson());
         return json;

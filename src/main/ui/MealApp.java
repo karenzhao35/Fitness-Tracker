@@ -1,6 +1,7 @@
 package ui;
 
 import model.*;
+import model.exceptions.DoesNotExist;
 import model.food.AllMeals;
 import model.food.Food;
 import model.food.MealType;
@@ -35,7 +36,11 @@ public class MealApp extends Application {
         if (command.equals("today")) {
             mealsToday();
         } else if (command.equals("view")) {
-            calculateTodaysFoodIntake();
+            try {
+                printFoods(allMeals.retreiveMeals(new java.sql.Date(current).toString()));
+            } catch (DoesNotExist e) {
+                System.out.println("Record doesn't exist!");
+            }
         } else if (dateFormat(command)) {
             mealsAnyDay(command);
         } else {
@@ -58,15 +63,6 @@ public class MealApp extends Application {
         Meals meal = new Meals(date);
         allMeals.addMeals(meal);
         startMeals(meal);
-    }
-
-    // EFFECTS: calculates and produces today's calorie and protein intake
-    private void calculateTodaysFoodIntake() {
-        Date date = new Date();
-        Meals todaysMeals = allMeals.retreiveMeals(date.getDate());
-        int calories = todaysMeals.sumCalories();
-        double protein = todaysMeals.sumProtein();
-        System.out.println("Nice! Today you ate " + calories + " calories and " + protein + " grams of protein.");
     }
 
     // MODIFIES: this
@@ -143,19 +139,25 @@ public class MealApp extends Application {
         String command = null;
 
         while (cont) {
-            System.out.println("That sounds delicious!");
-            System.out.println("Enter 'new' to add another food item, or 'back' to go back to the meal menu.");
+            continuePrompt();
             command = input.next();
             command = command.toLowerCase();
 
-            if (command.equals("back")) {
+            if (command.equals("q")) {
                 cont = false;
-            } else if (command.equals("new")) {
+            } else if (command.equals("n")) {
                 Food newFood = newFood();
                 meal.addFood(newFood);
             } else {
                 System.out.println("Selection not valid...");
             }
         }
+    }
+
+    private void continuePrompt() {
+        System.out.println("That sounds delicious!");
+        System.out.println("\nSelect from the following options:");
+        System.out.println("n -> add another food item");
+        System.out.println("q -> to go back to the meal menu");
     }
 }

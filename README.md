@@ -27,4 +27,7 @@ create one!
 - As a user, I want to be able to remove a meal day from my database by date
 - As a user, I want to be able to view a workout from my database by date
 - As a user, I want to be able to view a meal day from my database by date
+- As a user, when I select the quit option from the application menu, I want to be reminded to save my fitness data
+to file and have the option to do so or not. 
+- As a user, when I start the application, I want to be given the option to load my fitness data from file.
 

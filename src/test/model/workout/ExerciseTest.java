@@ -1,19 +1,27 @@
-package model;
+package model.workout;
 
 import model.workout.Exercise;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ExerciseTest {
     private Exercise exercise1;
     private Exercise exercise2;
+    private Exercise exercise3;
+    private ArrayList<Integer> reps;
+    private ArrayList<Integer> weight;
 
     @BeforeEach
     void runBefore() {
+        reps = new ArrayList<>();
+        weight = new ArrayList<>();
         exercise1 = new Exercise("Bench Press", 10, 135);
         exercise2 = new Exercise("Leg Press", 5, 150);
+        exercise3 = new Exercise("Lunges", reps, weight);
     }
 
     @Test
@@ -34,6 +42,13 @@ class ExerciseTest {
 
         assertEquals(1, exercise2.getWeight().size());
         assertEquals(150, exercise2.getWeight().get(0));
+    }
+
+    @Test
+    void testConstructor3() {
+        assertEquals("Lunges", exercise3.getName());
+        assertEquals(0, exercise3.getReps().size());
+        assertEquals(0, exercise3.getWeight().size());
     }
 
     @Test

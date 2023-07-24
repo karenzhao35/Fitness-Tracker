@@ -2,14 +2,16 @@ package model.workout;
 
 import model.Data;
 import model.Date;
+import model.exceptions.DoesNotExist;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import persistence.Writable;
 
 import java.util.ArrayList;
 import java.util.List;
 
 // A database for all workouts performed
-public class AllWorkouts implements Data {
+public class AllWorkouts implements Data, Writable {
     private List<Workout> allWorkouts;
 
     // EFFECTS: constructs a new AllWorkouts with no workouts added
@@ -46,26 +48,16 @@ public class AllWorkouts implements Data {
         return false;
     }
 
-    // EFFECTS: returns true if workout with given date exists
-    @Override
-    public boolean exists(String date) {
-        for (Workout w : allWorkouts) {
-            if (w.getDate().equals(date)) {
-                return true;
-            }
-        }
-        return false;
-    }
 
-    // REQUIRES: workout with given date must exist in all workouts list
     // EFFECTS: return the workout with the given date from list
-    public Workout retrieveWorkout(String date) {
+    //          if workout doesn't exist, throws DoesNotExist exception
+    public Workout retrieveWorkout(String date) throws DoesNotExist {
         for (Workout w : allWorkouts) {
             if (w.getDate().equals(date)) {
                 return w;
             }
         }
-        return null;
+        throw new DoesNotExist();
     }
 
     @Override

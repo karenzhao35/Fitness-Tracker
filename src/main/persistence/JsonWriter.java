@@ -1,12 +1,14 @@
 package persistence;
 
 import model.AllData;
-import model.Data;
 import org.json.JSONObject;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
+
+// The following code was inspired by the JsonSerializationDemo
+// https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo/blob/d79763d7ed5bb61196c51570598336948efe1202/src
+// /main/persistence/JsonWriter.java#L29
 
 // Represents a writer that writes JSON representation of workroom to file
 public class JsonWriter {

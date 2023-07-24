@@ -1,6 +1,8 @@
-package model;
+package model.food;
 
+import model.exceptions.DoesNotExist;
 import model.food.AllMeals;
+import model.food.Meals;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -85,40 +87,38 @@ public class AllMealsTest {
         assertFalse(testAllMeals.today());
     }
 
-    @Test
-    void testEmptyMealExists() {
-        assertFalse(testAllMeals.exists("2017-07-14"));
-    }
-
-    @Test
-    void testTrueMealExistsOne() {
-        testAllMeals.addMeals(meals1);
-        assertTrue(testAllMeals.exists(meals1.getDate()));
-    }
-
-    @Test
-    void testMealExists() {
-        addAllMeals();
-        assertTrue(testAllMeals.exists(meals2.getDate()));
-        assertFalse(testAllMeals.exists("2015-08-06"));
-    }
 
     @Test
     void testRetrieveMealsEmpty() {
-        assertNull(testAllMeals.retreiveMeals("2018-08-25"));
+        try {
+            testAllMeals.retreiveMeals("2018-08-25");
+            fail("Not expecting meal to be retrieved!");
+        } catch (DoesNotExist e) {
+            System.out.println("Great!");
+        }
     }
 
     @Test
     void testRetrieveMeals() {
         addAllMeals();
-        assertEquals(meals1, testAllMeals.retreiveMeals(meals1.getDate()));
-        assertEquals(meals3, testAllMeals.retreiveMeals(meals3.getDate()));
+        try {
+            assertEquals(meals1, testAllMeals.retreiveMeals(meals1.getDate()));
+            assertEquals(meals3, testAllMeals.retreiveMeals(meals3.getDate()));
+        } catch (DoesNotExist e) {
+            fail("Not expecting the DoesNotExist exception");
+        }
     }
 
     @Test
     void testRetrieveMealsNotThere() {
         addAllMeals();
-        assertNull(testAllMeals.retreiveMeals("1978-07-31"));
+        try {
+            testAllMeals.retreiveMeals("1978-07-31");
+            fail("Not expecting meal to be retrieved!");
+        } catch (DoesNotExist e) {
+            System.out.println("Great");
+
+        }
     }
 
     // MODIFIES: this

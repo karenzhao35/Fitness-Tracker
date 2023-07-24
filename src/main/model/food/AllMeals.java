@@ -2,14 +2,16 @@ package model.food;
 
 import model.Data;
 import model.Date;
+import model.exceptions.DoesNotExist;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import persistence.Writable;
 
 import java.util.ArrayList;
 import java.util.List;
 
 // A database for all meals eaten
-public class AllMeals implements Data {
+public class AllMeals implements Data, Writable {
     private List<Meals> allMeals;
 
     // EFFECTS: constructs a new AllMeals with no meals in it
@@ -46,26 +48,16 @@ public class AllMeals implements Data {
         return false;
     }
 
-    // EFFECTS: returns true if meal with given date exists
-    @Override
-    public boolean exists(String date) {
-        for (Meals m : allMeals) {
-            if (m.getDate().equals(date)) {
-                return true;
-            }
-        }
-        return false;
-    }
 
-    // REQUIRES: meal with given date must exist in all meals list
     // EFFECTS: return the meals with the given date from list
-    public Meals retreiveMeals(String date) {
+    //          throws DoesNotExist exception if meal is not in the list
+    public Meals retreiveMeals(String date) throws DoesNotExist {
         for (Meals m : allMeals) {
             if (m.getDate().equals(date)) {
                 return m;
             }
         }
-        return null;
+        throw new DoesNotExist();
     }
 
     @Override

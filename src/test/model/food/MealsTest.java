@@ -1,4 +1,4 @@
-package model;
+package model.food;
 
 import model.food.Food;
 import model.food.MealType;

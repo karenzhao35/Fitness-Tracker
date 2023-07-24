@@ -5,14 +5,21 @@ import model.food.AllMeals;
 import model.workout.AllWorkouts;
 import persistence.JsonReader;
 import persistence.JsonWriter;
-
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
 
+
+// the following code is inspired from the TellerApp class in the Teller Application
+// https://github.students.cs.ubc.ca/CPSC210/TellerApp/blob/main/src/main/ca/ubc/cpsc210/bank/ui/TellerApp.java
+
+// and also from the WorkRoomApp from the JsonSerializationDemo
+// https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo/blob/d79763d7ed5bb61196c51570598336948efe1202/src
+// /main/ui/WorkRoomApp.java#L122-L121
+
 // Fitness application
 public class FitnessApp {
-    private static final String JSON_STORE = "./data/log.json";
+    private static final String JSON_STORE = "./data/testReaderGeneralLog.json";
     private AllMeals allMeals;
     private AllWorkouts allWorkouts;
     private AllData allData;
@@ -20,22 +27,26 @@ public class FitnessApp {
     private JsonWriter jsonWriter;
     private JsonReader jsonReader;
 
-    // the following code is inspired from the TellerApp class in the Teller Application
-    // https://github.students.cs.ubc.ca/CPSC210/TellerApp/blob/main/src/main/ca/ubc/cpsc210/bank/ui/TellerApp.java
 
     // EFFECTS: runs the fitness application
     public FitnessApp() throws FileNotFoundException {
         init();
-        runFitness();
+        String user = "";
+        if (runLoad()) {
+            user = greetUser();
+            initData(user);
+        } else {
+            user = allData.getUser();
+            System.out.println("\nWelcome back " + user);
+        }
+        runFitness(user);
     }
 
     // MODIFIES: this
     // EFFECTS: processes user input
-    public void runFitness() {
+    public void runFitness(String user) {
         boolean cont = true;
         String command = null;
-
-        String name = greetUser();
 
         while (cont) {
             displayMenu();
@@ -43,7 +54,8 @@ public class FitnessApp {
             command = command.toLowerCase();
 
             if (command.equals("q")) {
-                System.out.println("See you tomorrow " + name + "!");
+                runSave();
+                System.out.println("See you tomorrow " + user + "!");
                 cont = false;
             } else {
                 processCommand(command);
@@ -51,16 +63,73 @@ public class FitnessApp {
         }
     }
 
+    // TODO: ask about how object persistence works here
     // MODIFIES: this
     // EFFECTS: initializes workouts and meals
-    private void init() throws FileNotFoundException {
-        allData = new AllData("My data");
+    private void initData(String user) {
+        allData = new AllData("My data", user);
         allMeals = allData.getAllMeals();
         allWorkouts = allData.getAllWorkouts();
+    }
+
+    private void init() {
         jsonWriter = new JsonWriter(JSON_STORE);
         jsonReader = new JsonReader(JSON_STORE);
         input = new Scanner(System.in);
         input.useDelimiter("\n");
+    }
+
+    private void promptLoad() {
+        System.out.println("Would you like to load previous data?");
+        System.out.print("Enter \"yes\" or \"no\": ");
+    }
+
+    public boolean runLoad() {
+        boolean cont = true;
+        String command = null;
+
+        while (cont) {
+            promptLoad();
+            command = input.next();
+            command = command.toLowerCase();
+
+            if (command.equals("yes")) {
+                loadWorkRoom();
+                cont = false;
+                return false;
+            } else if (command.equals("no")) {
+                cont = false;
+                return true;
+            } else {
+                System.out.println("Selection invalid!");
+            }
+        }
+        return false;
+    }
+
+    private void runSave() {
+        boolean cont = true;
+        String command = null;
+
+        while (cont) {
+            promptSave();
+            command = input.next();
+            command = command.toLowerCase();
+
+            if (command.equals("yes")) {
+                saveWorkRoom();
+                cont = false;
+            } else if (command.equals("no")) {
+                cont = false;
+            } else {
+                System.out.println("Selection invalid!");
+            }
+        }
+    }
+
+    private void promptSave() {
+        System.out.println("Wait! Before you go, would you like to save your data?");
+        System.out.print("Enter \"yes\" or \"no\": ");
     }
 
     // EFFECTS: greets the user
@@ -80,8 +149,6 @@ public class FitnessApp {
         System.out.println("\tw -> to start a workout");
         System.out.println("\tf -> to begin a recording your food intake");
         System.out.println("\td -> to view previous data");
-        System.out.println("\ts -> save work room to file");
-        System.out.println("\tl -> load work room from file");
         System.out.println("\tq -> to quit");
     }
 
@@ -94,10 +161,6 @@ public class FitnessApp {
             new MealApp(allMeals);
         } else if (command.equals("d")) {
             new DataApp(allWorkouts, allMeals);
-        } else if (command.equals("s")) {
-            saveWorkRoom();
-        } else if (command.equals("l")) {
-            loadWorkRoom();
         } else {
             System.out.println("Selection not valid...");
         }

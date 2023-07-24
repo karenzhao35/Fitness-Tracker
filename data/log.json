@@ -1,51 +1,141 @@
 {
-    "Food Log": {"meals": [{
-        "date": "2023-07-22",
-        "foods": [
-            {
-                "protein": 0,
-                "name": "Apples",
-                "calories": 30,
-                "meal type": "SNACK"
-            },
-            {
-                "protein": 25,
-                "name": "Steak",
-                "calories": 900,
-                "meal type": "DINNER"
-            },
-            {
-                "protein": 10,
-                "name": "Pasta",
-                "calories": 800,
-                "meal type": "LUNCH"
-            }
-        ]
-    }]},
+    "Food Log": {"meals": [
+        {
+            "date": "2023-07-22",
+            "foods": [
+                {
+                    "protein": 0,
+                    "name": "London fog",
+                    "calories": 30,
+                    "meal type": "BREAKFAST"
+                },
+                {
+                    "protein": 11,
+                    "name": "Sunny side up eggs",
+                    "calories": 100,
+                    "meal type": "BREAKFAST"
+                },
+                {
+                    "protein": 5,
+                    "name": "Sausage",
+                    "calories": 200,
+                    "meal type": "BREAKFAST"
+                },
+                {
+                    "protein": 10,
+                    "name": "Celery and chicken",
+                    "calories": 300,
+                    "meal type": "LUNCH"
+                },
+                {
+                    "protein": 0,
+                    "name": "Rice",
+                    "calories": 299,
+                    "meal type": "LUNCH"
+                },
+                {
+                    "protein": 20,
+                    "name": "Pasta!",
+                    "calories": 300,
+                    "meal type": "DINNER"
+                }
+            ]
+        },
+        {
+            "date": "2023-07-23",
+            "foods": [
+                {
+                    "protein": 30,
+                    "name": "Steak",
+                    "calories": 300,
+                    "meal type": "DINNER"
+                },
+                {
+                    "protein": 20,
+                    "name": "Sandwich",
+                    "calories": 200,
+                    "meal type": "LUNCH"
+                },
+                {
+                    "protein": 10,
+                    "name": "English muffin ",
+                    "calories": 300,
+                    "meal type": "BREAKFAST"
+                }
+            ]
+        }
+    ]},
     "name": "My data",
-    "Fitness Log": {"workouts": [{
-        "date": "2023-07-22",
-        "exercises": [
-            {
-                "reps": [
-                    10,
-                    10,
-                    9,
-                    9
-                ],
-                "name": "Leg Press",
-                "weight": [
-                    115,
-                    155,
-                    180,
-                    250
-                ]
-            },
-            {
+    "user": "Karen",
+    "Fitness Log": {"workouts": [
+        {
+            "date": "2023-07-22",
+            "exercises": [
+                {
+                    "reps": [
+                        10,
+                        9,
+                        8,
+                        10,
+                        9,
+                        10,
+                        10
+                    ],
+                    "name": "Leg Press",
+                    "weight": [
+                        200,
+                        250,
+                        300,
+                        90,
+                        100,
+                        140,
+                        140
+                    ]
+                },
+                {
+                    "reps": [10],
+                    "name": "Lunges",
+                    "weight": [90]
+                },
+                {
+                    "reps": [10],
+                    "name": "Bench Press",
+                    "weight": [135]
+                }
+            ]
+        },
+        {
+            "date": "2023-07-23",
+            "exercises": [
+                {
+                    "reps": [
+                        10,
+                        10,
+                        10,
+                        10
+                    ],
+                    "name": "Deadlift",
+                    "weight": [
+                        155,
+                        155,
+                        155,
+                        70
+                    ]
+                },
+                {
+                    "reps": [10],
+                    "name": "Low rows",
+                    "weight": [70]
+                }
+            ]
+        },
+        {
+            "date": "2023-07-23",
+            "exercises": [{
                 "reps": [10],
-                "name": "Leg Press",
-                "weight": [200]
-            }
-        ]
-    }]}
+                "name": "Pull-ups",
+                "weight": [0]
+            }]
+        }
+    ]}
 }

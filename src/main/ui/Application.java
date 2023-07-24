@@ -1,9 +1,13 @@
 package ui;
 
 import model.food.AllMeals;
+import model.food.Food;
+import model.food.Meals;
 import model.workout.AllWorkouts;
 import model.workout.Exercise;
+import model.workout.Workout;
 
+import java.util.ArrayList;
 import java.util.regex.Pattern;
 import java.util.List;
 import java.util.Scanner;
@@ -54,12 +58,55 @@ public abstract class Application {
 
 
     // EFFECTS: prints a list of exercises and the sets for each exercise
-    protected void printExercises(List<Exercise> exercises) {
-        for (Exercise e : exercises) {
+    protected void printExercises(Workout workout) {
+        System.out.println("***************************************************************");
+        System.out.println("\nHere is your workout on " + workout.getDate() + "!");
+        for (Exercise e : workout.getExercises()) {
             System.out.println("For " + e.getName() + " you did:");
             for (int i = 0; i < e.getReps().size(); i++) {
-                System.out.println("\t" + e.getReps().get(i) + " reps at " + e.getWeight().get(i) + " lbs");
+                System.out.println("\t- " + e.getReps().get(i) + " reps at " + e.getWeight().get(i) + " lbs");
             }
+        }
+        System.out.println("\n***************************************************************");
+    }
+
+    // EFFECTS: prints the list of foods with calories and protein for given meal
+    protected void printFoods(Meals meals) {
+        System.out.println("***************************************************************");
+        System.out.println("\nOn " + meals.getDate() + " you ate:");
+        ArrayList<ArrayList<Food>> sorted = meals.separateFoodTypes();
+        for (int i = 0; i < sorted.size(); i++) {
+            typeLabel(i, sorted.get(i));
+            for (Food f : sorted.get(i)) {
+                String n = f.getName();
+                int c = f.getCalories();
+                double p = f.getProtein();
+                System.out.println("\t- " + n + ", which had " + c + " calories and " + p + " grams of protein");
+            }
+        }
+        int kcal = meals.sumCalories();
+        double protein = meals.sumProtein();
+        System.out.println("In total, you ate " + kcal + " calories and " + protein + " grams of protein.");
+        System.out.println("\n***************************************************************");
+    }
+
+    // EFFECTS: determines if type label is needed and prints it
+    private void typeLabel(int index, ArrayList<Food> meals) {
+        if (!(meals.size() == 0)) {
+            printTypeLabel(index);
+        }
+    }
+
+    // EFFECTS: determines which label to print
+    private void printTypeLabel(int index) {
+        if (index == 0) {
+            System.out.println("FOR BREAKFAST:");
+        } else if (index == 1) {
+            System.out.println("FOR LUNCH:");
+        } else if (index == 2) {
+            System.out.println("FOR DINNER:");
+        } else {
+            System.out.println("FOR SNACK:");
         }
     }
 

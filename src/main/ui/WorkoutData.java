@@ -1,5 +1,6 @@
 package ui;
 
+import model.exceptions.DoesNotExist;
 import model.workout.AllWorkouts;
 import model.workout.Workout;
 
@@ -25,12 +26,16 @@ public class WorkoutData extends Application {
         } else if (!dateFormat(date)) {
             System.out.println("You didn't follow the format :(");
             System.out.println("Please try again!");
-        } else if (allWorkouts.exists(date)) {
-            Workout workout = allWorkouts.retrieveWorkout(date);
-            accessWorkout(workout);
         } else {
-            System.out.println("Unfortunately, workout with given date doesn't exist :(");
-            System.out.println("Please try again!");
+            Workout workout = null;
+            try {
+                workout = allWorkouts.retrieveWorkout(date);
+                printExercises(workout);
+                editWorkout(workout);
+            } catch (DoesNotExist e) {
+                System.out.println("Unfortunately, workout with given date doesn't exist :(");
+                System.out.println("Please try again!");
+            }
         }
     }
 
@@ -38,23 +43,16 @@ public class WorkoutData extends Application {
     // MODIFIES: this
     // EFFECTS: accesses the workout today to view exercises and choose to remove workout
     private void workoutDateToday() {
-        if (allWorkouts.today()) {
-            Workout workout = allWorkouts.retrieveWorkout(new java.sql.Date(current).toString());
-            accessWorkout(workout);
-        } else {
+        Workout workout = null;
+        try {
+            workout = allWorkouts.retrieveWorkout(new java.sql.Date(current).toString());
+            printExercises(workout);
+            editWorkout(workout);
+        } catch (DoesNotExist e) {
             System.out.println("Oh no! There are no workouts today.");
         }
     }
 
-    // MODIFIES: this
-    // EFFECTS: accesses the workout on the given date to view exercises and choose to remove workout
-    private void accessWorkout(Workout workout) {
-        System.out.println("\n*******************************************************");
-        System.out.println("\nHere is your workout on " + workout.getDate() + "!");
-        printExercises(workout.getExercises());
-        System.out.println("\n*******************************************************");
-        editWorkout(workout);
-    }
 
     // MODIFIES: this
     // EFFECTS: processes the user command and removes workout if prompted

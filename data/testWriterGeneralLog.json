@@ -1,0 +1,21 @@
+{
+    "Food Log": {"meals": [{
+        "date": "2023-07-24",
+        "foods": [{
+            "protein": 20,
+            "name": "Pasta",
+            "calories": 300,
+            "meal type": "DINNER"
+        }]
+    }]},
+    "name": "My data",
+    "user": "Karen",
+    "Fitness Log": {"workouts": [{
+        "date": "2023-07-23",
+        "exercises": [{
+            "reps": [10],
+            "name": "Leg press",
+            "weight": [200]
+        }]
+    }]}
+}

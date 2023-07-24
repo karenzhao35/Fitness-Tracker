@@ -1,4 +1,4 @@
-package model;
+package model.workout;
 
 import model.workout.Exercise;
 import model.workout.Workout;

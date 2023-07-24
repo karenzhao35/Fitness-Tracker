@@ -1,5 +1,6 @@
-package model;
+package model.workout;
 
+import model.exceptions.DoesNotExist;
 import model.workout.AllWorkouts;
 import model.workout.Workout;
 import org.junit.jupiter.api.BeforeEach;
@@ -91,40 +92,37 @@ public class AllWorkoutsTest {
         assertFalse(testWorkouts.today());
     }
 
-    @Test
-    void testEmptyWorkoutExists() {
-        assertFalse(testWorkouts.exists("2017-07-14"));
-    }
-
-    @Test
-    void testTrueWorkoutExistsOne() {
-        testWorkouts.addWorkout(workout1);
-        assertTrue(testWorkouts.exists(workout1.getDate()));
-    }
-
-    @Test
-    void testWorkoutExists() {
-        addAllWorkouts();
-        assertTrue(testWorkouts.exists(workout2.getDate()));
-        assertFalse(testWorkouts.exists("2015-08-06"));
-    }
 
     @Test
     void testRetrieveWorkoutsEmpty() {
-        assertNull(testWorkouts.retrieveWorkout("2018-08-25"));
+        try {
+            testWorkouts.retrieveWorkout("2018-08-25");
+            fail("Not expecting workout to be retrieved!");
+        } catch (DoesNotExist e) {
+            System.out.println("Great");
+        }
     }
 
     @Test
     void testRetrieveWorkouts() {
         addAllWorkouts();
-        assertEquals(workout1, testWorkouts.retrieveWorkout(workout1.getDate()));
-        assertEquals(workout3, testWorkouts.retrieveWorkout(workout3.getDate()));
+        try {
+            assertEquals(workout1, testWorkouts.retrieveWorkout(workout1.getDate()));
+            assertEquals(workout3, testWorkouts.retrieveWorkout(workout3.getDate()));
+        } catch (DoesNotExist e) {
+            System.out.println("Not expecting DoesNotExist exception!");
+        }
     }
 
     @Test
     void testRetrieveWorkoutsNotThere() {
         addAllWorkouts();
-        assertNull(testWorkouts.retrieveWorkout("1978-07-31"));
+        try {
+            testWorkouts.retrieveWorkout("1978-07-31");
+            fail("Not expecting workout to be retrieved!");
+        } catch (DoesNotExist e) {
+            System.out.println("Great");
+        }
     }
 
     private void addAllWorkouts() {

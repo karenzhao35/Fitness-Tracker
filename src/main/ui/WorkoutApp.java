@@ -1,6 +1,7 @@
 package ui;
 
 import model.*;
+import model.exceptions.DoesNotExist;
 import model.workout.AllWorkouts;
 import model.workout.Exercise;
 import model.workout.Workout;
@@ -58,8 +59,13 @@ public class WorkoutApp extends Application {
     // EFFECTS: prints all the exercises and sets from today's workout
     private void printTodaysWorkout() {
         Date date = new Date();
-        Workout todaysWorkout = allWorkouts.retrieveWorkout(date.getDate());
-        printExercises(todaysWorkout.getExercises());
+        Workout todaysWorkout = null;
+        try {
+            todaysWorkout = allWorkouts.retrieveWorkout(date.getDate());
+        } catch (DoesNotExist e) {
+            System.out.println("Record doesn't exist!");
+        }
+        printExercises(todaysWorkout);
         System.out.println("Taking you back to the workout menu now...");
     }
 
@@ -93,22 +99,29 @@ public class WorkoutApp extends Application {
         String command = null;
 
         while (cont) {
-            System.out.println("Great! Enter 'continue' to add a new set, 'new' to add another exercise,");
-            System.out.println("or 'back' to return to the workout menu.");
+            promptContinue();
             command = input.next();
             command = command.toLowerCase();
 
-            if (command.equals("back")) {
+            if (command.equals("q")) {
                 cont = false;
-            } else if (command.equals("continue")) {
+            } else if (command.equals("c")) {
                 addSet(exercise);
-            } else if (command.equals("new")) {
+            } else if (command.equals("n")) {
                 Exercise newExercise = newExercise();
                 workout.addExercise(newExercise);
             } else {
                 System.out.println("Selection not valid...");
             }
         }
+    }
+
+    private void promptContinue() {
+        System.out.println("Great!");
+        System.out.println("\nSelect from the following options");
+        System.out.println("c -> continue this exercise");
+        System.out.println("n -> begin a new workout");
+        System.out.println("q -> to return to the workout menu");
     }
 
     // MODIFIES: this

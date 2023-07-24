@@ -17,6 +17,11 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
+//TODO: CHANGE ALL THE COMMENTS !!!
+
+// The following code was inspired by the JsonSerializationDemo
+// https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo/blob/d79763d7ed5bb61196c51570598336948efe1202/src
+// /main/persistence/JsonReader.java#L17
 
 // Represents a reader that reads workroom from JSON data stored in file
 public class JsonReader {
@@ -50,7 +55,8 @@ public class JsonReader {
     // EFFECTS: parses workroom from JSON object and returns it
     private AllData parseAllData(JSONObject jsonObject) {
         String name = jsonObject.getString("name");
-        AllData data = new AllData(name);
+        String user = jsonObject.getString("user");
+        AllData data = new AllData(name, user);
         addAllData(data, jsonObject);
         return data;
     }
@@ -78,7 +84,7 @@ public class JsonReader {
         JSONArray jsonArray = jsonObject.getJSONArray("foods");
         String date = jsonObject.getString("date");
         Meals meals = new Meals(date);
-        data.addDataMeal(meals);
+        data.getAllMeals().addMeals(meals);
         for (Object json : jsonArray) {
             JSONObject nextFood = (JSONObject) json;
             addFoods(meals, nextFood);
@@ -106,7 +112,7 @@ public class JsonReader {
         JSONArray jsonArray = jsonObject.getJSONArray("exercises");
         String date = jsonObject.getString("date");
         Workout workout = new Workout(date);
-        data.addDataWorkout(workout);
+        data.getAllWorkouts().addWorkout(workout);
         for (Object json : jsonArray) {
             JSONObject nextExercises = (JSONObject) json;
             addExercises(workout, nextExercises);
