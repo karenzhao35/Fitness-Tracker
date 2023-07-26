@@ -2,6 +2,7 @@ package ui;
 
 import model.food.AllMeals;
 import model.food.Food;
+import model.food.MealType;
 import model.food.Meals;
 import model.workout.AllWorkouts;
 import model.workout.Exercise;
@@ -70,11 +71,38 @@ public abstract class Application {
         System.out.println("\n***************************************************************");
     }
 
+    // EFFECTS: sorts foods into a list of list
+    //          the list will contain all the food in each meal type in order
+    //          breakfast, lunch, dinner, snack
+    public ArrayList<ArrayList<Food>> separateFoodTypes(Meals meals) {
+        ArrayList<ArrayList<Food>> soFar = new ArrayList<>();
+        ArrayList<Food> breakfast = new ArrayList<>();
+        ArrayList<Food> lunch = new ArrayList<>();
+        ArrayList<Food> dinner = new ArrayList<>();
+        ArrayList<Food> snack = new ArrayList<>();
+        for (Food f : meals.getFoods()) {
+            if (f.getType().equals(MealType.BREAKFAST)) {
+                breakfast.add(f);
+            } else if (f.getType().equals(MealType.LUNCH)) {
+                lunch.add(f);
+            } else if (f.getType().equals(MealType.DINNER)) {
+                dinner.add(f);
+            } else {
+                snack.add(f);
+            }
+        }
+        soFar.add(breakfast);
+        soFar.add(lunch);
+        soFar.add(dinner);
+        soFar.add(snack);
+        return soFar;
+    }
+
     // EFFECTS: prints the list of foods with calories and protein for given meal
     protected void printFoods(Meals meals) {
-        System.out.println("***************************************************************");
+        System.out.println("****************** On " + meals.getDate() + " you ate: ********************");
         System.out.println("\nOn " + meals.getDate() + " you ate:");
-        ArrayList<ArrayList<Food>> sorted = meals.separateFoodTypes();
+        ArrayList<ArrayList<Food>> sorted = separateFoodTypes(meals);
         for (int i = 0; i < sorted.size(); i++) {
             typeLabel(i, sorted.get(i));
             for (Food f : sorted.get(i)) {

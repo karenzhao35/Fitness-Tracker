@@ -92,6 +92,29 @@
                     "meal type": "LUNCH"
                 }
             ]
+        },
+        {
+            "date": "2023-07-26",
+            "foods": [
+                {
+                    "protein": 9,
+                    "name": "Chips",
+                    "calories": 300,
+                    "meal type": "SNACK"
+                },
+                {
+                    "protein": 30,
+                    "name": "Chicken breast",
+                    "calories": 300,
+                    "meal type": "DINNER"
+                },
+                {
+                    "protein": 0,
+                    "name": "Asparagus",
+                    "calories": 30,
+                    "meal type": "LUNCH"
+                }
+            ]
         }
     ]},
     "name": "My data",

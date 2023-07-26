@@ -114,27 +114,6 @@ public class MealsTest {
         assertEquals(48.0, testMeals1.sumProtein());
     }
 
-    @Test
-    void testSortFoodTypesEmpty() {
-        assertEquals(4, testMeals1.separateFoodTypes().size());
-        assertEquals(0, testMeals1.separateFoodTypes().get(0).size());
-        assertEquals(0, testMeals1.separateFoodTypes().get(1).size());
-        assertEquals(0, testMeals1.separateFoodTypes().get(2).size());
-        assertEquals(0, testMeals1.separateFoodTypes().get(3).size());
-    }
-
-    @Test
-    void testSortFoodTypesAllTypes() {
-        addFoods(testMeals1);
-        testMeals1.addFood(food7);
-        testMeals1.addFood(food5);
-        testMeals1.addFood(food5);
-        assertEquals(4, testMeals1.separateFoodTypes().size());
-        assertEquals(1, testMeals1.separateFoodTypes().get(0).size());
-        assertEquals(2, testMeals1.separateFoodTypes().get(1).size());
-        assertEquals(3, testMeals1.separateFoodTypes().get(2).size());
-        assertEquals(4, testMeals1.separateFoodTypes().get(3).size());
-    }
 
     private void addFoods(Meals meals) {
         meals.addFood(food1);

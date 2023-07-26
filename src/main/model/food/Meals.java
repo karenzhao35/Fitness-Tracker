@@ -72,33 +72,6 @@ public class Meals implements Writable {
         return soFar;
     }
 
-    // TODO: is this the best way to do this
-    // EFFECTS: sorts foods into a list of list
-    //          the list will contain all the food in each meal type in order
-    //          breakfast, lunch, dinner, snack
-    public ArrayList<ArrayList<Food>> separateFoodTypes() {
-        ArrayList<ArrayList<Food>> soFar = new ArrayList<>();
-        ArrayList<Food> breakfast = new ArrayList<>();
-        ArrayList<Food> lunch = new ArrayList<>();
-        ArrayList<Food> dinner = new ArrayList<>();
-        ArrayList<Food> snack = new ArrayList<>();
-        for (Food f : foods) {
-            if (f.getType().equals(MealType.BREAKFAST)) {
-                breakfast.add(f);
-            } else if (f.getType().equals(MealType.LUNCH)) {
-                lunch.add(f);
-            } else if (f.getType().equals(MealType.DINNER)) {
-                dinner.add(f);
-            } else {
-                snack.add(f);
-            }
-        }
-        soFar.add(breakfast);
-        soFar.add(lunch);
-        soFar.add(dinner);
-        soFar.add(snack);
-        return soFar;
-    }
 
     // EFFECTS: returns the meal data as a JSON object
     @Override
