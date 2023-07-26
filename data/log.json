@@ -63,6 +63,35 @@
                     "meal type": "BREAKFAST"
                 }
             ]
+        },
+        {
+            "date": "2023-06-09",
+            "foods": [
+                {
+                    "protein": 0,
+                    "name": "Carrots",
+                    "calories": 20,
+                    "meal type": "SNACK"
+                },
+                {
+                    "protein": 10,
+                    "name": "Steak",
+                    "calories": 800,
+                    "meal type": "DINNER"
+                },
+                {
+                    "protein": 10,
+                    "name": "Chia Pudding",
+                    "calories": 200,
+                    "meal type": "BREAKFAST"
+                },
+                {
+                    "protein": 5,
+                    "name": "Salad",
+                    "calories": 200,
+                    "meal type": "LUNCH"
+                }
+            ]
         }
     ]},
     "name": "My data",
@@ -130,12 +159,34 @@
             ]
         },
         {
-            "date": "2023-07-23",
-            "exercises": [{
-                "reps": [10],
-                "name": "Pull-ups",
-                "weight": [0]
-            }]
+            "date": "2023-07-25",
+            "exercises": [
+                {
+                    "reps": [10],
+                    "name": "Bench",
+                    "weight": [200]
+                },
+                {
+                    "reps": [10],
+                    "name": "Curls",
+                    "weight": [20]
+                }
+            ]
+        },
+        {
+            "date": "2023-06-09",
+            "exercises": [
+                {
+                    "reps": [10],
+                    "name": "Pull-ups",
+                    "weight": [0]
+                },
+                {
+                    "reps": [10],
+                    "name": "Rows",
+                    "weight": [100]
+                }
+            ]
         }
     ]}
 }

@@ -1,11 +1,9 @@
 package model.workout;
 
 import model.Date;
-import model.food.Food;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import persistence.Writable;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,9 +35,18 @@ public class Workout implements Writable {
         return this.date.getDate();
     }
 
-    // EFFECTS: removes given exercise from exercises
+    // MODIFIES: this
+    // EFFECTS: adds given exercise from exercises
     public void addExercise(Exercise exercise) {
         this.exercises.add(exercise);
+    }
+
+    // MODIFIES: this
+    // EFFECTS: adds the list of given exercises
+    public void addExercises(List<Exercise> exercises) {
+        for (Exercise e : exercises) {
+            this.exercises.add(e);
+        }
     }
 
     // MODIFIES: this

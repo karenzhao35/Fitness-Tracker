@@ -11,6 +11,9 @@ public class AllWorkoutsTest {
     private Workout workout1;
     private Workout workout2;
     private Workout workout3;
+    private Workout workout4;
+    private Exercise exercise1;
+    private Exercise exercise2;
 
 
     @BeforeEach
@@ -19,6 +22,11 @@ public class AllWorkoutsTest {
         workout1 = new Workout("2019-02-10");
         workout2 = new Workout("2021-09-18");
         workout3 = new Workout();
+        workout4 = new Workout("2019-02-10");
+        exercise1 = new Exercise("Bench", 10, 155);
+        exercise2 = new Exercise("Curls", 9, 50);
+        workout1.addExercise(exercise1);
+        workout4.addExercise(exercise2);
     }
 
     @Test
@@ -42,6 +50,14 @@ public class AllWorkoutsTest {
         testWorkouts.addWorkout(workout3);
         assertEquals(3, testWorkouts.getWorkouts().size());
         assertEquals(workout3, testWorkouts.getWorkouts().get(2));
+    }
+
+    @Test
+    void testAddWorkoutsAlreadyExists() {
+        testWorkouts.addWorkout(workout1);
+        testWorkouts.addWorkout(workout4);
+        assertEquals(1, testWorkouts.getWorkouts().size());
+        assertEquals(2, testWorkouts.getWorkouts().get(0).getExercises().size());
     }
 
     @Test

@@ -3,6 +3,9 @@ package model.food;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class MealsTest {
@@ -45,14 +48,14 @@ public class MealsTest {
 
 
     @Test
-    void testAddOneWorkouts() {
+    void testAddOneMeal() {
         testMeals1.addFood(food1);
         assertEquals(1, testMeals1.getFoods().size());
         assertEquals(food1, testMeals1.getFoods().get(0));
     }
 
     @Test
-    void testAddThreeWorkouts() {
+    void testAddThreeMeal() {
         testMeals1.addFood(food1);
         testMeals1.addFood(food2);
         assertEquals(2, testMeals1.getFoods().size());
@@ -63,7 +66,16 @@ public class MealsTest {
     }
 
     @Test
-    void testRemoveOneWorkout() {
+    void testAddFoods() {
+        List<Food> foods = new ArrayList<>();
+        foods.add(food1);
+        foods.add(food2);
+        testMeals1.addFoods(foods);
+        assertEquals(2, testMeals1.getFoods().size());
+    }
+
+    @Test
+    void testRemoveOneMeal() {
         addFoods(testMeals1);
         testMeals1.removeFood(food2);
         assertEquals(6, testMeals1.getFoods().size());
@@ -72,7 +84,7 @@ public class MealsTest {
     }
 
     @Test
-    void testRemoveThreeWorkout() {
+    void testRemoveThreeMeal() {
         addFoods(testMeals1);
         testMeals1.removeFood(food1);
         testMeals1.removeFood(food2);

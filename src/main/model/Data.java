@@ -7,4 +7,6 @@ public interface Data {
     boolean today();
 
 
+
+
 }

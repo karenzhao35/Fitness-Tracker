@@ -1,8 +1,6 @@
 package model.food;
 
 import model.exceptions.DoesNotExist;
-import model.food.AllMeals;
-import model.food.Meals;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -13,6 +11,9 @@ public class AllMealsTest {
     private Meals meals1;
     private Meals meals2;
     private Meals meals3;
+    private Meals meals4;
+    private Food food1;
+    private Food food2;
 
     @BeforeEach
     void runBefore() {
@@ -20,6 +21,9 @@ public class AllMealsTest {
         meals1 = new Meals("2019-02-10");
         meals2 = new Meals("2021-09-18");
         meals3 = new Meals();
+        meals4 = new Meals("2019-02-10");
+        food1 = new Food("Apple", MealType.BREAKFAST, 30, 8.0);
+        food2 = new Food("Steak", MealType.DINNER, 600, 25.0);
     }
 
     @Test
@@ -28,14 +32,14 @@ public class AllMealsTest {
     }
 
     @Test
-    void testAddOneWorkouts() {
+    void testAddOneMeals() {
         testAllMeals.addMeals(meals1);
         assertEquals(1, testAllMeals.getAllMeals().size());
         assertEquals(meals1, testAllMeals.getAllMeals().get(0));
     }
 
     @Test
-    void testAddThreeWorkouts() {
+    void testAddThreeMeals() {
         testAllMeals.addMeals(meals1);
         testAllMeals.addMeals(meals2);
         assertEquals(2, testAllMeals.getAllMeals().size());
@@ -46,7 +50,17 @@ public class AllMealsTest {
     }
 
     @Test
-    void testRemoveOneWorkout() {
+    void testAddMealsAlreadyExists() {
+        meals1.addFood(food1);
+        meals4.addFood(food2);
+        testAllMeals.addMeals(meals1);
+        testAllMeals.addMeals(meals4);
+        assertEquals(1, testAllMeals.getAllMeals().size());
+        assertEquals(2, testAllMeals.getAllMeals().get(0).getFoods().size());
+    }
+
+    @Test
+    void testRemoveOneMeals() {
         addAllMeals();
         testAllMeals.removeMeals(meals2);
         assertEquals(2, testAllMeals.getAllMeals().size());
@@ -55,7 +69,7 @@ public class AllMealsTest {
     }
 
     @Test
-    void testRemoveThreeWorkout() {
+    void testRemoveThreeMeals() {
         addAllMeals();
         testAllMeals.removeMeals(meals1);
         testAllMeals.removeMeals(meals2);
@@ -120,6 +134,7 @@ public class AllMealsTest {
 
         }
     }
+
 
     // MODIFIES: this
     // EFFECTS: adds meals to allMeals

@@ -2,6 +2,10 @@ package model.workout;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 
@@ -58,6 +62,15 @@ public class WorkoutTest {
         assertEquals(exercise2, testWorkout2.getExercises().get(1));
         assertEquals(exercise3, testWorkout2.getExercises().get(2));
 
+    }
+
+    @Test
+    void testAddExercises() {
+        List<Exercise> exercises = new ArrayList<>();
+        exercises.add(exercise1);
+        exercises.add(exercise2);
+        testWorkout1.addExercises(exercises);
+        assertEquals(2, testWorkout1.getExercises().size());
     }
 
     @Test

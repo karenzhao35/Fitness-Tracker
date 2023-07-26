@@ -60,7 +60,7 @@ class JsonWriterTest extends JsonTest {
     }
 
     @Test
-    void testWriterGeneralWorkroom() {
+    void testWriterGeneralLog() {
         try {
             initData();
             JsonWriter writer = new JsonWriter("./data/testWriterGeneralLog.json");
@@ -72,12 +72,44 @@ class JsonWriterTest extends JsonTest {
             allData = reader.read();
             assertEquals("My data", allData.getName());
             assertEquals("Karen", allData.getUser());
+        } catch (IOException e) {
+            fail("Exception should not have been thrown");
+        }
+    }
+
+    @Test
+    void testWriterGeneralLogWorkout() {
+        try {
+            initData();
+            JsonWriter writer = new JsonWriter("./data/testWriterGeneralLog.json");
+            writer.open();
+            writer.write(allData);
+            writer.close();
+
+            JsonReader reader = new JsonReader("./data/testWriterGeneralLog.json");
+            allData = reader.read();
             List<Workout> allWorkouts = allData.getAllWorkouts().getWorkouts();
             assertEquals(1, allWorkouts.size());
             assertEquals("2023-07-23", allWorkouts.get(0).getDate());
             assertEquals("Leg press", allWorkouts.get(0).getExercises().get(0).getName()); // Test exercise name
             assertEquals(10, allWorkouts.get(0).getExercises().get(0).getReps().get(0)); // Test reps
             assertEquals(200, allWorkouts.get(0).getExercises().get(0).getWeight().get(0)); // Test weights
+        } catch (IOException e) {
+            fail("Exception should not have been thrown");
+        }
+    }
+
+    @Test
+    void testGeneralLogMeals() {
+        try {
+            initData();
+            JsonWriter writer = new JsonWriter("./data/testWriterGeneralLog.json");
+            writer.open();
+            writer.write(allData);
+            writer.close();
+
+            JsonReader reader = new JsonReader("./data/testWriterGeneralLog.json");
+            allData = reader.read();
 
             List<Meals> allMeals = allData.getAllMeals().getAllMeals();
             assertEquals(1, allMeals.size());

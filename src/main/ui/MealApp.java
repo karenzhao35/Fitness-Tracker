@@ -1,6 +1,5 @@
 package ui;
 
-import model.*;
 import model.exceptions.DoesNotExist;
 import model.food.AllMeals;
 import model.food.Food;
@@ -54,7 +53,6 @@ public class MealApp extends Application {
     // EFFECTS: creates a new meal with today's date
     private void mealsToday() {
         Meals meal = new Meals();
-        allMeals.addMeals(meal);
         startMeals(meal);
     }
 
@@ -62,7 +60,6 @@ public class MealApp extends Application {
     // EFFECTS: creates a new meal with the given date
     private void mealsAnyDay(String date) {
         Meals meal = new Meals(date);
-        allMeals.addMeals(meal);
         startMeals(meal);
     }
 
@@ -72,9 +69,10 @@ public class MealApp extends Application {
         Food food = newFood();
         meal.addFood(food);
         continueMeals(meal);
+        allMeals.addMeals(meal);
     }
 
-    // TODO: confirm this
+
     // MODIFIES: food
     // EFFECTS: processes the user's input for food and produces the food
     private Food newFood() {

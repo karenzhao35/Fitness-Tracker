@@ -63,7 +63,6 @@ public class FitnessApp {
         }
     }
 
-    // TODO: ask about how object persistence works here
     // MODIFIES: this
     // EFFECTS: initializes workouts and meals
     private void initData(String user) {

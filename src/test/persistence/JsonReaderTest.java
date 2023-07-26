@@ -44,7 +44,7 @@ public class JsonReaderTest extends JsonTest{
     }
 
     @Test
-    void testReaderGeneralLogWorkout() {
+    void testReaderGeneralLogAllWorkout() {
         JsonReader reader = new JsonReader("./data/testReaderGeneralLog.json");
         try {
             AllData d = reader.read();
@@ -53,6 +53,17 @@ public class JsonReaderTest extends JsonTest{
             List<Workout> allWorkouts = d.getAllWorkouts().getWorkouts();
             assertEquals(2, allWorkouts.size());
             assertEquals(2, allWorkouts.get(0).getExercises().size());
+        } catch (IOException e) {
+            fail("Couldn't read from file");
+        }
+    }
+
+    @Test
+    void testReaderGeneralLogWorkout0() {
+        JsonReader reader = new JsonReader("./data/testReaderGeneralLog.json");
+        try {
+            AllData d = reader.read();
+            List<Workout> allWorkouts = d.getAllWorkouts().getWorkouts();
             assertEquals("2023-07-24", allWorkouts.get(0).getDate());
 
             assertEquals("Leg press", allWorkouts.get(0).getExercises().get(0).getName()); // Test exercise name
@@ -62,7 +73,16 @@ public class JsonReaderTest extends JsonTest{
             assertEquals("Lunges", allWorkouts.get(0).getExercises().get(1).getName());
             assertEquals(11, allWorkouts.get(0).getExercises().get(1).getReps().get(0));
             assertEquals(20, allWorkouts.get(0).getExercises().get(1).getWeight().get(0));
-
+        } catch (IOException e) {
+            fail("Couldn't read from file");
+        }
+    }
+    @Test
+    void testReaderGeneralLogWorkout1() {
+        JsonReader reader = new JsonReader("./data/testReaderGeneralLog.json");
+        try {
+            AllData d = reader.read();
+            List<Workout> allWorkouts = d.getAllWorkouts().getWorkouts();
             assertEquals("2023-07-23", allWorkouts.get(1).getDate());
             assertEquals("Pull-ups", allWorkouts.get(1).getExercises().get(0).getName()); // Test exercise name
             assertEquals(9, allWorkouts.get(1).getExercises().get(0).getReps().get(0)); // Test reps
@@ -71,6 +91,7 @@ public class JsonReaderTest extends JsonTest{
             fail("Couldn't read from file");
         }
     }
+
 
 
     @Test

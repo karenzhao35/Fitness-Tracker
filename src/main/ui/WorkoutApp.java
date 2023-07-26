@@ -20,7 +20,7 @@ public class WorkoutApp extends Application {
         System.out.println("\nEnter the date you would like to record the workout for,");
         System.out.println("or 'today' if it's for today's workout,");
         if (allWorkouts.today()) {
-            System.out.println("or 'view' to view today's calorie and protein intake,");
+            System.out.println("or 'view' to view today's workout,");
         }
         System.out.println("or 'back' to return back to the menu");
         System.out.println("NOTE: Please format the date as YYYY-MM-DD");
@@ -73,10 +73,10 @@ public class WorkoutApp extends Application {
     // MODIFIES: this
     // EFFECTS: adds the user's exercise to the workout
     private void startWorkout(Workout workout) {
-        allWorkouts.addWorkout(workout);
         Exercise exercise = newExercise();
         workout.addExercise(exercise);
         continueWorkout(workout, exercise);
+        allWorkouts.addWorkout(workout);
     }
 
     // EFFECTS: processes the user's input for exercise and produces the exercise

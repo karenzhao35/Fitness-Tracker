@@ -1,11 +1,9 @@
 package persistence;
 
 import model.AllData;
-import model.food.AllMeals;
 import model.food.Food;
 import model.food.MealType;
 import model.food.Meals;
-import model.workout.AllWorkouts;
 import model.workout.Exercise;
 import model.workout.Workout;
 import org.json.JSONArray;

@@ -3,6 +3,7 @@ package model.workout;
 import model.Data;
 import model.Date;
 import model.exceptions.DoesNotExist;
+import model.food.Meals;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import persistence.Writable;
@@ -25,9 +26,16 @@ public class AllWorkouts implements Data, Writable {
     }
 
     // MODIFIES: this
-    // EFFECTS: adds workout to list of workouts
+    // EFFECTS: if workout's date doesn't exist, add workouts to list of all workouts
+    //          if it does, add exercises in given workout to already existing workout
     public void addWorkout(Workout workout) {
-        this.allWorkouts.add(workout);
+        String date = workout.getDate();
+        try {
+            Workout exists = retrieveWorkout(date);
+            exists.addExercises(workout.getExercises());
+        } catch (DoesNotExist e) {
+            allWorkouts.add(workout);
+        }
     }
 
     // MODIFIES: this

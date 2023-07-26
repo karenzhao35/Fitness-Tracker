@@ -25,9 +25,15 @@ public class AllMeals implements Data, Writable {
     }
 
     // MODIFIES: this
-    // EFFECTS: adds meals to list of all meals
+    // EFFECTS: if meal's date doesn't exist, add meals to list of all meals
+    //          if it does, add food items in meal to already existing meal
     public void addMeals(Meals meals) {
-        allMeals.add(meals);
+        String date = meals.getDate();
+        try {
+            retreiveMeals(date).addFoods(meals.getFoods());
+        } catch (DoesNotExist e) {
+            allMeals.add(meals);
+        }
     }
 
     // MODIFIES: this
@@ -59,6 +65,7 @@ public class AllMeals implements Data, Writable {
         }
         throw new DoesNotExist();
     }
+
 
     // EFFECTS: returns the all meals data as a JSON object
     @Override

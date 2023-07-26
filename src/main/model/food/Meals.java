@@ -4,7 +4,6 @@ import model.Date;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import persistence.Writable;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,6 +44,14 @@ public class Meals implements Writable {
     // EFFECTS: removes given food item from meal
     public void removeFood(Food food) {
         foods.remove(food);
+    }
+
+    // MODIFIES: this
+    // EFFECTS: add given list of foods to meal
+    public void addFoods(List<Food> foods) {
+        for (Food f : foods) {
+            this.foods.add(f);
+        }
     }
 
     // EFFECTS: returns the total calories consumed

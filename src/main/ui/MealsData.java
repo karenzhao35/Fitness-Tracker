@@ -2,7 +2,6 @@ package ui;
 
 import model.exceptions.DoesNotExist;
 import model.food.AllMeals;
-import model.food.Food;
 import model.food.Meals;
 
 import java.util.ArrayList;
