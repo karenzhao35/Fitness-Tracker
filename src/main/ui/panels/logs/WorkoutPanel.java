@@ -35,7 +35,7 @@ public class WorkoutPanel extends MainPanels {
                 Workout workout = new Workout();
                 error.setVisible(false);
                 exercisePanel.startWorkout(allWorkouts, workout);
-            } else if (MainPanel.getInstance().dateFormat(date)) {
+            } else if (dateFormat(date)) {
                 Workout workout = new Workout(date);
                 error.setVisible(false);
                 exercisePanel.startWorkout(allWorkouts, workout);

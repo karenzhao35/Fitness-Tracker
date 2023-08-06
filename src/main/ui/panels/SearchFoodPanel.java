@@ -32,7 +32,7 @@ public class SearchFoodPanel extends MainPanels {
             if (date.equals("today")) {
                 error.setVisible(false);
 
-            } else if (MainPanel.getInstance().dateFormat(date)) {
+            } else if (dateFormat(date)) {
 
                 error.setVisible(false);
 

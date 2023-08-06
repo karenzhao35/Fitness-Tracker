@@ -7,6 +7,7 @@ import ui.MainPanel;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.regex.Pattern;
 
 public abstract class MainPanels extends Panel {
     protected AllMeals allMeals;
@@ -78,5 +79,12 @@ public abstract class MainPanels extends Panel {
         error.setFont(new Font("Monospace", Font.BOLD, 12));
         error.setBounds(150, 150, 500, 40);
         error.setVisible(false);
+    }
+
+    // EFFECTS: produces true if given command follows the YYYY-MM-DD date format
+    public boolean dateFormat(String command) {
+        String pattern = "\\b\\d{4}-((0[1-9])|(1[0-2]))-((0[1-9])|([1,2]\\d)|(3[0,1]))\\b";
+        boolean matches = Pattern.matches(pattern, command);
+        return matches;
     }
 }

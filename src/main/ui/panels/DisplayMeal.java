@@ -25,8 +25,8 @@ public class DisplayMeal implements Panels {
         main.add(generateDate());
         main.add(generateTotalCalories());
         main.add(generateTotalProtein());
-        main.add(generateButton("trash2.png", 30, 370));
-        main.add(generateButton("plus.png", 25, 330));
+        main.add(generateButton("trash.png", 30, 370));
+        main.add(generateButton("expand.png", 25, 330));
 
     }
 
@@ -74,7 +74,7 @@ public class DisplayMeal implements Panels {
         main = new JPanel(null);
         main.setBackground(Colors.SIDEBAR);
         main.setBounds(15, calculateHeight(), 420, 90);
-        main.setBorder(BorderFactory.createLineBorder(Colors.MAIN_COLOUR, 5));
+        main.setBorder(BorderFactory.createLineBorder(Colors.MAIN_COLOUR, 3));
     }
 
     private int calculateHeight() {

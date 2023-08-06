@@ -42,7 +42,7 @@ public class MealPanel extends MainPanels {
                 Meals meal = new Meals();
                 error.setVisible(false);
                 foodPanel.startMeal(allMeals, meal);
-            } else if (MainPanel.getInstance().dateFormat(date)) {
+            } else if (dateFormat(date)) {
                 Meals meal = new Meals(date);
                 error.setVisible(false);
                 foodPanel.startMeal(allMeals, meal);

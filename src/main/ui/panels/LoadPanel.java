@@ -4,6 +4,7 @@ import model.AllData;
 import persistence.JsonReader;
 import persistence.JsonWriter;
 import ui.Colors;
+import ui.FitnessInterface;
 import ui.MainPanel;
 
 import javax.swing.*;
@@ -23,7 +24,7 @@ public class LoadPanel extends JFrame implements ActionListener {
     private JLabel welcomeMessage;
     private JLabel saveMessage;
 
-    private static final String JSON_STORE = "./data/log.json";
+    public static final String JSON_STORE = "./data/log.json";
 
     private AllData allData;
     private JsonWriter jsonWriter;
@@ -175,11 +176,17 @@ public class LoadPanel extends JFrame implements ActionListener {
             try {
                 allData = jsonReader.read();
                 welcomeMessage.setVisible(true);
-
+                setVisible(false);
+                new FitnessInterface(allData);
                 // System.out.println("Loaded " + allData.getName() + " from " + JSON_STORE);
             } catch (IOException error) {
                 // System.out.println("Unable to read from file: " + JSON_STORE);
             }
+        }
+        if (e.getSource() == startNew) {
+            allData = new AllData("My data", "bro");
+            setVisible(false);
+            new FitnessInterface(allData);
         }
 //        if (e.getSource() == save) {
 //            try {

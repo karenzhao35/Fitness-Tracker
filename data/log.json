@@ -115,6 +115,24 @@
                     "meal type": "LUNCH"
                 }
             ]
+        },
+        {
+            "date": "2023-08-05",
+            "foods": [{
+                "protein": 3,
+                "name": "apple",
+                "calories": 20,
+                "meal type": "BREAKFAST"
+            }]
+        },
+        {
+            "date": "2023-08-09",
+            "foods": [{
+                "protein": 30,
+                "name": "Ribs",
+                "calories": 600,
+                "meal type": "DINNER"
+            }]
         }
     ]},
     "name": "My data",
