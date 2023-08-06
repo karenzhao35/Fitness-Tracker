@@ -1,8 +1,9 @@
-package ui;
+package ui.console;
 
 import model.exceptions.DoesNotExist;
 import model.workout.AllWorkouts;
 import model.workout.Workout;
+import ui.console.Application;
 
 // Workout data for users to view previous workout entries
 public class WorkoutData extends Application {

@@ -1,10 +1,11 @@
-package ui;
+package ui.console;
 
 import model.exceptions.DoesNotExist;
 import model.food.AllMeals;
 import model.food.Food;
 import model.food.MealType;
 import model.food.Meals;
+import ui.console.Application;
 
 import java.util.regex.Pattern;
 

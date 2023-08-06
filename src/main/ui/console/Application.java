@@ -1,4 +1,4 @@
-package ui;
+package ui.console;
 
 import model.food.AllMeals;
 import model.food.Food;
@@ -146,7 +146,7 @@ public abstract class Application {
     }
 
     // EFFECTS: produces true if given command follows the YYYY-MM-DD date format
-    protected boolean dateFormat(String command) {
+    public boolean dateFormat(String command) {
         String pattern = "\\b\\d{4}-((0[1-9])|(1[0-2]))-((0[1-9])|([1,2]\\d)|(3[0,1]))\\b";
         boolean matches = Pattern.matches(pattern, command);
         return matches;
@@ -173,7 +173,7 @@ public abstract class Application {
     }
 
     // EFFECTS: processes user command turning it into an integer if it is one
-    protected int ensureInteger() {
+    public int ensureInteger() {
         boolean cont = true;
         String command = null;
 

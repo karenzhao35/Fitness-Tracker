@@ -1,10 +1,11 @@
-package ui;
+package ui.console;
 
 import model.*;
 import model.exceptions.DoesNotExist;
 import model.workout.AllWorkouts;
 import model.workout.Exercise;
 import model.workout.Workout;
+import ui.console.Application;
 
 // Workout Application for users to enter new workout entries
 public class WorkoutApp extends Application {

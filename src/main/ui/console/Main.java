@@ -1,4 +1,6 @@
-package ui;
+package ui.console;
+
+import ui.console.FitnessApp;
 
 import java.io.FileNotFoundException;
 

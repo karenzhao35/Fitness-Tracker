@@ -1,10 +1,11 @@
-package ui;
+package ui.console;
 
 import model.AllData;
 import model.food.AllMeals;
 import model.workout.AllWorkouts;
 import persistence.JsonReader;
 import persistence.JsonWriter;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;

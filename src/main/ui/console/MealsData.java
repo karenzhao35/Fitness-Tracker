@@ -1,10 +1,9 @@
-package ui;
+package ui.console;
 
 import model.exceptions.DoesNotExist;
 import model.food.AllMeals;
 import model.food.Meals;
-
-import java.util.ArrayList;
+import ui.console.Application;
 
 // Meals data for users to view previous food entries
 public class MealsData extends Application {
