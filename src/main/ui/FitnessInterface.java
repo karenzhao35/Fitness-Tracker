@@ -1,5 +1,4 @@
 package ui;
-package ui;
 
 import javax.swing.*;
 import java.awt.*;
@@ -24,6 +23,8 @@ public class FitnessInterface extends JFrame implements ActionListener {
 
     public FitnessInterface() {
         createSideBar();
+
+
 
         setTitle("Your Fitness Buddy");
         setLayout(new BorderLayout());

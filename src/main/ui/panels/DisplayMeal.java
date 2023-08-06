@@ -1,8 +1,10 @@
-pacpackage ui.panels;
+package ui.panels;
+
 
 import model.food.AllMeals;
 import model.food.Meals;
 import ui.Colors;
+import ui.panels.Panels;
 
 import javax.swing.*;
 import java.awt.*;
