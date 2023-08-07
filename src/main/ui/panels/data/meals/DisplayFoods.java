@@ -77,7 +77,7 @@ public class DisplayFoods {
 
     // EFFECTS: constructs meal type headers
     public JLabel addHeader(String file, int x, int y, int width, int height) {
-        ImageIcon unscaled = new ImageIcon("src/main/ui/panels/data/meals" + file);
+        ImageIcon unscaled = new ImageIcon("src/main/ui/panels/data/meals/typeLabel/" + file);
         Image image = unscaled.getImage().getScaledInstance(width, height, unscaled.getImage().SCALE_SMOOTH);
         ImageIcon icon = new ImageIcon(image);
 
