@@ -3,24 +3,22 @@ package ui.panels.logs;
 import model.workout.AllWorkouts;
 import model.workout.Exercise;
 import model.workout.Workout;
-
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.List;
 
+// panel to create new exercise
 public class ExercisePanel extends InnerPanel {
     private AllWorkouts allWorkouts;
     private Workout workout;
-
     private JButton continueButton;
-
     private JTextField repsTextField;
     private JTextField weightTextField;
-
     private List<Integer> reps;
     private List<Integer> weight;
 
+    // EFFECTS: constructs an exercise panel with panel items
     public ExercisePanel() {
         super();
         reps = new ArrayList<>();
@@ -33,6 +31,8 @@ public class ExercisePanel extends InnerPanel {
         main.setVisible(false);
     }
 
+    // MODIFIES: this
+    // EFFECTS: generates panel items
     @Override
     public void generatePanelItems() {
         super.generatePanelItems();
@@ -41,6 +41,8 @@ public class ExercisePanel extends InnerPanel {
         generateTextField(weightTextField, 170);
     }
 
+    // MODIFIES: this
+    // EFFECTS: add items to main panel
     @Override
     public void addToFoodPanel() {
         super.addToFoodPanel();
@@ -53,6 +55,8 @@ public class ExercisePanel extends InnerPanel {
         main.add(generateLabels("(lbs)", 350, 165));
     }
 
+    // MODIFIES: this
+    // EFFECTS: resets text fields
     @Override
     public void clearTextFields() {
         nameTextField.setText("");
@@ -60,13 +64,16 @@ public class ExercisePanel extends InnerPanel {
         weightTextField.setText("");
     }
 
+    // MODIFIES: this
+    // EFFECTS: instantiates allWorkouts and workout
     public void startWorkout(AllWorkouts allWorkouts, Workout workout) {
         this.allWorkouts = allWorkouts;
         this.workout = workout;
         main.setVisible(true);
     }
 
-
+    // MODIFIES: this
+    // EFFECTS: submit and continue workout based on user input
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == continueButton) {
@@ -90,6 +97,8 @@ public class ExercisePanel extends InnerPanel {
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: add workout to allWorkout
     private void finishWorkout() {
         main.setVisible(false);
         reps = new ArrayList<>();
@@ -100,6 +109,8 @@ public class ExercisePanel extends InnerPanel {
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: create exercise and add it to workout
     private void finishExercise() {
         error.setVisible(false);
         String name = nameTextField.getText();
@@ -110,6 +121,8 @@ public class ExercisePanel extends InnerPanel {
         clearTextFields();
     }
 
+    // MODIFIES: this
+    // EFFECTS: starts a new workout and submits it
     private void newWorkout() {
         if (checkValid()) {
             error.setVisible(false);
@@ -120,6 +133,8 @@ public class ExercisePanel extends InnerPanel {
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: create exercise and submit it
     private void submitWorkout() {
         String name = nameTextField.getText();
         reps.add(Integer.parseInt(repsTextField.getText()));
@@ -130,6 +145,8 @@ public class ExercisePanel extends InnerPanel {
         weight = new ArrayList<>();
     }
 
+    // MODIFIES: this
+    // EFFECTS: add set to current exercise
     private void continueWorkout() {
         nameTextField.setEnabled(false);
         reps.add(Integer.parseInt(repsTextField.getText()));

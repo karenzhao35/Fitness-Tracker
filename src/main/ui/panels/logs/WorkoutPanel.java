@@ -3,15 +3,16 @@ package ui.panels.logs;
 import model.workout.AllWorkouts;
 import model.workout.Workout;
 import ui.panels.MainSearchSetUp;
-
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 
+// panel for users to log new workouts
 public class WorkoutPanel extends MainSearchSetUp {
     private ExercisePanel exercisePanel;
     private JPanel panel;
 
 
+    // EFFECTS: constructs a new WorkoutPanel with given allWorkouts
     public WorkoutPanel(AllWorkouts allWorkouts) {
         super(allWorkouts, null);
         exercisePanel = new ExercisePanel();
@@ -19,6 +20,8 @@ public class WorkoutPanel extends MainSearchSetUp {
         addComponents();
     }
 
+    // MODIFIES: this
+    // EFFECTS: adds components to main panel
     public void addComponents() {
         super.addComponents();
         mainPanel.add(generateHeading("LET'S TRACK YOUR WORKOUT", 75));
@@ -26,6 +29,8 @@ public class WorkoutPanel extends MainSearchSetUp {
     }
 
 
+    // MODIFIES: this
+    // EFFECTS: starts a new workout based on user input
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == submitDateButton) {
@@ -45,6 +50,7 @@ public class WorkoutPanel extends MainSearchSetUp {
 
     }
 
+    // EFFECTS: returns main panel
     @Override
     public JPanel getPanel() {
         return mainPanel;

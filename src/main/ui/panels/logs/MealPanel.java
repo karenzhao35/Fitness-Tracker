@@ -6,12 +6,12 @@ import ui.panels.MainSearchSetUp;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 
+// panel for users to log their meals
 public class MealPanel extends MainSearchSetUp {
     private FoodPanel foodPanel;
     private JPanel panel;
 
-
-
+    // EFFECTS: constructs a MealPanel with given allMeals and instantiates panel items
     public MealPanel(AllMeals allMeals) {
         super(null, allMeals);
         foodPanel = new FoodPanel();
@@ -19,20 +19,16 @@ public class MealPanel extends MainSearchSetUp {
         addComponents();
     }
 
-
-
+    // MODIFIES: this
+    // EFFECTS: adds items to main panel
     public void addComponents() {
         super.addComponents();
         mainPanel.add(panel);
         mainPanel.add(generateHeading("LET'S TRACK YOUR MEAL", 110));
     }
 
-
-    public JPanel getPanel() {
-        return mainPanel;
-    }
-
-
+    // MODIFIES: this
+    // EFFECTS: starts a new meal based on user input
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == submitDateButton) {
@@ -51,7 +47,10 @@ public class MealPanel extends MainSearchSetUp {
         }
     }
 
-
-
+    // EFFECTS: returns main panel
+    @Override
+    public JPanel getPanel() {
+        return mainPanel;
+    }
 
 }

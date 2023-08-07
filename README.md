@@ -31,3 +31,12 @@ create one!
 to file and have the option to do so or not. 
 - As a user, when I start the application, I want to be given the option to load my fitness data from file.
 
+# Instructions for Grader
+
+- You can generate the first required event related to adding Xs to a Y by adding food items to a meal, then adding 
+said meal to the meal data.
+- You can generate the second required event related to adding Xs to a Y by adding an exercise to a workout, then
+adding said workout to the workout data.
+- You can locate my visual component on the sidebar after clicking to load data or start a new data file.
+- You can save the state of my application by clicking save in the menu bar.
+- You can reload the state of my application by clicking one of the options on the initial window.

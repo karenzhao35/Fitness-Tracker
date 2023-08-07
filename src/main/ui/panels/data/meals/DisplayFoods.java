@@ -3,58 +3,61 @@ package ui.panels.data.meals;
 import model.food.Food;
 import model.food.MealType;
 import model.food.Meals;
-import ui.Colors;
-
+import ui.ColourPicker;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
+// Displays a single meal
 public class DisplayFoods {
     private JFrame main;
-    private Meals meals;
-
     private JPanel breakfastBase;
     private JPanel lunchBase;
     private JPanel dinnerBase;
     private JPanel snackBase;
-
     private JPanel breakfastMain;
     private JPanel lunchMain;
     private JPanel dinnerMain;
     private JPanel snackMain;
 
+    // EFFECTS: constructs DisplayFoods
     public DisplayFoods(Meals meals) {
-        this.meals = meals;
-        main = new JFrame();
-
-        breakfastBase = new JPanel();
-        lunchBase = new JPanel();
-        dinnerBase = new JPanel();
-        snackBase = new JPanel();
-
-        breakfastMain = new JPanel();
-        lunchMain = new JPanel();
-        dinnerMain = new JPanel();
-        snackMain = new JPanel();
-
+        init();
         ArrayList<ArrayList<Food>> separated = separateFoodTypes(meals);
-
-
-        main.setTitle("Meal on " + meals.getDate());
-
-        main.setLayout(null);
-        main.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        main.setMinimumSize(new Dimension(500, 700));
-        main.getContentPane().setBackground(Colors.MAIN_COLOUR);
-
+        setUpMain(meals);
         addMainComponents();
         placeLabels(separated);
         initBase(separated);
-
         main.pack();
         main.setVisible(true);
     }
 
+    // MODIFIES: this
+    // EFFECTS: set up main frame
+    private void setUpMain(Meals meals) {
+        main.setTitle("Meal on " + meals.getDate());
+        main.setLayout(null);
+        main.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        main.setMinimumSize(new Dimension(500, 700));
+        main.getContentPane().setBackground(ColourPicker.MAIN_COLOUR);
+    }
+
+    // MODIFIES: this
+    // EFFECTS: initializes all frame components
+    private void init() {
+        main = new JFrame();
+        breakfastBase = new JPanel();
+        lunchBase = new JPanel();
+        dinnerBase = new JPanel();
+        snackBase = new JPanel();
+        breakfastMain = new JPanel();
+        lunchMain = new JPanel();
+        dinnerMain = new JPanel();
+        snackMain = new JPanel();
+    }
+
+    // MODIFIES: this
+    // EFFECTS: adds components to main frame
     private void addMainComponents() {
         main.add(addPanel(breakfastBase, 65));
         main.add(addPanel(lunchBase, 215));
@@ -72,8 +75,9 @@ public class DisplayFoods {
         main.add(addHeader("snack.png", 170, 390, 170, 140));
     }
 
+    // EFFECTS: constructs meal type headers
     public JLabel addHeader(String file, int x, int y, int width, int height) {
-        ImageIcon unscaled = new ImageIcon("src/main/ui/panels/data/" + file);
+        ImageIcon unscaled = new ImageIcon("src/main/ui/panels/data/meals" + file);
         Image image = unscaled.getImage().getScaledInstance(width, height, unscaled.getImage().SCALE_SMOOTH);
         ImageIcon icon = new ImageIcon(image);
 
@@ -83,13 +87,15 @@ public class DisplayFoods {
         return label;
     }
 
+    // EFFECTS: constructs a new panel to display foods
     public JPanel addPanel(JPanel panel, int height) {
         panel.setLayout(new BorderLayout());
-        panel.setBackground(Colors.SIDEBAR);
+        panel.setBackground(ColourPicker.SIDEBAR);
         panel.setBounds(10, height, 480, 100);
         return panel;
     }
 
+    // EFFECTS: constructs a new scroll pane
     public JScrollPane addScroll(JPanel panel) {
         JScrollPane pane = new JScrollPane(panel);
         pane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
@@ -98,12 +104,15 @@ public class DisplayFoods {
         return pane;
     }
 
+    // EFFECTS: sets up given main JPanel
     public void setUpMainPanels(JPanel panel, ArrayList<Food> foods) {
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-        panel.setBackground(Colors.SIDEBAR);
+        panel.setBackground(ColourPicker.SIDEBAR);
         panel.setPreferredSize(new Dimension(500, calculateHeight(foods.size())));
     }
 
+    // MODIFIES: this
+    // EFFECTS: initializes base panels with given lists of foods
     public void initBase(ArrayList<ArrayList<Food>> separated) {
         setUpMainPanels(breakfastMain, separated.get(0));
         setUpMainPanels(lunchMain, separated.get(1));
@@ -138,6 +147,7 @@ public class DisplayFoods {
         return soFar;
     }
 
+    // EFFECTS: calculate the height of the main panels
     public int calculateHeight(int size) {
         int height = (18 * (size + 1));
         if (height < 105) {
@@ -147,6 +157,8 @@ public class DisplayFoods {
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: places the food items on the given main panels
     public void placeLabels(ArrayList<ArrayList<Food>> separated) {
         printFoodLabels(separated.get(0), breakfastMain);
         printFoodLabels(separated.get(1), lunchMain);
@@ -154,6 +166,8 @@ public class DisplayFoods {
         printFoodLabels(separated.get(3), snackMain);
     }
 
+    // MODIFIES: this
+    // EFFECTS: prints the food labels and adds them to the given main panel
     public void printFoodLabels(ArrayList<Food> foods, JPanel panel) {
         panel.add(new JLabel(" "));
         for (Food food : foods) {
@@ -162,16 +176,10 @@ public class DisplayFoods {
             double p = food.getProtein();
             JLabel label = new JLabel();
             label.setText("   - " + n + " which had " + c + " calories and " + p + " grams of protein.");
-            label.setForeground(Colors.MAIN_COLOUR);
+            label.setForeground(ColourPicker.MAIN_COLOUR);
             label.setFont(new Font("Monospace", Font.PLAIN, 12));
             panel.add(label);
         }
     }
-
-
-    public static void main(String[] args) {
-        new DisplayFoods(new Meals());
-    }
-
 
 }

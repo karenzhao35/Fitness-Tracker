@@ -1,7 +1,8 @@
-package ui;
+package ui.base;
 
 import model.food.AllMeals;
 import model.workout.AllWorkouts;
+import ui.panels.Panels;
 import ui.panels.data.meals.SearchFoodPanel;
 import ui.panels.data.workouts.SearchWorkoutPanel;
 import ui.panels.logs.MealPanel;
@@ -9,8 +10,8 @@ import ui.panels.logs.WorkoutPanel;
 import javax.swing.*;
 import java.awt.*;
 
-
-public class CardPanel extends Panel {
+// Card Panel that stores the log and data panels
+public class CardPanel implements Panels {
     public static final Dimension DIMENSION = new Dimension(FitnessInterface.WINDOW_WIDTH, FitnessInterface.HEIGHT);
     public static final int WIDTH = FitnessInterface.WINDOW_WIDTH;
     public static final int HEIGHT = FitnessInterface.HEIGHT;
@@ -18,18 +19,18 @@ public class CardPanel extends Panel {
     private CardLayout card;
     private JPanel main;
 
-    private AllMeals allMeals;
-    private AllWorkouts allWorkouts;
-
+    // EFFECTS: constructs a CardPanel
     public CardPanel(AllWorkouts allWorkouts, AllMeals allMeals) {
-        this.allWorkouts = allWorkouts;
-        this.allMeals = allMeals;
-
         main = new JPanel();
         card = new CardLayout();
         main.setLayout(card);
         main.setPreferredSize(DIMENSION);
+        addPanels(allWorkouts, allMeals);
+    }
 
+    // MODIFIES: this
+    // EFFECTS: add panels to card panel
+    private void addPanels(AllWorkouts allWorkouts, AllMeals allMeals) {
         MealPanel mealPanel = new MealPanel(allMeals);
         WorkoutPanel workoutPanel = new WorkoutPanel(allWorkouts);
         SearchFoodPanel searchFoodPanel = new SearchFoodPanel(allMeals);
@@ -41,10 +42,13 @@ public class CardPanel extends Panel {
         main.add(mealPanel.getPanel(), "food");
     }
 
+    // EFFECTS: returns main card
     public CardLayout getMainCard() {
         return card;
     }
 
+    // EFFECTS: returns main panel
+    @Override
     public JPanel getPanel() {
         return main;
     }

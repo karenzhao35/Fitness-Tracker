@@ -1,8 +1,8 @@
-package ui;
+package ui.base;
 
 import model.AllData;
 import persistence.JsonWriter;
-
+import ui.ColourPicker;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -11,6 +11,7 @@ import java.io.FileNotFoundException;
 
 import static ui.MainPanel.JSON_STORE;
 
+// main fitness interface frame
 public class FitnessInterface extends JFrame implements ActionListener {
     public static final int WIDTH = 800;
     public static final int HEIGHT = 800;
@@ -37,8 +38,18 @@ public class FitnessInterface extends JFrame implements ActionListener {
 
     private JsonWriter jsonWriter;
 
+    // EFFECTS: constructs a FitnessInterface with given allData
     public FitnessInterface(AllData allData) {
         this.allData = allData;
+        init();
+        setUpMenuBar();
+        createSideBar();
+        setUpFrame();
+    }
+
+    // MODIFIES: this
+    // EFFECTS: initializes frame components
+    private void init() {
         sideBar = new JPanel();
         cardPanel = new CardPanel(allData.getAllWorkouts(), allData.getAllMeals());
         jsonWriter = new JsonWriter(JSON_STORE);
@@ -52,11 +63,10 @@ public class FitnessInterface extends JFrame implements ActionListener {
         save = new JMenuItem("Save");
         exit = new JMenuItem("Exit");
         refresh = new JMenuItem("Refresh");
-        setUpMenuBar();
-        createSideBar();
-        setUpFrame();
     }
 
+    // MODIFIES: this
+    // EFFECTS: sets up main frame
     private void setUpFrame() {
         setTitle("Your Fitness Buddy");
         setLayout(new BorderLayout());
@@ -65,14 +75,16 @@ public class FitnessInterface extends JFrame implements ActionListener {
 
         setJMenuBar(menuBar);
         addMainPanels();
-        setBackground(Colors.SIDEBAR);
+        setBackground(ColourPicker.SIDEBAR);
 
         pack();
         setResizable(false);
         setVisible(true);
-        getContentPane().setBackground(Colors.MAIN_COLOUR);
+        getContentPane().setBackground(ColourPicker.MAIN_COLOUR);
     }
 
+    // MODIFIES: this
+    // EFFECTS: sets up menu bar
     private void setUpMenuBar() {
         menuBar.setFont(new Font("Monospace", Font.PLAIN, 10));
         save.addActionListener(this);
@@ -84,6 +96,8 @@ public class FitnessInterface extends JFrame implements ActionListener {
         menuBar.add(file);
     }
 
+    // MODIFIES: this
+    // EFFECTS: add main panels to the frame
     public void addMainPanels() {
         dataPanel = cardPanel.getPanel();
         card = cardPanel.getMainCard();
@@ -92,15 +106,16 @@ public class FitnessInterface extends JFrame implements ActionListener {
     }
 
 
+    // MODIFIES: this
+    // EFFECTS: creates sidebar and adds components
     public void createSideBar() {
         sideBarButtons("workout.png", workoutButton, 0);
         sideBarButtons("noodle.png", mealButton, 97);
         sideBarButtons("search-food.png", mealSearchButton, 194);
         sideBarButtons("gym.png", workoutSearchButton, 291);
 
-
         sideBar.setLayout(null);
-        sideBar.setBackground(Colors.SIDEBAR);
+        sideBar.setBackground(ColourPicker.SIDEBAR);
         sideBar.setPreferredSize(new Dimension(SIDEBAR_WIDTH, HEIGHT));
         sideBar.add(workoutSearchButton);
         sideBar.add(mealSearchButton);
@@ -109,7 +124,23 @@ public class FitnessInterface extends JFrame implements ActionListener {
         sideBar.add(loadButton);
     }
 
+//    IMAGE ICON CREDITS:
+//    WORKOUT:
+//    <a target="_blank" href="https://icons8.com/icon/20288/gymnastics">Workout</a> icon by <a target="_blank" href
+//    ="https://icons8.com">Icons8</a>
+//    FOOD:
+//    <a target="_blank" href="https://icons8.com/icon/AdSgGRnON0R9/kawaii-noodle">Kawaii Noodle</a> icon by <a target
+//    ="_blank" href="https://icons8.com">Icons8</a>
+//    SEARCH FOOD:
+//    <a target="_blank" href="https://icons8.com/icon/123417/search-in-list">Search in List</a> icon by <a target
+//    ="_blank" href="https://icons8.com">Icons8</a>
+//    SEARCH WORKOUT:
+//    <a target="_blank" href="https://icons8.com/icon/l5Br0fxxE35Q/gym">Gym</a> icon by <a target="_blank" href
+//    ="https://icons8.com">Icons8</a>
 
+
+    // MODIFIES: button
+    // EFFECTS: generates button with given file and height
     private void sideBarButtons(String file, JButton button, int height) {
         ImageIcon unscaled = new ImageIcon("src/main/ui/sideBarImages/" + file);
         Image image = unscaled.getImage().getScaledInstance(35, 35, unscaled.getImage().SCALE_SMOOTH);
@@ -120,36 +151,29 @@ public class FitnessInterface extends JFrame implements ActionListener {
         initializeSideBarButton(button);
     }
 
+    // MODIFIES: button
+    // EFFECTS: generates sidebar buttons
     public void initializeSideBarButton(JButton button) {
         button.setFont(new Font("Monospace", Font.ITALIC, 20));
         button.setIconTextGap(10);
-        button.setForeground(Colors.MAIN_COLOUR);
+        button.setForeground(ColourPicker.MAIN_COLOUR);
         button.addActionListener(this);
         button.setFocusable(false);
         button.setOpaque(false);
-        button.setBorder(BorderFactory.createLineBorder(Colors.MAIN_COLOUR, 3, true));
+        button.setBorder(BorderFactory.createLineBorder(ColourPicker.MAIN_COLOUR, 3, true));
     }
 
-
-    public static void main(String[] args) {
-        new FitnessInterface(null);
-    }
-
-
+    // MODIFIES: this
+    // EFFECTS: parses user input for sidebar and menu bar
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == mealButton) {
-            card.show(dataPanel, "food");
-        }
-        if (e.getSource() == workoutButton) {
-            card.show(dataPanel, "workout");
-        }
-        if (e.getSource() == mealSearchButton) {
-            card.show(dataPanel, "search food");
-        }
-        if (e.getSource() == workoutSearchButton) {
-            card.show(dataPanel, "search workout");
-        }
+        sideBarActions(e);
+        menuBarActions(e);
+    }
+
+    // MODIFIES: this
+    // EFFECTS: parses user input for the menu bar
+    private void menuBarActions(ActionEvent e) {
         if (e.getSource() == save) {
             try {
                 jsonWriter.open();
@@ -168,6 +192,23 @@ public class FitnessInterface extends JFrame implements ActionListener {
             FitnessInterface main = new FitnessInterface(allData);
             main.setVisible(true);
 
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: parses user input for the sidebar
+    private void sideBarActions(ActionEvent e) {
+        if (e.getSource() == mealButton) {
+            card.show(dataPanel, "food");
+        }
+        if (e.getSource() == workoutButton) {
+            card.show(dataPanel, "workout");
+        }
+        if (e.getSource() == mealSearchButton) {
+            card.show(dataPanel, "search food");
+        }
+        if (e.getSource() == workoutSearchButton) {
+            card.show(dataPanel, "search workout");
         }
     }
 
