@@ -3,13 +3,14 @@ package ui.panels;
 import model.food.AllMeals;
 import model.workout.AllWorkouts;
 import ui.Colors;
-import ui.MainPanel;
+import ui.CardPanel;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
 import java.util.regex.Pattern;
 
-public abstract class MainPanels extends Panel {
+public abstract class MainSearchSetUp implements ActionListener, Panels {
     protected AllMeals allMeals;
     protected AllWorkouts allWorkouts;
     protected JTextField dateTextField;
@@ -17,7 +18,7 @@ public abstract class MainPanels extends Panel {
     protected JButton submitDateButton;
     protected JLabel error;
 
-    public MainPanels(AllWorkouts allWorkouts, AllMeals allMeals) {
+    public MainSearchSetUp(AllWorkouts allWorkouts, AllMeals allMeals) {
         mainPanel = new JPanel();
         this.allMeals = allMeals;
         this.allWorkouts = allWorkouts;
@@ -31,7 +32,7 @@ public abstract class MainPanels extends Panel {
 
         mainPanel.setLayout(null);
         mainPanel.setBackground(Colors.MAIN_COLOUR);
-        mainPanel.setPreferredSize(MainPanel.DIMENSION);
+        mainPanel.setPreferredSize(CardPanel.DIMENSION);
     }
 
     public void addComponents() {
@@ -86,5 +87,13 @@ public abstract class MainPanels extends Panel {
         String pattern = "\\b\\d{4}-((0[1-9])|(1[0-2]))-((0[1-9])|([1,2]\\d)|(3[0,1]))\\b";
         boolean matches = Pattern.matches(pattern, command);
         return matches;
+    }
+
+    public void generateButton(JButton button, int x, int y, int width) {
+        button.setBounds(x, y, width, 30);
+        button.setFont(new Font("Monospace", Font.PLAIN, 12));
+        button.addActionListener(this);
+        button.setFocusable(false);
+        button.setForeground(Colors.SIDEBAR);
     }
 }

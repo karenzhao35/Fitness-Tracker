@@ -133,6 +133,47 @@
                 "calories": 600,
                 "meal type": "DINNER"
             }]
+        },
+        {
+            "date": "2023-08-06",
+            "foods": [
+                {
+                    "protein": 0,
+                    "name": "apple",
+                    "calories": 20,
+                    "meal type": "BREAKFAST"
+                },
+                {
+                    "protein": 0,
+                    "name": "blueberries",
+                    "calories": 30,
+                    "meal type": "BREAKFAST"
+                },
+                {
+                    "protein": 0,
+                    "name": "mangoes",
+                    "calories": 30,
+                    "meal type": "BREAKFAST"
+                },
+                {
+                    "protein": 0,
+                    "name": "banana",
+                    "calories": 90,
+                    "meal type": "BREAKFAST"
+                },
+                {
+                    "protein": 0,
+                    "name": "leech",
+                    "calories": 80,
+                    "meal type": "BREAKFAST"
+                },
+                {
+                    "protein": 0,
+                    "name": "cherry",
+                    "calories": 80,
+                    "meal type": "BREAKFAST"
+                }
+            ]
         }
     ]},
     "name": "My data",
@@ -228,6 +269,30 @@
                     "weight": [100]
                 }
             ]
+        },
+        {
+            "date": "2023-08-06",
+            "exercises": [{
+                "reps": [10],
+                "name": "bench press",
+                "weight": [400]
+            }]
+        },
+        {
+            "date": "2023-01-02",
+            "exercises": [{
+                "reps": [10],
+                "name": "Pull-ups",
+                "weight": [0]
+            }]
+        },
+        {
+            "date": "2023-08-21",
+            "exercises": [{
+                "reps": [30],
+                "name": "Ring rows",
+                "weight": [0]
+            }]
         }
     ]}
 }

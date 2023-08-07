@@ -2,13 +2,14 @@ package ui;
 
 import model.AllData;
 import persistence.JsonWriter;
-import ui.panels.LoadPanel;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
+
+import static ui.MainPanel.JSON_STORE;
 
 public class FitnessInterface extends JFrame implements ActionListener {
     public static final int WIDTH = 800;
@@ -20,7 +21,7 @@ public class FitnessInterface extends JFrame implements ActionListener {
     private JPanel dataPanel;
     private CardLayout card;
     private AllData allData;
-    private MainPanel mainPanel;
+    private CardPanel cardPanel;
 
     private JButton loadButton;
     private JButton workoutButton;
@@ -39,8 +40,8 @@ public class FitnessInterface extends JFrame implements ActionListener {
     public FitnessInterface(AllData allData) {
         this.allData = allData;
         sideBar = new JPanel();
-        mainPanel = new MainPanel(allData.getAllWorkouts(), allData.getAllMeals());
-        jsonWriter = new JsonWriter(LoadPanel.JSON_STORE);
+        cardPanel = new CardPanel(allData.getAllWorkouts(), allData.getAllMeals());
+        jsonWriter = new JsonWriter(JSON_STORE);
         loadButton = new JButton("MAIN MENU          ");
         workoutButton = new JButton("ADD WORKOUT     ");
         mealButton = new JButton("LOG FOOD            ");
@@ -84,16 +85,14 @@ public class FitnessInterface extends JFrame implements ActionListener {
     }
 
     public void addMainPanels() {
-        dataPanel = mainPanel.getPanel();
-        card = mainPanel.getMainCard();
+        dataPanel = cardPanel.getPanel();
+        card = cardPanel.getMainCard();
         add(dataPanel, BorderLayout.EAST);
         add(sideBar, BorderLayout.WEST);
     }
 
 
     public void createSideBar() {
-//        sideBarButtons("menu.png", loadButton, 0);
-//        sideBarButtons("gym.png", workoutSearchButton, 388);
         sideBarButtons("workout.png", workoutButton, 0);
         sideBarButtons("noodle.png", mealButton, 97);
         sideBarButtons("search-food.png", mealSearchButton, 194);
@@ -112,7 +111,7 @@ public class FitnessInterface extends JFrame implements ActionListener {
 
 
     private void sideBarButtons(String file, JButton button, int height) {
-        ImageIcon unscaled = new ImageIcon("src/main/ui/" + file);
+        ImageIcon unscaled = new ImageIcon("src/main/ui/sideBarImages/" + file);
         Image image = unscaled.getImage().getScaledInstance(35, 35, unscaled.getImage().SCALE_SMOOTH);
         ImageIcon icon = new ImageIcon(image);
         button.setVerticalTextPosition(JButton.BOTTOM);
@@ -120,55 +119,6 @@ public class FitnessInterface extends JFrame implements ActionListener {
         button.setIcon(icon);
         initializeSideBarButton(button);
     }
-
-//    public void createWorkoutButton() {
-//        ImageIcon unscaled = new ImageIcon(FitnessInterface.class.getResource("sport.png"));
-//        Image image = unscaled.getImage().getScaledInstance(35, 35, unscaled.getImage().SCALE_SMOOTH);
-//        ImageIcon workoutIcon = new ImageIcon(image);
-//
-//        workoutButton.setVerticalTextPosition(JButton.BOTTOM);
-//        workoutButton.setBounds(0, 97, SIDEBAR_WIDTH + 3, 100);
-//
-//        workoutButton.setIcon(workoutIcon);
-//        initializeSideBarButton(workoutButton);
-//    }
-
-//    public void createMealButton() {
-//        ImageIcon unscaled = new ImageIcon(FitnessInterface.class.getResource("healthy-food.png"));
-//        Image image = unscaled.getImage().getScaledInstance(35, 35, unscaled.getImage().SCALE_SMOOTH);
-//        ImageIcon mealIcon = new ImageIcon(image);
-//
-//        mealButton.setVerticalTextPosition(JButton.BOTTOM);
-//        mealButton.setBounds(0, 194, SIDEBAR_WIDTH + 3, 100);
-//
-//        mealButton.setIcon(mealIcon);
-//        initializeSideBarButton(mealButton);
-//    }
-
-//    public void createSearchMealButton() {
-//        ImageIcon unscaled = new ImageIcon(FitnessInterface.class.getResource("search-food.png"));
-//        Image image = unscaled.getImage().getScaledInstance(35, 35, unscaled.getImage().SCALE_SMOOTH);
-//        ImageIcon searchIcon = new ImageIcon(image);
-//
-//        mealSearchButton.setBounds(0, 291, SIDEBAR_WIDTH + 3, 100);
-//
-//        mealSearchButton.setIcon(searchIcon);
-//        initializeSideBarButton(mealSearchButton);
-//
-//    }
-
-//    public void createSearchWorkoutButton() {
-//        ImageIcon unscaled = new ImageIcon(FitnessInterface.class.getResource("calendar.png"));
-//        Image image = unscaled.getImage().getScaledInstance(35, 35, unscaled.getImage().SCALE_SMOOTH);
-//        ImageIcon searchIcon = new ImageIcon(image);
-//
-//        workoutSearchButton.setBounds(0, 388, SIDEBAR_WIDTH + 3, 100);
-//
-//        workoutSearchButton.setIcon(searchIcon);
-//        initializeSideBarButton(workoutSearchButton);
-//
-//    }
-
 
     public void initializeSideBarButton(JButton button) {
         button.setFont(new Font("Monospace", Font.ITALIC, 20));
@@ -197,21 +147,27 @@ public class FitnessInterface extends JFrame implements ActionListener {
         if (e.getSource() == mealSearchButton) {
             card.show(dataPanel, "search food");
         }
+        if (e.getSource() == workoutSearchButton) {
+            card.show(dataPanel, "search workout");
+        }
         if (e.getSource() == save) {
             try {
                 jsonWriter.open();
                 jsonWriter.write(allData);
                 jsonWriter.close();
-                // System.out.println("Saved " + allData.getName() + " to " + JSON_STORE);
+                System.out.println("Saved " + allData.getName() + " to " + JSON_STORE);
             } catch (FileNotFoundException error) {
-                // System.out.println("Unable to write to file: " + JSON_STORE);
+                System.out.println("Unable to write to file: " + JSON_STORE);
             }
         }
         if (e.getSource() == exit) {
             System.exit(0);
         }
         if (e.getSource() == refresh) {
-            new FitnessInterface(allData);
+            this.dispose();
+            FitnessInterface main = new FitnessInterface(allData);
+            main.setVisible(true);
+
         }
     }
 

@@ -2,13 +2,12 @@ package ui.panels.logs;
 
 import model.workout.AllWorkouts;
 import model.workout.Workout;
-import ui.MainPanel;
-import ui.panels.MainPanels;
+import ui.panels.MainSearchSetUp;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 
-public class WorkoutPanel extends MainPanels {
+public class WorkoutPanel extends MainSearchSetUp {
     private ExercisePanel exercisePanel;
     private JPanel panel;
 

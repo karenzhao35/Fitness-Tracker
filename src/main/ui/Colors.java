@@ -12,7 +12,6 @@ public class Colors {
     public static final Color SIDEBAR = new Color(0x506A67);
     // light blue
     //  public static final Color SIDEBAR = new Color(0x4F5B67);
-
     // brown
     //public static final Color SIDEBAR = new Color(0x352315);
     // another brown
@@ -21,6 +20,6 @@ public class Colors {
 
 
     // WHITE
-    public static final Color MAIN_COLOUR = new Color(0xEEECE7);
+    public static final Color MAIN_COLOUR = new Color(0xEEECE6);
 
 }

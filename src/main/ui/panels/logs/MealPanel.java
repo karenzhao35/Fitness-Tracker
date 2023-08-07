@@ -2,12 +2,11 @@ package ui.panels.logs;
 
 import model.food.AllMeals;
 import model.food.Meals;
-import ui.MainPanel;
-import ui.panels.MainPanels;
+import ui.panels.MainSearchSetUp;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 
-public class MealPanel extends MainPanels {
+public class MealPanel extends MainSearchSetUp {
     private FoodPanel foodPanel;
     private JPanel panel;
 

@@ -1,11 +1,13 @@
-package ui.panels;
+package ui.panels.logs;
 
 import ui.Colors;
+import ui.panels.Panels;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
 
-public abstract class InnerPanel extends Panel {
+public abstract class InnerPanel implements ActionListener, Panels {
     protected JPanel main;
     protected JTextField nameTextField;
     protected JButton submitButton;
@@ -72,6 +74,14 @@ public abstract class InnerPanel extends Panel {
         label.setFont(new Font("Monospace", Font.BOLD, 13));
         label.setBounds(x, y, 300, 40);
         return label;
+    }
+
+    public void generateButton(JButton button, int x, int y, int width) {
+        button.setBounds(x, y, width, 30);
+        button.setFont(new Font("Monospace", Font.PLAIN, 12));
+        button.addActionListener(this);
+        button.setFocusable(false);
+        button.setForeground(Colors.SIDEBAR);
     }
 
     public abstract boolean checkValid();

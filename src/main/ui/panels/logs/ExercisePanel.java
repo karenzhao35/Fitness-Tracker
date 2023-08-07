@@ -3,7 +3,6 @@ package ui.panels.logs;
 import model.workout.AllWorkouts;
 import model.workout.Exercise;
 import model.workout.Workout;
-import ui.panels.InnerPanel;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -146,4 +145,6 @@ public class ExercisePanel extends InnerPanel {
                 && isInteger(repsTextField.getText())
                 && isInteger(weightTextField.getText()));
     }
+
+
 }

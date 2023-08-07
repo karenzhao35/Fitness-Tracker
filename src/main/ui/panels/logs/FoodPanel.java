@@ -5,7 +5,6 @@ import model.food.Food;
 import model.food.MealType;
 import model.food.Meals;
 import ui.Colors;
-import ui.panels.InnerPanel;
 
 import javax.swing.*;
 import java.awt.*;
