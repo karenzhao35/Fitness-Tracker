@@ -3,7 +3,7 @@ package ui.panels;
 import model.food.AllMeals;
 import model.workout.AllWorkouts;
 import ui.ColourPicker;
-import ui.base.CardPanel;
+import ui.CardPanel;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;

@@ -155,7 +155,7 @@ public class ExercisePanel extends InnerPanel {
         weightTextField.setText("");
     }
 
-
+    // EFFECTS: returns true if text field input is valid
     @Override
     public boolean checkValid() {
         return (!nameTextField.getText().equals("")

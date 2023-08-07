@@ -2,8 +2,6 @@ package ui;
 
 import model.AllData;
 import persistence.JsonReader;
-import ui.base.CardPanel;
-import ui.base.FitnessInterface;
 
 import javax.swing.*;
 import java.awt.*;

@@ -1,8 +1,8 @@
-package ui.base;
+package ui;
 
 import model.AllData;
 import persistence.JsonWriter;
-import ui.ColourPicker;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;

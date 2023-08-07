@@ -1,4 +1,4 @@
-package ui.base;
+package ui;
 
 import model.food.AllMeals;
 import model.workout.AllWorkouts;

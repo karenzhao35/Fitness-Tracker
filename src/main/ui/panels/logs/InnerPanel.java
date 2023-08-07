@@ -2,7 +2,6 @@ package ui.panels.logs;
 
 import ui.ColourPicker;
 import ui.panels.Panels;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
@@ -52,6 +51,8 @@ public abstract class InnerPanel implements ActionListener, Panels {
         return main;
     }
 
+    // MODIFIES: this
+    // EFFECTS: sets up main panel
     public void setUpInnerPanel() {
         main.setLayout(null);
         main.setBackground(ColourPicker.SIDEBAR);

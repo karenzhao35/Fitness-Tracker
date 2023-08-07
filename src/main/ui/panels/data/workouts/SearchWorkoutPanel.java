@@ -3,6 +3,7 @@ package ui.panels.data.workouts;
 import model.Date;
 import model.exceptions.DoesNotExist;
 import model.workout.AllWorkouts;
+import model.workout.Workout;
 import ui.ColourPicker;
 import ui.panels.MainSearchSetUp;
 import javax.swing.*;
@@ -61,7 +62,8 @@ public class SearchWorkoutPanel extends MainSearchSetUp {
         String date = dateTextField.getText();
         if (date.equals("today")) {
             try {
-                DisplayWorkout workout = new DisplayWorkout(allWorkouts, allWorkouts.retrieveWorkout(today.getDate()), 0);
+                Workout retrieved = allWorkouts.retrieveWorkout(today.getDate());
+                DisplayWorkout workout = new DisplayWorkout(allWorkouts, retrieved, 0);
                 displaySingleEntry();
                 single.add(workout.getPanel());
             } catch (DoesNotExist ex) {
@@ -69,7 +71,8 @@ public class SearchWorkoutPanel extends MainSearchSetUp {
             }
         } else if (dateFormat(date)) {
             try {
-                DisplayWorkout workout = new DisplayWorkout(allWorkouts, allWorkouts.retrieveWorkout(date), 0);
+                Workout retrieved = allWorkouts.retrieveWorkout(date);
+                DisplayWorkout workout = new DisplayWorkout(allWorkouts, retrieved, 0);
                 displaySingleEntry();
                 single.add(workout.getPanel());
             } catch (DoesNotExist ex) {
