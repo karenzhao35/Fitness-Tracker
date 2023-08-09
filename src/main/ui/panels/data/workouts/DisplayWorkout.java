@@ -1,5 +1,6 @@
 package ui.panels.data.workouts;
 
+import model.AllData;
 import model.workout.AllWorkouts;
 import model.workout.Workout;
 import ui.ColourPicker;
@@ -12,8 +13,8 @@ import java.awt.event.ActionEvent;
 public class DisplayWorkout extends DisplayLogs {
 
     // EFFECTS: constructs a DisplayWorkout with given workout data and iteration
-    public DisplayWorkout(AllWorkouts allWorkouts, Workout workout, int iteration) {
-        super(allWorkouts, workout, null, null, iteration);
+    public DisplayWorkout(AllData allData, JFrame frame, Workout workout, int iteration) {
+        super(allData, frame, workout, null, iteration);
         addComponents();
     }
 
@@ -54,6 +55,7 @@ public class DisplayWorkout extends DisplayLogs {
     public void removeWorkout(int answer) {
         if (answer == 0) {
             allWorkouts.removeWorkout(workout);
+            refresh();
         }
     }
 

@@ -1,5 +1,6 @@
 package ui.panels.data.workouts;
 
+import model.AllData;
 import model.Date;
 import model.exceptions.DoesNotExist;
 import model.workout.AllWorkouts;
@@ -18,10 +19,10 @@ public class SearchWorkoutPanel extends MainSearchSetUp {
     private JButton back;
 
     // EFFECTS: constructs SearchWorkoutPanel
-    public SearchWorkoutPanel(AllWorkouts allWorkouts) {
-        super(allWorkouts, null);
+    public SearchWorkoutPanel(AllData allData, JFrame frame) {
+        super(allData, frame);
         back = new JButton("Back");
-        scrollInterfacePanel = new ScrollInterfaceWorkout(allWorkouts);
+        scrollInterfacePanel = new ScrollInterfaceWorkout(allData, frame);
         single = new JPanel(new BorderLayout());
         display = scrollInterfacePanel.getPanel();
 
@@ -63,7 +64,7 @@ public class SearchWorkoutPanel extends MainSearchSetUp {
         if (date.equals("today")) {
             try {
                 Workout retrieved = allWorkouts.retrieveWorkout(today.getDate());
-                DisplayWorkout workout = new DisplayWorkout(allWorkouts, retrieved, 0);
+                DisplayWorkout workout = new DisplayWorkout(allData, frame, retrieved, 0);
                 displaySingleEntry();
                 single.add(workout.getPanel());
             } catch (DoesNotExist ex) {
@@ -72,7 +73,7 @@ public class SearchWorkoutPanel extends MainSearchSetUp {
         } else if (dateFormat(date)) {
             try {
                 Workout retrieved = allWorkouts.retrieveWorkout(date);
-                DisplayWorkout workout = new DisplayWorkout(allWorkouts, retrieved, 0);
+                DisplayWorkout workout = new DisplayWorkout(allData, frame, retrieved, 0);
                 displaySingleEntry();
                 single.add(workout.getPanel());
             } catch (DoesNotExist ex) {

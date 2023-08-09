@@ -1,5 +1,6 @@
 package ui.panels.data.meals;
 
+import model.AllData;
 import model.Date;
 import model.exceptions.DoesNotExist;
 import model.food.AllMeals;
@@ -17,10 +18,10 @@ public class SearchFoodPanel extends MainSearchSetUp {
     private JButton back;
 
     // EFFECTS: constructs a SearchFoodPanel with given allMeals
-    public SearchFoodPanel(AllMeals allMeals) {
-        super(null, allMeals);
+    public SearchFoodPanel(AllData allData, JFrame frame) {
+        super(allData, frame);
         single = new JPanel(new BorderLayout());
-        scrollInterfacePanel = new ScrollInterfaceMeal(allMeals);
+        scrollInterfacePanel = new ScrollInterfaceMeal(allData, frame);
         display = scrollInterfacePanel.getPanel();
         back = new JButton("Back");
 
@@ -63,7 +64,7 @@ public class SearchFoodPanel extends MainSearchSetUp {
         String date = dateTextField.getText();
         if (date.equals("today")) {
             try {
-                DisplayMeal meal = new DisplayMeal(allMeals, allMeals.retreiveMeals(today.getDate()), 0);
+                DisplayMeal meal = new DisplayMeal(allData, frame, allMeals.retreiveMeals(today.getDate()), 0);
                 displaySingleMeal();
                 single.add(meal.getPanel());
             } catch (DoesNotExist ex) {
@@ -71,7 +72,7 @@ public class SearchFoodPanel extends MainSearchSetUp {
             }
         } else if (dateFormat(date)) {
             try {
-                DisplayMeal meal = new DisplayMeal(allMeals, allMeals.retreiveMeals(date), 0);
+                DisplayMeal meal = new DisplayMeal(allData, frame, allMeals.retreiveMeals(date), 0);
                 displaySingleMeal();
                 single.add(meal.getPanel());
             } catch (DoesNotExist ex) {

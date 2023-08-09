@@ -1,6 +1,7 @@
 package ui.panels.data.meals;
 
 
+import model.AllData;
 import model.food.AllMeals;
 import model.food.Meals;
 import ui.ColourPicker;
@@ -13,8 +14,8 @@ import java.awt.event.ActionEvent;
 public class DisplayMeal extends DisplayLogs {
 
     // EFFECTS: constructs a DisplayMeal with given allMeals, meals, and iteration
-    public DisplayMeal(AllMeals allMeals, Meals meals, int iteration) {
-        super(null, null, allMeals, meals, iteration);
+    public DisplayMeal(AllData allData, JFrame frame, Meals meals, int iteration) {
+        super(allData, frame, null, meals, iteration);
         addComponents();
     }
 
@@ -71,6 +72,7 @@ public class DisplayMeal extends DisplayLogs {
     public void removeMeal(int answer) {
         if (answer == 0) {
             allMeals.removeMeals(meals);
+            refresh();
         }
     }
 

@@ -1,10 +1,12 @@
 package ui.panels.logs;
 
+import model.AllData;
 import model.food.AllMeals;
 import model.food.Food;
 import model.food.MealType;
 import model.food.Meals;
 import ui.ColourPicker;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -66,8 +68,9 @@ public class FoodPanel extends InnerPanel {
 
     // MODIFIES: this
     // EFFECTS: instantiate meal fields
-    public void startMeal(AllMeals allMeals, Meals meals) {
-        this.allMeals = allMeals;
+    public void start(AllData allData, Meals meals, JFrame frame) {
+        super.start(allData, frame);
+        this.allMeals = allData.getAllMeals();
         this.meals = meals;
         main.setVisible(true);
     }
@@ -89,6 +92,7 @@ public class FoodPanel extends InnerPanel {
             main.setVisible(false);
             if (!meals.getFoods().isEmpty()) {
                 allMeals.addMeals(meals);
+                refresh();
             }
         }
 
@@ -109,13 +113,13 @@ public class FoodPanel extends InnerPanel {
         String name = nameTextField.getText();
         int calories = Integer.parseInt(calTextField.getText());
         double protein = Double.parseDouble(proteinTextField.getText());
-        MealType type = getType();
+        MealType type = returnType();
         Food food = new Food(name, type, calories, protein);
         meals.addFood(food);
     }
 
     // EFFECTS: returns meal type based on user input
-    private MealType getType() {
+    private MealType returnType() {
         String type = (String) typeComboBox.getSelectedItem();
         if (type.equals("breakfast")) {
             return MealType.BREAKFAST;

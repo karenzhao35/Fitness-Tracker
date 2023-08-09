@@ -1,8 +1,10 @@
 package ui.panels.logs;
 
+import model.AllData;
 import model.workout.AllWorkouts;
 import model.workout.Exercise;
 import model.workout.Workout;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
@@ -66,8 +68,9 @@ public class ExercisePanel extends InnerPanel {
 
     // MODIFIES: this
     // EFFECTS: instantiates allWorkouts and workout
-    public void startWorkout(AllWorkouts allWorkouts, Workout workout) {
-        this.allWorkouts = allWorkouts;
+    public void start(AllData allData, Workout workout, JFrame frame) {
+        super.start(allData, frame);
+        this.allWorkouts = allData.getAllWorkouts();
         this.workout = workout;
         main.setVisible(true);
     }
@@ -94,6 +97,7 @@ public class ExercisePanel extends InnerPanel {
         }
         if (e.getSource() == doneButton) {
             finishWorkout();
+            refresh();
         }
     }
 

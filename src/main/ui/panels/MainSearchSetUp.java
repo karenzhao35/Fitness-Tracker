@@ -1,9 +1,12 @@
 package ui.panels;
 
+import model.AllData;
 import model.food.AllMeals;
 import model.workout.AllWorkouts;
 import ui.ColourPicker;
 import ui.CardPanel;
+import ui.FitnessInterface;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
@@ -17,16 +20,19 @@ public abstract class MainSearchSetUp implements ActionListener, Panels {
     protected JPanel mainPanel;
     protected JButton submitDateButton;
     protected JLabel error;
+    protected AllData allData;
+    protected JFrame frame;
 
     // EFFECTS: constructs a MainSearchSetUp with given allWorkouts and allMeals and creates needed panels and buttons
-    public MainSearchSetUp(AllWorkouts allWorkouts, AllMeals allMeals) {
+    public MainSearchSetUp(AllData allData, JFrame frame) {
+        this.frame = frame;
+        this.allData = allData;
+        this.allMeals = allData.getAllMeals();
+        this.allWorkouts = allData.getAllWorkouts();
         mainPanel = new JPanel();
-        this.allMeals = allMeals;
-        this.allWorkouts = allWorkouts;
         dateTextField = new JTextField();
         submitDateButton = new JButton("Submit");
         error = new JLabel("Invalid entry: Does not follow format.");
-
         setUp();
     }
 

@@ -1,6 +1,6 @@
 package ui.panels.logs;
 
-import model.food.AllMeals;
+import model.AllData;
 import model.food.Meals;
 import ui.panels.MainSearchSetUp;
 import javax.swing.*;
@@ -12,8 +12,8 @@ public class MealPanel extends MainSearchSetUp {
     private JPanel panel;
 
     // EFFECTS: constructs a MealPanel with given allMeals and instantiates panel items
-    public MealPanel(AllMeals allMeals) {
-        super(null, allMeals);
+    public MealPanel(AllData allData, JFrame frame) {
+        super(allData, frame);
         foodPanel = new FoodPanel();
         panel = foodPanel.getPanel();
         addComponents();
@@ -36,11 +36,11 @@ public class MealPanel extends MainSearchSetUp {
             if (date.equals("today")) {
                 Meals meal = new Meals();
                 error.setVisible(false);
-                foodPanel.startMeal(allMeals, meal);
+                foodPanel.start(allData, meal, frame);
             } else if (dateFormat(date)) {
                 Meals meal = new Meals(date);
                 error.setVisible(false);
-                foodPanel.startMeal(allMeals, meal);
+                foodPanel.start(allData, meal, frame);
             } else {
                 error.setVisible(true);
             }

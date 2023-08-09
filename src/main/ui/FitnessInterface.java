@@ -1,12 +1,16 @@
 package ui;
 
 import model.AllData;
+import model.Event;
+import model.EventLog;
 import persistence.JsonWriter;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.FileNotFoundException;
 
 import static ui.MainPanel.JSON_STORE;
@@ -51,7 +55,7 @@ public class FitnessInterface extends JFrame implements ActionListener {
     // EFFECTS: initializes frame components
     private void init() {
         sideBar = new JPanel();
-        cardPanel = new CardPanel(allData.getAllWorkouts(), allData.getAllMeals());
+        cardPanel = new CardPanel(allData, this);
         jsonWriter = new JsonWriter(JSON_STORE);
         loadButton = new JButton("MAIN MENU          ");
         workoutButton = new JButton("ADD WORKOUT     ");
@@ -70,17 +74,39 @@ public class FitnessInterface extends JFrame implements ActionListener {
     private void setUpFrame() {
         setTitle("Your Fitness Buddy");
         setLayout(new BorderLayout());
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setMinimumSize(new Dimension(WIDTH, HEIGHT));
-
+        getContentPane().setBackground(ColourPicker.MAIN_COLOUR);
+        closeWindow();
         setJMenuBar(menuBar);
         addMainPanels();
         setBackground(ColourPicker.SIDEBAR);
-
         pack();
         setResizable(false);
         setVisible(true);
-        getContentPane().setBackground(ColourPicker.MAIN_COLOUR);
+    }
+
+
+    // MODIFIES: this
+    // EFFECTS: closes window
+    private void closeWindow() {
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                quit();
+            }
+        });
+    }
+
+    private void quit() {
+        int answer = JOptionPane.showConfirmDialog(null, "Save your data?");
+        if (answer == 0) {
+            saveData();
+        }
+        for (Event e : EventLog.getInstance()) {
+            System.out.println(e.getDate());
+            System.out.println(e.getDescription() + "\n");
+        }
+        System.exit(0);
     }
 
     // MODIFIES: this
@@ -175,25 +201,30 @@ public class FitnessInterface extends JFrame implements ActionListener {
     // EFFECTS: parses user input for the menu bar
     private void menuBarActions(ActionEvent e) {
         if (e.getSource() == save) {
-            try {
-                jsonWriter.open();
-                jsonWriter.write(allData);
-                jsonWriter.close();
-                System.out.println("Saved " + allData.getName() + " to " + JSON_STORE);
-            } catch (FileNotFoundException error) {
-                System.out.println("Unable to write to file: " + JSON_STORE);
-            }
+            saveData();
         }
         if (e.getSource() == exit) {
-            System.exit(0);
+            quit();
         }
         if (e.getSource() == refresh) {
             this.dispose();
             FitnessInterface main = new FitnessInterface(allData);
             main.setVisible(true);
-
         }
     }
+
+    // MODIFIES: this
+    // EFFECTS: writes data to source
+    private void saveData() {
+        try {
+            jsonWriter.open();
+            jsonWriter.write(allData);
+            jsonWriter.close();
+        } catch (FileNotFoundException error) {
+            System.out.println("Unable to write to file: " + JSON_STORE);
+        }
+    }
+
 
     // MODIFIES: this
     // EFFECTS: parses user input for the sidebar
@@ -211,5 +242,6 @@ public class FitnessInterface extends JFrame implements ActionListener {
             card.show(dataPanel, "search workout");
         }
     }
+
 
 }

@@ -1,5 +1,7 @@
 package model.workout;
 
+import model.Event;
+import model.EventLog;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import persistence.Writable;
@@ -23,6 +25,7 @@ public class Exercise implements Writable {
 
         this.reps.add(reps);
         this.weight.add(weight);
+        EventLog.getInstance().logEvent(new Event("New set for " + name + " logged."));
     }
 
     // EFFECTS: constructs an Exercise with given sets
@@ -30,6 +33,7 @@ public class Exercise implements Writable {
         this.name = name;
         this.reps = reps;
         this.weight = weight;
+        EventLog.getInstance().logEvent(new Event("New sets for " + name + " logged."));
     }
 
     // getters:
@@ -50,6 +54,7 @@ public class Exercise implements Writable {
     public void addSet(int reps, int weight) {
         this.reps.add(reps);
         this.weight.add(weight);
+        EventLog.getInstance().logEvent(new Event("New set for " + name + " logged."));
     }
 
 

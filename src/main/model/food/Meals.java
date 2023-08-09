@@ -1,6 +1,8 @@
 package model.food;
 
 import model.Date;
+import model.Event;
+import model.EventLog;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import persistence.Writable;
@@ -38,12 +40,16 @@ public class Meals implements Writable {
     // EFFECTS: add given food item to meal
     public void addFood(Food food) {
         foods.add(food);
+        String description = food.getName() + " logged for meal on " + date.getDate() + ".";
+        EventLog.getInstance().logEvent(new Event(description));
     }
 
     // MODIFIES: this
     // EFFECTS: removes given food item from meal
     public void removeFood(Food food) {
         foods.remove(food);
+        String description = food.getName() + " removed for meal on " + date.getDate() + ".";
+        EventLog.getInstance().logEvent(new Event(description));
     }
 
     // MODIFIES: this
@@ -51,6 +57,8 @@ public class Meals implements Writable {
     public void addFoods(List<Food> foods) {
         for (Food f : foods) {
             this.foods.add(f);
+            String description = f.getName() + " logged for meal on " + date.getDate() + ".";
+            EventLog.getInstance().logEvent(new Event(description));
         }
     }
 

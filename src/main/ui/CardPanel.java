@@ -1,5 +1,6 @@
 package ui;
 
+import model.AllData;
 import model.food.AllMeals;
 import model.workout.AllWorkouts;
 import ui.panels.Panels;
@@ -20,21 +21,21 @@ public class CardPanel implements Panels {
     private JPanel main;
 
     // EFFECTS: constructs a CardPanel
-    public CardPanel(AllWorkouts allWorkouts, AllMeals allMeals) {
+    public CardPanel(AllData allData, JFrame frame) {
         main = new JPanel();
         card = new CardLayout();
         main.setLayout(card);
         main.setPreferredSize(DIMENSION);
-        addPanels(allWorkouts, allMeals);
+        addPanels(allData, frame);
     }
 
     // MODIFIES: this
     // EFFECTS: add panels to card panel
-    private void addPanels(AllWorkouts allWorkouts, AllMeals allMeals) {
-        MealPanel mealPanel = new MealPanel(allMeals);
-        WorkoutPanel workoutPanel = new WorkoutPanel(allWorkouts);
-        SearchFoodPanel searchFoodPanel = new SearchFoodPanel(allMeals);
-        SearchWorkoutPanel searchWorkoutPanel = new SearchWorkoutPanel(allWorkouts);
+    private void addPanels(AllData allData, JFrame frame) {
+        MealPanel mealPanel = new MealPanel(allData, frame);
+        WorkoutPanel workoutPanel = new WorkoutPanel(allData, frame);
+        SearchFoodPanel searchFoodPanel = new SearchFoodPanel(allData, frame);
+        SearchWorkoutPanel searchWorkoutPanel = new SearchWorkoutPanel(allData, frame);
 
         main.add(workoutPanel.getPanel(), "workout");
         main.add(searchWorkoutPanel.getPanel(), "search workout");

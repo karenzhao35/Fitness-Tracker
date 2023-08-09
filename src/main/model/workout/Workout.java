@@ -1,6 +1,8 @@
 package model.workout;
 
 import model.Date;
+import model.Event;
+import model.EventLog;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import persistence.Writable;
@@ -39,6 +41,8 @@ public class Workout implements Writable {
     // EFFECTS: adds given exercise from exercises
     public void addExercise(Exercise exercise) {
         this.exercises.add(exercise);
+        String description = exercise.getName() + " added to workout on " + date.getDate() + ".";
+        EventLog.getInstance().logEvent(new Event(description));
     }
 
     // MODIFIES: this
@@ -46,6 +50,9 @@ public class Workout implements Writable {
     public void addExercises(List<Exercise> exercises) {
         for (Exercise e : exercises) {
             this.exercises.add(e);
+            String description = e.getName() + " added to workout on " + date.getDate() + ".";
+            EventLog.getInstance().logEvent(new Event(description));
+
         }
     }
 
@@ -53,6 +60,18 @@ public class Workout implements Writable {
     // EFFECTS: removes given exercise from exercises
     public void removeExercise(Exercise exercise) {
         this.exercises.remove(exercise);
+        String description = exercise.getName() + " removed from workout on " + date.getDate() + ".";
+        EventLog.getInstance().logEvent(new Event(description));
+
+    }
+
+    // EFFECTS: returns number of sets in workout
+    public int sumSets() {
+        int soFar = 0;
+        for (Exercise exercise : exercises) {
+            soFar += exercise.getReps().size();
+        }
+        return soFar;
     }
 
     // EFFECTS: puts the workout data into a JSON object

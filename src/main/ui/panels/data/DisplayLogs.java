@@ -1,10 +1,12 @@
 package ui.panels.data;
 
+import model.AllData;
 import model.food.AllMeals;
 import model.food.Meals;
 import model.workout.AllWorkouts;
 import model.workout.Workout;
 import ui.ColourPicker;
+import ui.FitnessInterface;
 import ui.panels.Panels;
 import javax.swing.*;
 import java.awt.*;
@@ -16,16 +18,20 @@ public abstract class DisplayLogs implements ActionListener, Panels {
     protected Workout workout;
     protected AllMeals allMeals;
     protected Meals meals;
+    protected AllData allData;
     protected JPanel main;
     protected JButton remove;
     protected JButton expand;
+    protected JFrame frame;
     private int iteration;
 
     // EFFECTS: constructs a new DisplayLogs with given items and instantiates panel items
-    public DisplayLogs(AllWorkouts allWorkouts, Workout workout, AllMeals allMeals, Meals meals, int iteration) {
-        this.allWorkouts = allWorkouts;
+    public DisplayLogs(AllData allData, JFrame frame, Workout workout, Meals meals, int iteration) {
+        this.frame = frame;
+        this.allData = allData;
+        this.allWorkouts = allData.getAllWorkouts();
         this.workout = workout;
-        this.allMeals = allMeals;
+        this.allMeals = allData.getAllMeals();
         this.meals = meals;
         this.iteration = iteration;
         remove = new JButton();
@@ -86,5 +92,13 @@ public abstract class DisplayLogs implements ActionListener, Panels {
     // EFFECTS: calculate height in which the given panel needs to be placed
     private int calculateHeight() {
         return 15 + (105 * iteration);
+    }
+
+    // MODIFIES: this
+    // EFFECTS: refreshes main frame
+    public void refresh() {
+        frame.dispose();
+        FitnessInterface fitnessInterface = new FitnessInterface(allData);
+        fitnessInterface.setVisible(true);
     }
 }

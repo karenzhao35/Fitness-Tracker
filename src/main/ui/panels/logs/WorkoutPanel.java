@@ -1,6 +1,6 @@
 package ui.panels.logs;
 
-import model.workout.AllWorkouts;
+import model.AllData;
 import model.workout.Workout;
 import ui.panels.MainSearchSetUp;
 import javax.swing.*;
@@ -13,8 +13,8 @@ public class WorkoutPanel extends MainSearchSetUp {
 
 
     // EFFECTS: constructs a new WorkoutPanel with given allWorkouts
-    public WorkoutPanel(AllWorkouts allWorkouts) {
-        super(allWorkouts, null);
+    public WorkoutPanel(AllData allData, JFrame frame) {
+        super(allData, frame);
         exercisePanel = new ExercisePanel();
         panel = exercisePanel.getPanel();
         addComponents();
@@ -38,11 +38,11 @@ public class WorkoutPanel extends MainSearchSetUp {
             if (date.equals("today")) {
                 Workout workout = new Workout();
                 error.setVisible(false);
-                exercisePanel.startWorkout(allWorkouts, workout);
+                exercisePanel.start(allData, workout, frame);
             } else if (dateFormat(date)) {
                 Workout workout = new Workout(date);
                 error.setVisible(false);
-                exercisePanel.startWorkout(allWorkouts, workout);
+                exercisePanel.start(allData, workout, frame);
             } else {
                 error.setVisible(true);
             }

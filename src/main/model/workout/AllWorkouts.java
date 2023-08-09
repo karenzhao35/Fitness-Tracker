@@ -2,6 +2,8 @@ package model.workout;
 
 import model.Data;
 import model.Date;
+import model.Event;
+import model.EventLog;
 import model.exceptions.DoesNotExist;
 import model.food.Meals;
 import org.json.JSONArray;
@@ -33,8 +35,10 @@ public class AllWorkouts implements Data, Writable {
         try {
             Workout exists = retrieveWorkout(date);
             exists.addExercises(workout.getExercises());
+            EventLog.getInstance().logEvent(new Event("Workout on " + exists.getDate() + " updated."));
         } catch (DoesNotExist e) {
             allWorkouts.add(workout);
+            EventLog.getInstance().logEvent(new Event("New workout on " + workout.getDate() + " logged."));
         }
     }
 
@@ -42,6 +46,7 @@ public class AllWorkouts implements Data, Writable {
     // EFFECTS: removes workout from list of workouts
     public void removeWorkout(Workout workout) {
         this.allWorkouts.remove(workout);
+        EventLog.getInstance().logEvent(new Event("Workout on " + workout.getDate() + " removed."));
     }
 
     // EFFECTS: produces true if there is a workout from today

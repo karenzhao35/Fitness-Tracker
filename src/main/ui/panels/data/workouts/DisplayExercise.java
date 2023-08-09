@@ -72,7 +72,7 @@ public class DisplayExercise {
 
     // EFFECTS: calculates the height of the panel
     public int calculateHeight() {
-        int height = (18 * (workout.getExercises().size() + 1));
+        int height = (18 * (workout.getExercises().size() + workout.sumSets() + 1));
         if (height < 335) {
             return 335;
         } else {

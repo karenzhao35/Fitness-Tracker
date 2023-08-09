@@ -1,6 +1,8 @@
 package ui.panels.logs;
 
+import model.AllData;
 import ui.ColourPicker;
+import ui.FitnessInterface;
 import ui.panels.Panels;
 import javax.swing.*;
 import java.awt.*;
@@ -9,10 +11,13 @@ import java.awt.event.ActionListener;
 // instantiates panel to log items
 public abstract class InnerPanel implements ActionListener, Panels {
     protected JPanel main;
+    protected JFrame frame;
     protected JTextField nameTextField;
     protected JButton submitButton;
     protected JButton doneButton;
     protected JLabel error;
+    protected AllData allData;
+
 
     // EFFECTS: constructs InnerPanel and necessary items
     public InnerPanel() {
@@ -99,10 +104,25 @@ public abstract class InnerPanel implements ActionListener, Panels {
         button.setForeground(ColourPicker.SIDEBAR);
     }
 
+    // MODIFIES: this
+    // EFFECTS: refreshes main frame
+    public void refresh() {
+        frame.dispose();
+        FitnessInterface fitnessInterface = new FitnessInterface(allData);
+        fitnessInterface.setVisible(true);
+    }
+
     // EFFECTS: produces true if entry is valid
     public abstract boolean checkValid();
 
     // MODIFIES: textField
     // EFFECTS: reset text fields
     public abstract void clearTextFields();
+
+    // MODIFIES: this
+    // EFFECTS: sets up frame data
+    public void start(AllData allData, JFrame frame) {
+        this.allData = allData;
+        this.frame = frame;
+    }
 }

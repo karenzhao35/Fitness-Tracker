@@ -86,7 +86,6 @@ public class MainPanel extends JFrame implements ActionListener {
                 allData = jsonReader.read();
                 setVisible(false);
                 new FitnessInterface(allData);
-                System.out.println("Loaded " + allData.getName() + " from " + JSON_STORE);
             } catch (IOException error) {
                 System.out.println("Unable to read from file: " + JSON_STORE);
             }

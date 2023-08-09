@@ -1,5 +1,6 @@
 package ui.panels.data;
 
+import model.AllData;
 import model.food.AllMeals;
 import model.workout.AllWorkouts;
 import ui.ColourPicker;
@@ -11,14 +12,18 @@ import java.awt.*;
 public abstract class ScrollInterface implements Panels {
     protected AllWorkouts allWorkouts;
     protected AllMeals allMeals;
+    protected AllData allData;
     protected JPanel basePanel;
     protected JPanel mainPanel;
     protected JScrollPane scroll;
+    protected JFrame frame;
 
-    // EFFECTS:
-    public ScrollInterface(AllWorkouts allWorkouts, AllMeals allMeals) {
-        this.allWorkouts = allWorkouts;
-        this.allMeals = allMeals;
+    // EFFECTS: constructs a new scroll interface with given data
+    public ScrollInterface(AllData allData, JFrame frame) {
+        this.allData = allData;
+        this.frame = frame;
+        this.allWorkouts = allData.getAllWorkouts();
+        this.allMeals = allData.getAllMeals();
         basePanel = new JPanel();
         mainPanel = new JPanel();
         scroll = new JScrollPane(mainPanel);

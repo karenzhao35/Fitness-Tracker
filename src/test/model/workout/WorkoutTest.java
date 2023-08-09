@@ -32,6 +32,7 @@ public class WorkoutTest {
     @Test
     void testConstructor1() {
         assertEquals(0, testWorkout1.getExercises().size());
+        assertEquals(0, testWorkout1.sumSets());
         assertEquals("2023-05-21", testWorkout1.getDate());
     }
 
@@ -51,6 +52,7 @@ public class WorkoutTest {
     void testAddExercise1() {
         testWorkout1.addExercise(exercise1);
         assertEquals(1, testWorkout1.getExercises().size());
+        assertEquals(1, testWorkout1.sumSets());
         assertEquals(exercise1, testWorkout1.getExercises().get(0));
     }
 
@@ -71,6 +73,7 @@ public class WorkoutTest {
         exercises.add(exercise2);
         testWorkout1.addExercises(exercises);
         assertEquals(2, testWorkout1.getExercises().size());
+        assertEquals(2, testWorkout1.sumSets());
     }
 
     @Test

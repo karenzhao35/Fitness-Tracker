@@ -1,22 +1,25 @@
 package ui.panels.data.meals;
 
+import model.AllData;
 import model.food.AllMeals;
 import ui.panels.data.ScrollInterface;
 import ui.panels.data.meals.DisplayMeal;
+
+import javax.swing.*;
 
 // Scroll interface for meal data
 public class ScrollInterfaceMeal extends ScrollInterface {
 
     // EFFECTS: constructs a ScrollInterfaceMeal with given allMeals
-    public ScrollInterfaceMeal(AllMeals allMeals) {
-        super(null, allMeals);
+    public ScrollInterfaceMeal(AllData allData, JFrame frame) {
+        super(allData, frame);
     }
 
     // MODIFIES: this
     // EFFECTS: places each meal on the panel
     public void placeItems() {
         for (int i = 0; i < allMeals.getAllMeals().size(); i++) {
-            DisplayMeal displayMeal = new DisplayMeal(allMeals, allMeals.getAllMeals().get(i), i);
+            DisplayMeal displayMeal = new DisplayMeal(allData, frame, allMeals.getAllMeals().get(i), i);
             mainPanel.add(displayMeal.getPanel());
         }
     }

@@ -2,6 +2,8 @@ package model.food;
 
 import model.Data;
 import model.Date;
+import model.Event;
+import model.EventLog;
 import model.exceptions.DoesNotExist;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -30,9 +32,12 @@ public class AllMeals implements Data, Writable {
     public void addMeals(Meals meals) {
         String date = meals.getDate();
         try {
+            Meals exists = retreiveMeals(date);
             retreiveMeals(date).addFoods(meals.getFoods());
+            EventLog.getInstance().logEvent(new Event("Meal on " + exists.getDate() + " updated."));
         } catch (DoesNotExist e) {
             allMeals.add(meals);
+            EventLog.getInstance().logEvent(new Event("New meal for " + meals.getDate() + " logged."));
         }
     }
 
@@ -40,6 +45,7 @@ public class AllMeals implements Data, Writable {
     // EFFECTS: removes meals from list of all meals
     public void removeMeals(Meals meals) {
         allMeals.remove(meals);
+        EventLog.getInstance().logEvent(new Event("Meal on" + meals.getDate() + " removed."));
     }
 
     // EFFECTS: produces true if there is a meal from today
