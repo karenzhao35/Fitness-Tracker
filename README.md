@@ -50,6 +50,7 @@ save the application when the application is quit
 
 # Phase 4: Task 2
 Sample of events that can occur in the program: <br>
+
 Tue Aug 08 23:34:36 PDT 2023 <br>
 New sets for Lunges logged.
 
@@ -72,13 +73,13 @@ Tue Aug 08 23:34:52 PDT 2023 <br>
 Workout on 2023-08-08 removed.
 
 # Phase 4: Task 3
-One improvement of this code would be the simplification of the meal and workout classes. Instead of having a date and 
-an ArrayList of logs, I could implement a HashMap, using the date as a key. This would eliminate the need of said 
-classes, allowing the AllWorkout and AllMeals classes to contain the newly implemented HashMaps. 
+One improvement of this code would be the simplification of the meal and workout classes. Instead of having a date and
+an ArrayList of logs, I could implement a HashMap, using the date as a key. This would eliminate the need for said
+classes, allowing the AllWorkout and AllMeals classes to contain the newly implemented HashMaps.
 
-Furthermore, I would improve the cohesion of my program. For instance, the FitnessInterface class handles the sidebar, 
+Furthermore, I would improve the cohesion of my program. For instance, the FitnessInterface class handles the sidebar,
 menu bar, and all the buttons associated with it. I realize now that all of these components could be refactored into
-separate classes, all instantiated in the FitnessInterface class. In general, the classes in my program handle the 
-actions incited by the buttons, but these functionalities should be separated into another class. Moreover, the main 
-FitnessInterface frame is passed throughout the entire GUI to refresh with any change of the data. This could be 
+separate classes, all instantiated in the FitnessInterface class. In general, the classes in my program handle the
+actions incited by the buttons, but these functionalities should be separated into another class. Moreover, the main
+FitnessInterface frame is passed throughout the entire GUI to refresh with any change of the data. This could be
 avoided by improving my type hierarchy or implementing a design pattern, such as the observer pattern.
