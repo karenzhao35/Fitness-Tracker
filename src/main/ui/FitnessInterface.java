@@ -97,6 +97,8 @@ public class FitnessInterface extends JFrame implements ActionListener {
         });
     }
 
+    // MODIFIES: this
+    // EFFECTS: saves data if user requests and prints event log
     private void quit() {
         int answer = JOptionPane.showConfirmDialog(null, "Save your data?");
         if (answer == 0) {
