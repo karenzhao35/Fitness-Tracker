@@ -45,7 +45,7 @@ public class AllMeals implements Data, Writable {
     // EFFECTS: removes meals from list of all meals
     public void removeMeals(Meals meals) {
         allMeals.remove(meals);
-        EventLog.getInstance().logEvent(new Event("Meal on" + meals.getDate() + " removed."));
+        EventLog.getInstance().logEvent(new Event("Meal on " + meals.getDate() + " removed."));
     }
 
     // EFFECTS: produces true if there is a meal from today

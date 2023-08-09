@@ -33,10 +33,40 @@ to file and have the option to do so or not.
 
 # Instructions for Grader
 
-- You can generate the first required event related to adding Xs to a Y by adding food items to a meal, then adding 
-said meal to the meal data.
-- You can generate the second required event related to adding Xs to a Y by adding an exercise to a workout, then
-adding said workout to the workout data.
+- You can generate the first required event related to adding Xs to a Y by 
+  - going to the log food panel 
+  - entering a date for the meal
+  - adding a food item to said meal
+- You can generate the second required event related to adding Xs to a Y by 
+  - going to the add workout panel
+  - entering a date for the workout
+  - adding a exercise to the workout
+  - entering the amount of sets to the exercise
 - You can locate my visual component on the sidebar after clicking to load data or start a new data file.
-- You can save the state of my application by clicking save in the menu bar.
-- You can reload the state of my application by clicking one of the options on the initial window.
+- You can save the state of my application by clicking save in the menu bar, or the application will prompt user to 
+save the application when the application is quit
+- You can reload the state of my application by clicking one of the options on the initial load window.
+
+
+# Phase 4: Task 2
+Sample of events that can occur in the program: <br>
+Tue Aug 08 23:34:36 PDT 2023 <br>
+New sets for Lunges logged.
+
+Tue Aug 08 23:34:36 PDT 2023 <br>
+Lunges added to workout on 2023-08-08.
+
+Tue Aug 08 23:34:37 PDT 2023 <br>
+New workout on 2023-08-08 logged.
+
+Tue Aug 08 23:34:46 PDT 2023 <br>
+Apples logged for meal on 2023-09-09.
+
+Tue Aug 08 23:34:47 PDT 2023 <br>
+New meal for 2023-09-09 logged.
+
+Tue Aug 08 23:34:49 PDT 2023 <br>
+Meal on 2023-09-09 removed.
+
+Tue Aug 08 23:34:52 PDT 2023 <br>
+Workout on 2023-08-08 removed.

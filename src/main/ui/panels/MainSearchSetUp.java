@@ -14,14 +14,14 @@ import java.util.regex.Pattern;
 
 // instantiates the search bar
 public abstract class MainSearchSetUp implements ActionListener, Panels {
+    protected AllData allData;
     protected AllMeals allMeals;
     protected AllWorkouts allWorkouts;
+    protected JFrame frame;
     protected JTextField dateTextField;
     protected JPanel mainPanel;
     protected JButton submitDateButton;
     protected JLabel error;
-    protected AllData allData;
-    protected JFrame frame;
 
     // EFFECTS: constructs a MainSearchSetUp with given allWorkouts and allMeals and creates needed panels and buttons
     public MainSearchSetUp(AllData allData, JFrame frame) {
