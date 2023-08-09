@@ -46,6 +46,7 @@ public class EventTest {
     @Test
     public void testEquals() {
         assertTrue(e1.equals(e2));
+        assertFalse(e3.equals(e1));
         assertFalse(e1.equals(e3));
         assertFalse(e1.equals(null));
         assertFalse(e2.equals(new Meals()));
