@@ -124,6 +124,71 @@
                 "calories": 2,
                 "meal type": "BREAKFAST"
             }]
+        },
+        {
+            "date": "2024-01-02",
+            "foods": [
+                {
+                    "protein": 30,
+                    "name": "Steak",
+                    "calories": 900,
+                    "meal type": "DINNER"
+                },
+                {
+                    "protein": 9,
+                    "name": "Omlette",
+                    "calories": 200,
+                    "meal type": "BREAKFAST"
+                },
+                {
+                    "protein": 3,
+                    "name": "Chia Seed Pudding",
+                    "calories": 40,
+                    "meal type": "BREAKFAST"
+                },
+                {
+                    "protein": 1,
+                    "name": "Banana",
+                    "calories": 90,
+                    "meal type": "BREAKFAST"
+                },
+                {
+                    "protein": 10,
+                    "name": "Chicken Pasta",
+                    "calories": 300,
+                    "meal type": "LUNCH"
+                },
+                {
+                    "protein": 0,
+                    "name": "Salad",
+                    "calories": 30,
+                    "meal type": "LUNCH"
+                },
+                {
+                    "protein": 1,
+                    "name": "Milk",
+                    "calories": 100,
+                    "meal type": "SNACK"
+                },
+                {
+                    "protein": 0,
+                    "name": "Chips",
+                    "calories": 300,
+                    "meal type": "SNACK"
+                },
+                {
+                    "protein": 0,
+                    "name": "Green peas",
+                    "calories": 30,
+                    "meal type": "DINNER"
+                },
+                {
+                    "protein": 3,
+                    "name": "Mashed potatoes",
+                    "calories": 300,
+                    "meal type": "BREAKFAST"
+                }
+            ]
         }
     ]},
     "name": "My data",

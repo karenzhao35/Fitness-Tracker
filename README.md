@@ -1,9 +1,14 @@
-# My Personal Project
+# Your Fitness Buddy
+![](Welcome.png)
+## Desktop Well-being Tracker
+***
+I developed a comprehensive desktop well-being tracker that empowers users to monitor 
+and enhance their fitness journey. I implemented features that enable users to effortlessly track their workouts and
+meals, fostering a holistic approach to personal health.
 
-## Fitness System
 
-### Features
-
+### Project Specifications Before Development
+***
 This application will provide users with a platform to aid 
 their fitness journey. Features of this program will
 include:
@@ -17,17 +22,8 @@ can be very beneficial in ensuring consistency while resistance training,
 and I have yet to find a system that I enjoy using. Thus, I would like to
 create one!
 
-### User Stories
+### User Interface
 
-- As a user, I want to be able to add a new workout day to my collection 
-- As a user, I want to be able to add a new exercise to my workout
-- As a user, I want to be able to add a new meal day to my collection
-- As a user, I want to be able to add a new food to my meal
-- As a user, I want to be able to remove a workout from my database by date
-- As a user, I want to be able to remove a meal day from my database by date
-- As a user, I want to be able to view a workout from my database by date
-- As a user, I want to be able to view a meal day from my database by date
-- As a user, when I select the quit option from the application menu, I want to be reminded to save my fitness data
-to file and have the option to do so or not. 
-- As a user, when I start the application, I want to be given the option to load my fitness data from file.
-
+| Workout Tracker UI | Meal Tracker UI | View History   |
+|--------------------|-----------------|----------------|
+| ![](Workout.png)   | ![](Meal.png)   | ![](Views.png) |
