@@ -22,7 +22,7 @@ can be very beneficial in ensuring consistency while resistance training,
 and I have yet to find a system that I enjoy using. Thus, I would like to
 create one!
 
-### User Interface
+### User Interface 
 
 | Workout Tracker UI | Meal Tracker UI | View History   |
 |--------------------|-----------------|----------------|
